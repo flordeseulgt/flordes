@@ -245,9 +245,15 @@ export default function Home() {
     const product = PRODUCTS.find(p => p.id === id);
     if (!product) return;
     
+    const existing = cart.find(c => c.id === id);
+    if (existing && existing.qty >= product.stock) {
+      showToast(`❌ Límite alcanzado (${product.stock} disp.)`);
+      return;
+    }
+    
     setCart(prev => {
-      const existing = prev.find(c => c.id === id);
-      if (existing) {
+      const existingInPrev = prev.find(c => c.id === id);
+      if (existingInPrev) {
         return prev.map(c => c.id === id ? { ...c, qty: c.qty + 1 } : c);
       }
       return [...prev, { id, qty: 1 }];
@@ -262,9 +268,15 @@ export default function Home() {
   };
 
   const changeQty = (id, delta) => {
+    const product = PRODUCTS.find(p => p.id === id);
+    
     setCart(prev => prev.map(c => {
       if (c.id === id) {
         const nextQty = c.qty + delta;
+        if (product && nextQty > product.stock) {
+          showToast(`❌ Límite alcanzado (${product.stock} disp.)`);
+          return c;
+        }
         return nextQty > 0 ? { ...c, qty: nextQty } : null;
       }
       return c;
@@ -321,43 +333,49 @@ export default function Home() {
   const hasActiveFilter = searchQuery !== '' || currentBrand !== 'todos' || currentCategory !== 'all' || isShowingAll;
   const featuredProducts = hasActiveFilter ? sortedProducts : sortedProducts.filter(p => p.stock).slice(0, 8);
 
-  const renderProduct = (p) => (
-    <article key={p.id} className={`product-card ${!p.stock ? 'out-of-stock' : ''}`}>
-      <div className="product-img-wrap" onClick={() => setSelectedProduct(p)}>
-        <img src={p.img} alt={p.name} loading="lazy" />
-        {!p.stock && (
-          <div className="out-of-stock-overlay">
-            <span>Agotado</span>
+  const renderProduct = (p) => {
+    const cartQty = cart.find(c => c.id === p.id)?.qty || 0;
+    const isMaxReached = cartQty >= p.stock;
+    const isDisabled = !p.stock || isMaxReached;
+
+    return (
+      <article key={p.id} className={`product-card ${!p.stock ? 'out-of-stock' : ''}`}>
+        <div className="product-img-wrap" onClick={() => setSelectedProduct(p)}>
+          <img src={p.img} alt={p.name} loading="lazy" />
+          {!p.stock && (
+            <div className="out-of-stock-overlay">
+              <span>Agotado</span>
+            </div>
+          )}
+        </div>
+        <div className="product-info">
+          <div className="product-meta">
+            <span className="product-brand">{p.brandName}</span>
+            {p.size && <span className="product-size">{p.size}</span>}
           </div>
-        )}
-      </div>
-      <div className="product-info">
-        <div className="product-meta">
-          <span className="product-brand">{p.brandName}</span>
-          {p.size && <span className="product-size">{p.size}</span>}
-        </div>
-        <h3 className="product-name" onClick={() => setSelectedProduct(p)}>{p.name}</h3>
-        <p className="product-desc">{p.desc}</p>
-        <div className="product-tags">
-          {p.tags.slice(0, 3).map(t => <span key={t} className="product-tag">{t}</span>)}
-        </div>
-        <div className="product-footer">
-          <div className="product-price-wrap">
-            <span className="product-price-original">Q{p.price.toFixed(2)}</span>
-            <span className="product-price sale">Q{(p.price * 0.9).toFixed(2)}</span>
-            <span className="product-discount-badge">-10%</span>
+          <h3 className="product-name" onClick={() => setSelectedProduct(p)}>{p.name}</h3>
+          <p className="product-desc">{p.desc}</p>
+          <div className="product-tags">
+            {p.tags.slice(0, 3).map(t => <span key={t} className="product-tag">{t}</span>)}
           </div>
-          <button 
-            className={`add-to-cart-btn ${!p.stock ? 'disabled' : ''}`} 
-            onClick={() => p.stock && addToCart(p.id)}
-            disabled={!p.stock}
-          >
-            {p.stock ? '🛍 Agregar' : 'Agotado'}
-          </button>
+          <div className="product-footer">
+            <div className="product-price-wrap">
+              <span className="product-price-original">Q{p.price.toFixed(2)}</span>
+              <span className="product-price sale">Q{(p.price * 0.9).toFixed(2)}</span>
+              <span className="product-discount-badge">-10%</span>
+            </div>
+            <button 
+              className={`add-to-cart-btn ${isDisabled ? 'disabled' : ''}`} 
+              onClick={() => !isDisabled && addToCart(p.id)}
+              disabled={isDisabled}
+            >
+              {!p.stock ? 'Agotado' : (isMaxReached ? 'Límite alcanzado' : '🛍 Agregar')}
+            </button>
+          </div>
         </div>
-      </div>
-    </article>
-  );
+      </article>
+    );
+  };
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
@@ -388,17 +406,6 @@ export default function Home() {
     }
   };
 
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const nombre = formData.get('nombre');
-    const email = formData.get('email');
-    const mensaje = formData.get('mensaje');
-    showToast(`🌸 ¡Gracias ${nombre}! Te contactaremos pronto.`);
-    e.target.reset();
-    const wa = `https://wa.me/50200000000?text=${encodeURIComponent(`Hola! Me llamo ${nombre} (${email}). ${mensaje}`)}`;
-    setTimeout(() => window.open(wa, '_blank'), 1500);
-  };
 
   // --- RENDER ---
   return (
@@ -1202,17 +1209,17 @@ export default function Home() {
                 </div>
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                   <button 
-                    className={`btn-primary ${!selectedProduct.stock ? 'disabled' : ''}`} 
+                    className={`btn-primary ${(!selectedProduct.stock || (cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock)) ? 'disabled' : ''}`} 
                     onClick={() => { 
-                      if (selectedProduct.stock) {
+                      if (selectedProduct.stock && (cart.find(c => c.id === selectedProduct.id)?.qty || 0) < selectedProduct.stock) {
                         addToCart(selectedProduct.id); 
                         setSelectedProduct(null); 
                       }
                     }} 
                     style={{ flex: 1, minWidth: '160px' }}
-                    disabled={!selectedProduct.stock}
+                    disabled={!selectedProduct.stock || (cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock)}
                   >
-                    {selectedProduct.stock ? '🛍 Agregar' : '❌ Agotado'}
+                    {!selectedProduct.stock ? '❌ Agotado' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : '🛍 Agregar')}
                   </button>
                 </div>
               </div>

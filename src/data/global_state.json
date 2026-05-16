@@ -1,4 +1,6 @@
 {
-  "lastOrderNumber": 19,
-  "productStock": {}
+  "lastOrderNumber": 22,
+  "productStock": {
+    "17": 98
+  }
 }
