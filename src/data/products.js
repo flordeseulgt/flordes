@@ -249,7 +249,7 @@ export const PRODUCTS = [
     benefits: ['Hidratación intensa', 'Minerales marinos', 'Calmante'],
   },
   {
-    id: 17, stock: 1,
+    id: 17, stock: 2,
     brand: 'roundlab',
     brandName: 'Round Lab',
     name: 'Protector Solar En Barra SPF 50',
