@@ -2423,7 +2423,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .product-price { font-size: 1rem; }
   .add-to-cart-btn { padding: 6px 10px; font-size: 0.72rem; }
   .footer-grid { grid-template-columns: 1fr; }
-  .collage-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .collage-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .collage-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .collage-item {
+    flex: 0 0 85%;
+    height: 300px;
+    scroll-snap-align: center;
+  }
+  .collage-item.large {
+    grid-row: auto;
+  }
   .brand-tabs { gap: 6px; }
   .brand-tab { padding: 8px 14px; font-size: 0.8rem; }
 }
