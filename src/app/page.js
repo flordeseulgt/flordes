@@ -356,7 +356,11 @@ export default function Home() {
     if (a.stock && !b.stock) return -1;
     if (!a.stock && b.stock) return 1;
     
-    // 2. Prioridad por precio si el filtro está activo
+    // 2. Prioridad para productos "Populares" (Destacados)
+    if (a.badge === 'popular' && b.badge !== 'popular') return -1;
+    if (a.badge !== 'popular' && b.badge === 'popular') return 1;
+    
+    // 3. Prioridad por precio si el filtro está activo
     if (sortByPrice === 'low-high') return a.price - b.price;
     if (sortByPrice === 'high-low') return b.price - a.price;
     
