@@ -36,7 +36,17 @@ export async function OPTIONS() {
 }
 
 export async function GET(request) {
-  return NextResponse.json({ orderNumber: Math.floor(Math.random() * 10000) }, { headers: corsHeaders });
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+
+  const { count, error } = await supabase
+    .from('orders')
+    .select('*', { count: 'exact', head: true });
+
+  const nextOrderNumber = (count || 0) + 20;
+  return NextResponse.json({ orderNumber: nextOrderNumber }, { headers: corsHeaders });
 }
 
 export async function POST(request) {
@@ -55,7 +65,7 @@ export async function POST(request) {
     const items = body.items;
     
     for (const item of items) {
-      if (typeof item.id !== 'string') { // ID ahora es UUID (string)
+      if (typeof item.id !== 'string') {
         return NextResponse.json({ success: false, error: 'ID de producto inválido' }, { status: 400, headers: corsHeaders });
       }
       if (typeof item.qty !== 'number' || item.qty <= 0 || !Number.isInteger(item.qty)) {
@@ -63,15 +73,34 @@ export async function POST(request) {
       }
     }
     
-    // Conectar a Supabase usando Service Role para poder modificar stock (salta RLS)
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    // Descontar stock en base de datos
+    // 1. Obtener número de orden secuencial
+    const { count } = await supabase
+      .from('orders')
+      .select('*', { count: 'exact', head: true });
+      
+    const newOrderNumber = (count || 0) + 20;
+
+    // 2. Insertar la orden en Supabase para que el contador avance
+    // Asumimos que user_id ya es opcional (ver instrucciones al usuario)
+    const { error: orderError } = await supabase
+      .from('orders')
+      .insert({ 
+        total_amount: 0, // Aquí podrías calcular el total real
+        status: 'pending'
+      });
+
+    if (orderError) {
+      console.error('Error al crear la orden:', orderError);
+      return NextResponse.json({ success: false, error: 'No se pudo registrar la orden' }, { status: 500, headers: corsHeaders });
+    }
+
+    // 3. Descontar stock en base de datos
     for (const item of items) {
-      // 1. Obtener el stock actual
       const { data: product, error: fetchError } = await supabase
         .from('products')
         .select('stock')
@@ -79,20 +108,21 @@ export async function POST(request) {
         .single();
         
       if (fetchError || !product) {
-        console.error('Producto no encontrado:', item.id);
+        console.error('Producto no encontrado o error:', item.id, fetchError);
         continue;
       }
       
       const newStock = Math.max(0, product.stock - item.qty);
       
-      // 2. Actualizar stock
-      await supabase
+      const { error: updateError } = await supabase
         .from('products')
         .update({ stock: newStock })
         .eq('id', item.id);
+
+      if (updateError) {
+        console.error('Error al actualizar stock:', updateError);
+      }
     }
-    
-    const newOrderNumber = Math.floor(Math.random() * 100000);
     
     return NextResponse.json({ 
       success: true, 
