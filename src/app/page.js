@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { createClient } from '../lib/supabase';
+import { PRODUCTS } from '../data/products';
 
 export default function Home() {
   // --- STATE ---
@@ -55,6 +56,13 @@ export default function Home() {
               benefits: p.benefits || [],
               stock: p.stock
            }));
+           
+           // Ordenar según el orden del archivo products.js
+           const orderedNames = PRODUCTS.map(p => p.name);
+           mappedProducts.sort((a, b) => {
+             return orderedNames.indexOf(a.name) - orderedNames.indexOf(b.name);
+           });
+           
            setProductsData(mappedProducts);
         }
       } catch (e) {

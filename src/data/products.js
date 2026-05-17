@@ -249,23 +249,6 @@ export const PRODUCTS = [
     benefits: ['Hidratación intensa', 'Minerales marinos', 'Calmante'],
   },
   {
-    id: 17, stock: 1,
-    brand: 'roundlab',
-    brandName: 'Round Lab',
-    name: 'Protector Solar En Barra SPF 50',
-    nameLong: 'Round Lab Birch Juice Moisturizing Sun Cream SPF50+',
-    price: 260,
-    size: '19g',
-    img: '/assets/images/marcas/roundlab/spf50roundlab.jpg',
-    desc: 'Crema solar hidratante con savia de abedul y SPF 50+ PA++++. Sin residuo blanco, textura cremosa y ligera. Protege mientras hidrata profundamente.',
-    tags: ['solar', 'spf50', 'crema'],
-    badge: 'popular',
-    categories: ['solar'],
-    benefits: ['SPF 50+ PA++++', 'Hidratante', 'Sin residuo blanco'],
-  },
-
-  // --- SKIN1004 Acne ---
-  {
     id: 18, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
@@ -279,6 +262,23 @@ export const PRODUCTS = [
     badge: null,
     categories: ['limpieza', 'acne'],
     benefits: ['Ácido salicílico', 'Anti-acné', 'Limpieza profunda'],
+  },
+
+  // --- SKIN1004 Acne ---
+  {
+    id: 17, stock: 1,
+    brand: 'roundlab',
+    brandName: 'Round Lab',
+    name: 'Protector Solar En Barra SPF 50',
+    nameLong: 'Round Lab Birch Juice Moisturizing Sun Cream SPF50+',
+    price: 260,
+    size: '19g',
+    img: '/assets/images/marcas/roundlab/spf50roundlab.jpg',
+    desc: 'Crema solar hidratante con savia de abedul y SPF 50+ PA++++. Sin residuo blanco, textura cremosa y ligera. Protege mientras hidrata profundamente.',
+    tags: ['solar', 'spf50', 'crema'],
+    badge: 'popular',
+    categories: ['solar'],
+    benefits: ['SPF 50+ PA++++', 'Hidratante', 'Sin residuo blanco'],
   },
   {
     id: 19, stock: 0,
