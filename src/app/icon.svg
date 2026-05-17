@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="sakura-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f497ad" />
+      <stop offset="100%" stop-color="#b39cd0" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(12, 12)">
+    <path transform="rotate(0)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(72)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(144)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(216)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(288)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <circle r="1.5" fill="white" fill-opacity="0.5" />
+  </g>
+</svg>
