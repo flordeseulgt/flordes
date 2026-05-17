@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { PRODUCTS } from '../data/products';
+import { createClient } from '../lib/supabase';
 
 export default function Home() {
   // --- STATE ---
@@ -30,7 +30,42 @@ export default function Home() {
   const [petals, setPetals] = useState([]);
   const [introPetals, setIntroPetals] = useState([]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  
+  const [productsData, setProductsData] = useState([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase.from('products').select('*');
+        if (data) {
+           const mappedProducts = data.map(p => ({
+              id: p.id,
+              brand: p.brand,
+              brandName: p.brand_name,
+              name: p.name,
+              nameLong: p.name_long,
+              price: p.price,
+              size: p.size_info,
+              img: p.image_url,
+              desc: p.description,
+              tags: p.tags || [],
+              badge: p.badge,
+              categories: p.categories || [],
+              benefits: p.benefits || [],
+              stock: p.stock
+           }));
+           setProductsData(mappedProducts);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoadingProducts(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const pressTimerRef = useRef(null);
 
   const handlePressStart = (id) => {
@@ -242,7 +277,7 @@ export default function Home() {
   };
 
   const addToCart = (id) => {
-    const product = PRODUCTS.find(p => p.id === id);
+    const product = productsData.find(p => p.id === id);
     if (!product) return;
     
     const existing = cart.find(c => c.id === id);
@@ -268,7 +303,7 @@ export default function Home() {
   };
 
   const changeQty = (id, delta) => {
-    const product = PRODUCTS.find(p => p.id === id);
+    const product = productsData.find(p => p.id === id);
     
     setCart(prev => prev.map(c => {
       if (c.id === id) {
@@ -297,13 +332,13 @@ export default function Home() {
   const DISCOUNT = 0.9;
 
   const cartTotal = cart.reduce((sum, c) => {
-    const p = PRODUCTS.find(pr => pr.id === c.id);
+    const p = productsData.find(pr => pr.id === c.id);
     return sum + (p ? p.price * DISCOUNT * c.qty : 0);
   }, 0);
 
   const cartCount = cart.reduce((sum, c) => sum + c.qty, 0);
 
-  const filteredProducts = PRODUCTS.filter(p => {
+  const filteredProducts = productsData.filter(p => {
     const matchBrand = currentBrand === 'todos' || p.brand === currentBrand;
     const matchCategory = currentCategory === 'all' || p.categories.includes(currentCategory);
     const q = searchQuery.toLowerCase();
@@ -953,7 +988,7 @@ export default function Home() {
             </div>
           ) : (
             cart.map(c => {
-              const p = PRODUCTS.find(pr => pr.id === c.id);
+              const p = productsData.find(pr => pr.id === c.id);
               if (!p) return null;
               return (
                 <div key={c.id} className="cart-item">
@@ -1083,7 +1118,7 @@ export default function Home() {
                     <h3>Resumen del Pedido</h3>
                     <div className="summary-items">
                       {cart.map(c => {
-                        const p = PRODUCTS.find(pr => pr.id === c.id);
+                        const p = productsData.find(pr => pr.id === c.id);
                         if (!p) return null;
                         return (
                           <div key={c.id} className="summary-item">
