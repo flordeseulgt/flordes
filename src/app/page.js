@@ -33,6 +33,13 @@ export default function Home() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [productsData, setProductsData] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -567,6 +574,7 @@ export default function Home() {
             
             <div className={`nav-search-wrap ${isSearchOpen ? 'open' : ''}`}>
               <input 
+                ref={searchInputRef}
                 type="text" 
                 className="nav-search-input" 
                 placeholder="Buscar productos..."
