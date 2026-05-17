@@ -266,21 +266,6 @@ export const PRODUCTS = [
 
   // --- SKIN1004 Acne ---
   {
-    id: 20, stock: 1,
-    brand: 'skin1004',
-    brandName: 'Skin1004',
-    name: 'Crema Tea Trica',
-    nameLong: 'Skin1004 Zombie Beauty Acne Cream',
-    price: 255,
-    size: '75ml',
-    img: '/assets/images/marcas/skin1004/Acne/creamaacne.png',
-    desc: 'Crema tratante con niacinamida y zinc para controlar brotes, reducir poros y matificar. Perfecta para piel grasa con tendencia al acné.',
-    tags: ['crema', 'acne', 'niacinamida'],
-    badge: null,
-    categories: ['acne'],
-    benefits: ['Niacinamida', 'Control de grasa', 'Anti-inflamatoria'],
-  },
-  {
     id: 18, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
@@ -309,6 +294,21 @@ export const PRODUCTS = [
     badge: 'new',
     categories: ['acne'],
     benefits: ['Tratamiento localizado', 'Invisible', 'Cicatrizante'],
+  },
+  {
+    id: 20, stock: 1,
+    brand: 'skin1004',
+    brandName: 'Skin1004',
+    name: 'Crema Tea Trica',
+    nameLong: 'Skin1004 Zombie Beauty Acne Cream',
+    price: 255,
+    size: '75ml',
+    img: '/assets/images/marcas/skin1004/Acne/creamaacne.png',
+    desc: 'Crema tratante con niacinamida y zinc para controlar brotes, reducir poros y matificar. Perfecta para piel grasa con tendencia al acné.',
+    tags: ['crema', 'acne', 'niacinamida'],
+    badge: null,
+    categories: ['acne'],
+    benefits: ['Niacinamida', 'Control de grasa', 'Anti-inflamatoria'],
   },
   {
     id: 21, stock: 0,
