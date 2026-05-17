@@ -249,7 +249,7 @@ export const PRODUCTS = [
     benefits: ['Hidratación intensa', 'Minerales marinos', 'Calmante'],
   },
   {
-    id: 17, stock: 1,
+    id: 17, stock: 2,
     brand: 'roundlab',
     brandName: 'Round Lab',
     name: 'Protector Solar En Barra SPF 50',
@@ -531,7 +531,7 @@ export const PRODUCTS = [
     benefits: ['Rosa & niacinamida', 'Control de poros', 'Matificante'],
   },
   {
-    id: 35, stock: 0,
+    id: 35, stock: 2,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Mascarilla en Barra Poros',
