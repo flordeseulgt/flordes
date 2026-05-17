@@ -430,6 +430,16 @@ export default function Home() {
       if (result.success) {
         setOrderNumber(result.orderNumber);
         setOrderSuccess(true);
+        
+        // Actualizar el stock localmente para que se refleje de inmediato sin recargar
+        setProductsData(prev => prev.map(p => {
+          const inCart = cart.find(c => c.id === p.id);
+          if (inCart) {
+            return { ...p, stock: Math.max(0, p.stock - inCart.qty) };
+          }
+          return p;
+        }));
+        
         setCart([]);
         showToast('🌸 ¡Pedido confirmado con éxito!');
       } else {
