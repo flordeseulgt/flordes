@@ -63,6 +63,8 @@ export async function POST(request) {
     }
 
     const items = body.items;
+    const customer = body.customer;
+    const paymentMethod = body.paymentMethod;
     
     for (const item of items) {
       if (typeof item.id !== 'string') {
@@ -99,11 +101,14 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'No se pudo registrar la orden' }, { status: 500, headers: corsHeaders });
     }
 
-    // 3. Descontar stock en base de datos
+    // 3. Descontar stock en base de datos y calcular total
+    let totalAmount = 0;
+    const orderItemsDetails = [];
+
     for (const item of items) {
       const { data: product, error: fetchError } = await supabase
         .from('products')
-        .select('stock')
+        .select('stock, name, price')
         .eq('id', item.id)
         .single();
         
@@ -121,6 +126,57 @@ export async function POST(request) {
 
       if (updateError) {
         console.error('Error al actualizar stock:', updateError);
+      }
+
+      totalAmount += product.price * item.qty;
+      orderItemsDetails.push({
+        name: product.name,
+        qty: item.qty,
+        price: product.price
+      });
+    }
+
+    const subtotal = totalAmount;
+    const discountAmount = subtotal * 0.10;
+    const finalTotal = subtotal - discountAmount;
+
+    // 4. Enviar notificación a Telegram
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (botToken && chatId) {
+      let message = `🌸 Nuevo Pedido Recibido 🌸\n\n` +
+        `🔢 Orden: #${newOrderNumber}\n\n` +
+        `📦 Productos:\n\n` +
+        orderItemsDetails.map(detail => `${detail.name} (x${detail.qty})`).join('\n') +
+        `\n\n💰 Subtotal: Q${subtotal.toFixed(2)}` +
+        `\n🎁 Descuento (10% Día de la Madre): -Q${discountAmount.toFixed(2)}` +
+        `\n💰 Total: Q${finalTotal.toFixed(2)}\n\n`;
+
+      if (customer) {
+        message += `👤 Cliente:\n\n` +
+          `Nombre: ${customer.nombre} ${customer.apellido}\n` +
+          `Tel: ${customer.tel}\n` +
+          `Email: ${customer.email || 'N/D'}\n` +
+          `Dirección: ${customer.direccion}\n` +
+          `Municipio: ${customer.municipio}\n` +
+          `Depto: ${customer.departamento}\n`;
+      }
+
+      message += `💳 Método de Pago: ${paymentMethod === 'entrega' ? 'Contra Entrega' : 'Previo Depósito'}`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'Markdown',
+          }),
+        });
+      } catch (telegramError) {
+        console.error('Error al enviar notificación de Telegram:', telegramError);
       }
     }
     

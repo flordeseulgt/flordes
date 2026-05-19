@@ -430,13 +430,26 @@ export default function Home() {
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
     
+    const formData = new FormData(e.target);
+    const customer = {
+      nombre: formData.get('nombre'),
+      apellido: formData.get('apellido'),
+      email: formData.get('email'),
+      tel: formData.get('tel'),
+      direccion: formData.get('direccion'),
+      municipio: formData.get('municipio'),
+      departamento: formData.get('departamento'),
+    };
+    
     try {
       // Enviar el pedido al servidor central
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: cart.map(c => ({ id: c.id, qty: c.qty }))
+          items: cart.map(c => ({ id: c.id, qty: c.qty })),
+          customer,
+          paymentMethod
         })
       });
       
@@ -1080,6 +1093,12 @@ export default function Home() {
                 <span className="order-label">Número de Orden:</span>
                 <span className="order-value">#0000{orderNumber}</span>
               </div>
+              
+              {paymentMethod === 'deposito' && (
+                <p style={{ color: '#00F5FF', fontSize: '0.9rem', marginTop: '10px', marginBottom: '15px', textAlign: 'center', fontWeight: 'bold' }}>
+                  📸 Por favor, tómale una captura de pantalla a tu número de orden.
+                </p>
+              )}
               
               <p className="thanks-footer">Que tengas un excelente día · 좋은 하루 되세요</p>
               
