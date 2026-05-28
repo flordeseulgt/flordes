@@ -483,6 +483,9 @@ export default function Home() {
   // --- RENDER ---
   return (
     <main className={showIntro ? 'overflow-hidden' : ''}>
+      <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0 }}>
+        Flor de Seúl | Tienda de Skincare Coreano en Guatemala
+      </h1>
       {/* ============ PRELOADER INTRO ============ */}
       {showIntro && (
         <div className="intro-overlay">
@@ -509,7 +512,7 @@ export default function Home() {
                 </g>
               </svg>
             </div>
-            <h1 className="intro-title">Flor de Seúl</h1>
+            <h2 className="intro-title">Flor de Seúl</h2>
             <div className="intro-line"></div>
             <p className="intro-subtitle">아름다운 피부를 위한 여정</p>
           </div>
@@ -649,7 +652,7 @@ export default function Home() {
               <div className="hero-overlay"></div>
               <div className="hero-content">
                 <span className="hero-badge">{slide.badge}</span>
-                <h1 className="hero-title">{slide.title}</h1>
+                <h2 className="hero-title">{slide.title}</h2>
                 <p className="hero-desc">{slide.desc}</p>
                 <div className="hero-btns">
                   <a href={slide.linkPrimary} className="btn-primary">{slide.btnPrimary}</a>
@@ -1086,7 +1089,7 @@ export default function Home() {
             <div className="order-success-screen">
               <div className="success-icon">🌸</div>
               <h2 className="thanks-kr">구매해 주셔서 감사합니다!</h2>
-              <h1 className="success-title">¡Gracias por tu compra!</h1>
+              <h2 className="success-title">¡Gracias por tu compra!</h2>
               <p className="success-subtitle">Tu pedido ha sido recibido y está siendo procesado.</p>
               
               <div className="order-info-card">
@@ -1095,9 +1098,11 @@ export default function Home() {
               </div>
               
               {paymentMethod === 'deposito' && (
-                <p style={{ color: '#00F5FF', fontSize: '0.9rem', marginTop: '10px', marginBottom: '15px', textAlign: 'center', fontWeight: 'bold' }}>
-                  📸 Por favor, tómale una captura de pantalla a tu número de orden.
-                </p>
+                <div style={{ backgroundColor: '#1a0a0f', padding: '12px', borderRadius: '10px', marginTop: '15px', marginBottom: '15px', border: '1px solid #00F5FF' }}>
+                  <p style={{ color: '#00F5FF', fontSize: '0.85rem', textAlign: 'center', fontWeight: 'bold', margin: 0 }}>
+                    📸 Por favor, tómale una captura de pantalla a tu número de orden.
+                  </p>
+                </div>
               )}
               
               <p className="thanks-footer">Que tengas un excelente día · 좋은 하루 되세요</p>

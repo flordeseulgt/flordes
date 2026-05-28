@@ -1,16 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="sakura-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f497ad" />
-      <stop offset="100%" stop-color="#b39cd0" />
+    <linearGradient id="premium-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB5C5" />
+      <stop offset="50%" stop-color="#F497AD" />
+      <stop offset="100%" stop-color="#C5A3E8" />
     </linearGradient>
+    <filter id="subtle-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.15" />
+    </filter>
   </defs>
-  <g transform="translate(12, 12)">
-    <path transform="rotate(0)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
-    <path transform="rotate(72)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
-    <path transform="rotate(144)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
-    <path transform="rotate(216)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
-    <path transform="rotate(288)" fill="url(#sakura-grad)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
-    <circle r="1.5" fill="white" fill-opacity="0.5" />
+  <!-- Background circle with soft gradient -->
+  <circle cx="256" cy="256" r="256" fill="url(#premium-bg)" />
+  
+  <!-- Subtle inner glowing ring -->
+  <circle cx="256" cy="256" r="236" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.35" />
+  
+  <!-- Stylized Elegant Flower -->
+  <g transform="translate(256, 256) scale(16)" filter="url(#subtle-shadow)">
+    <!-- 5 Petals -->
+    <path transform="rotate(0)" fill="#FFFFFF" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(72)" fill="#FFFFFF" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(144)" fill="#FFFFFF" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(216)" fill="#FFFFFF" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <path transform="rotate(288)" fill="#FFFFFF" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+    <!-- Glowing center pistil/stamens -->
+    <circle r="1.5" fill="#FFEAA7" />
+    <!-- Tiny decorative dots inside petals to look like a flower core -->
+    <circle cx="0" cy="-2.5" r="0.4" fill="#FFEAA7" opacity="0.8" />
+    <circle cx="2.38" cy="-0.77" r="0.4" fill="#FFEAA7" opacity="0.8" />
+    <circle cx="1.47" cy="2.02" r="0.4" fill="#FFEAA7" opacity="0.8" />
+    <circle cx="-1.47" cy="2.02" r="0.4" fill="#FFEAA7" opacity="0.8" />
+    <circle cx="-2.38" cy="-0.77" r="0.4" fill="#FFEAA7" opacity="0.8" />
   </g>
 </svg>
