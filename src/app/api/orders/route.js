@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
+// --- HTML ESCAPE HELPER TO PREVENT XSS/MARKDOWN INJECTION IN TELEGRAM ---
+function escapeHtml(text) {
+  if (typeof text !== 'string') return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // --- 1. RATE LIMITING BÁSICO EN MEMORIA ---
 const rateLimitCache = new Map();
 const RATE_LIMIT_WINDOW_MS = 60000; // 1 minuto
@@ -75,6 +86,37 @@ export async function POST(request) {
       }
     }
     
+    // --- SECURE INPUT VALIDATION ---
+    if (!customer || typeof customer !== 'object') {
+      return NextResponse.json({ success: false, error: 'Información de cliente requerida' }, { status: 400, headers: corsHeaders });
+    }
+
+    const requiredFields = ['nombre', 'apellido', 'tel', 'direccion', 'municipio', 'departamento'];
+    for (const field of requiredFields) {
+      const val = customer[field];
+      if (typeof val !== 'string' || val.trim() === '') {
+        return NextResponse.json({ success: false, error: `El campo '${field}' es obligatorio y debe ser texto` }, { status: 400, headers: corsHeaders });
+      }
+      const maxLen = field === 'direccion' ? 300 : 100;
+      if (val.length > maxLen) {
+        return NextResponse.json({ success: false, error: `El campo '${field}' excede el límite de caracteres permitido` }, { status: 400, headers: corsHeaders });
+      }
+    }
+
+    if (customer.email) {
+      if (typeof customer.email !== 'string' || customer.email.length > 100) {
+        return NextResponse.json({ success: false, error: 'El correo electrónico es inválido' }, { status: 400, headers: corsHeaders });
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(customer.email)) {
+        return NextResponse.json({ success: false, error: 'Formato de correo electrónico inválido' }, { status: 400, headers: corsHeaders });
+      }
+    }
+
+    if (paymentMethod !== 'deposito' && paymentMethod !== 'entrega') {
+      return NextResponse.json({ success: false, error: 'Método de pago inválido' }, { status: 400, headers: corsHeaders });
+    }
+    
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -140,30 +182,30 @@ export async function POST(request) {
     const discountAmount = subtotal * 0.10;
     const finalTotal = subtotal - discountAmount;
 
-    // 4. Enviar notificación a Telegram
+    // 4. Enviar notificación a Telegram (Usando HTML-safe escaping para evitar fallos de parseo en Telegram)
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (botToken && chatId) {
-      let message = `🌸 Nuevo Pedido Recibido 🌸\n\n` +
-        `🔢 Orden: #${newOrderNumber}\n\n` +
-        `📦 Productos:\n\n` +
-        orderItemsDetails.map(detail => `${detail.name} (x${detail.qty})`).join('\n') +
-        `\n\n💰 Subtotal: Q${subtotal.toFixed(2)}` +
-        `\n🎁 Descuento (10% Día de la Madre): -Q${discountAmount.toFixed(2)}` +
-        `\n💰 Total: Q${finalTotal.toFixed(2)}\n\n`;
+      let message = `<b>🌸 Nuevo Pedido Recibido 🌸</b>\n\n` +
+        `<b>🔢 Orden:</b> #${newOrderNumber}\n\n` +
+        `<b>📦 Productos:</b>\n` +
+        orderItemsDetails.map(detail => `${escapeHtml(detail.name)} (x${detail.qty})`).join('\n') +
+        `\n\n<b>💰 Subtotal:</b> Q${subtotal.toFixed(2)}` +
+        `\n<b>🎁 Descuento (10% Día de la Madre):</b> -Q${discountAmount.toFixed(2)}` +
+        `\n<b>💰 Total:</b> Q${finalTotal.toFixed(2)}\n\n`;
 
       if (customer) {
-        message += `👤 Cliente:\n\n` +
-          `Nombre: ${customer.nombre} ${customer.apellido}\n` +
-          `Tel: ${customer.tel}\n` +
-          `Email: ${customer.email || 'N/D'}\n` +
-          `Dirección: ${customer.direccion}\n` +
-          `Municipio: ${customer.municipio}\n` +
-          `Depto: ${customer.departamento}\n`;
+        message += `<b>👤 Cliente:</b>\n` +
+          `Nombre: ${escapeHtml(customer.nombre)} ${escapeHtml(customer.apellido)}\n` +
+          `Tel: ${escapeHtml(customer.tel)}\n` +
+          `Email: ${escapeHtml(customer.email || 'N/D')}\n` +
+          `Dirección: ${escapeHtml(customer.direccion)}\n` +
+          `Municipio: ${escapeHtml(customer.municipio)}\n` +
+          `Depto: ${escapeHtml(customer.departamento)}\n\n`;
       }
 
-      message += `💳 Método de Pago: ${paymentMethod === 'entrega' ? 'Contra Entrega' : 'Previo Depósito'}`;
+      message += `<b>💳 Método de Pago:</b> ${paymentMethod === 'entrega' ? 'Contra Entrega' : 'Previo Depósito'}`;
 
       try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -172,7 +214,7 @@ export async function POST(request) {
           body: JSON.stringify({
             chat_id: chatId,
             text: message,
-            parse_mode: 'Markdown',
+            parse_mode: 'HTML',
           }),
         });
       } catch (telegramError) {
