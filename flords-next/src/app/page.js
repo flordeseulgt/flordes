@@ -438,7 +438,7 @@ export default function Home() {
               onClick={() => !isDisabled && addToCart(p.id)}
               disabled={isDisabled}
             >
-              {!p.stock ? 'Agotado' : (isMaxReached ? 'Límite alcanzado' : '🛍 Agregar')}
+              {!p.stock ? 'Agotado' : (isMaxReached ? 'Límite alcanzado' : <><span className="cart-icon">🛍</span> Agregar</>)}
             </button>
           </div>
         </div>
@@ -1352,7 +1352,7 @@ export default function Home() {
                     style={{ flex: 1, minWidth: '160px' }}
                     disabled={!selectedProduct.stock || (cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock)}
                   >
-                    {!selectedProduct.stock ? '❌ Agotado' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : '🛍 Agregar')}
+                    {!selectedProduct.stock ? '❌ Agotado' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : <><span className="cart-icon">🛍</span> Agregar</>)}
                   </button>
                 </div>
               </div>

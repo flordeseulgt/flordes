@@ -1796,6 +1796,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 @media (max-width: 768px) {
+  .cart-icon {
+    display: none;
+  }
   .about-badges {
     grid-template-columns: 1fr;
     gap: 10px;
