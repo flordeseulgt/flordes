@@ -858,7 +858,7 @@ export default function Home() {
           <div className="about-grid">
             <div className="about-visual">
               <div className="about-img-wrap">
-                <img src="/assets/images/logos/fk.png" alt="Flor de Seúl GT" />
+                <img src="/assets/images/logos/fk.png?v=2" alt="Flor de Seúl GT" />
               </div>
               <div className="about-korean-deco">
                 <span>진정한 아름다움</span>

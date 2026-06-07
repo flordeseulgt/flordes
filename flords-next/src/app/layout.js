@@ -29,7 +29,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: '/assets/images/logos/fk.png',
+        url: '/assets/images/logos/fk.png?v=2',
         width: 800,
         height: 800,
         alt: 'Flor de Seúl Logo',
@@ -40,7 +40,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Flor de Seúl — Skincare Coreano Auténtico',
     description: 'Flor de Seúl — Tu tienda de skincare coreano en Guatemala. Descubre las mejores marcas como Anua, Beauty of Joseon, Skin1004, Tirtir y más.',
-    images: ['/assets/images/logos/fk.png'],
+    images: ['/assets/images/logos/fk.png?v=2'],
   },
   robots: {
     index: true,
