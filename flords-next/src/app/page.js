@@ -16,9 +16,11 @@ const collectionBrands = [
 
 export default function Home() {
   const audioRef = useRef(null);
+  const [muted, setMuted] = useState(true);
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+    audio.muted = true;
     const play = () => { audio.play().catch(() => {}); document.removeEventListener('click', play); };
     audio.play().catch(() => document.addEventListener('click', play, { once: true }));
   }, []);
@@ -506,10 +508,21 @@ export default function Home() {
   };
 
 
+  const toggleMute = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.muted = !audio.muted;
+    setMuted(audio.muted);
+    if (!audio.muted) audio.play().catch(() => {});
+  };
+
   // --- RENDER ---
   return (
     <main className={showIntro ? 'overflow-hidden' : ''}>
       <audio ref={audioRef} src="/Sparkle (Instrumental Only).mp3" loop playsInline />
+      <button className="audio-toggle" onClick={toggleMute} aria-label={muted ? 'Activar sonido' : 'Silenciar'}>
+        {muted ? '🔇' : '🔊'}
+      </button>
       <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0 }}>
         Flor de Seúl | Tienda de Skincare Coreano en Guatemala
       </h1>
