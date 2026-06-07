@@ -16,11 +16,10 @@ const collectionBrands = [
 
 export default function Home() {
   const audioRef = useRef(null);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.muted = true;
     const play = () => { audio.play().catch(() => {}); document.removeEventListener('click', play); };
     audio.play().catch(() => document.addEventListener('click', play, { once: true }));
   }, []);
