@@ -1799,6 +1799,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .cart-icon {
     display: none;
   }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .about-badges {
     grid-template-columns: 1fr;
     gap: 10px;
