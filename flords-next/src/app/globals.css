@@ -1799,10 +1799,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .cart-icon {
     display: none;
   }
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
   .about-badges {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -2977,6 +2973,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
   .checkout-content { padding: 24px 16px; }
   .form-row { grid-template-columns: 1fr; }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .feature-card {
+    padding: 28px 20px;
+  }
+  .feature-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+  }
 }
 
 @media (max-width: 480px) {
