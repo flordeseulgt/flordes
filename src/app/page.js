@@ -4,6 +4,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createClient } from '../lib/supabase';
 import { PRODUCTS } from '../data/products';
 
+const collectionBrands = [
+  { id: 'anua', name: 'Anua', img: '/assets/images/collage/an.jpeg', desc: 'Cuidado natural, honesto y minimalista' },
+  { id: 'beautyofjoseon', name: 'Beauty of Joseon', img: '/assets/images/collage/boj.jpeg', desc: 'Hanbang: medicina tradicional coreana' },
+  { id: 'mixsoon', name: 'Mixsoon', img: '/assets/images/collage/mix.jpeg', desc: 'Ingredientes puros en alta concentración' },
+  { id: 'tirtir', name: 'Tirtir', img: '/assets/images/collage/tirtirb.webp', desc: 'Piel de porcelana y brillo cristalino' },
+  { id: 'skin1004', name: 'Skin1004', img: '/assets/images/collage/sk.jpeg', desc: 'Especialistas en Centella de Madagascar' },
+  { id: 'sulwhasoo', name: 'Sulwhasoo', img: '/assets/images/collage/sul.jpeg', desc: 'Skincare de lujo coreano premium' },
+  { id: 'roundlab', name: 'Round Lab', img: '/assets/images/collage/roundlabb.webp', desc: 'Hidratación limpia con ingredientes puros' }
+];
+
 export default function Home() {
   // --- STATE ---
   const [cart, setCart] = useState([]);
@@ -34,6 +44,18 @@ export default function Home() {
   const [productsData, setProductsData] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const searchInputRef = useRef(null);
+  const collectionCarouselRef = useRef(null);
+
+  const scrollCollection = (direction) => {
+    if (collectionCarouselRef.current) {
+      const { scrollLeft, clientWidth } = collectionCarouselRef.current;
+      const scrollAmount = direction === 'left' ? -clientWidth * 0.75 : clientWidth * 0.75;
+      collectionCarouselRef.current.scrollTo({
+        left: scrollLeft + scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
@@ -378,10 +400,10 @@ export default function Home() {
     return 0;
   });
 
-  // La limitación de 8 productos solo aplica en la vista predeterminada inicial.
+  // La limitación de 9 productos solo aplica en la vista predeterminada inicial.
   // Si el usuario busca, filtra por marca/categoría o pulsa "Ver Todo", mostramos todo.
   const hasActiveFilter = searchQuery !== '' || currentBrand !== 'todos' || currentCategory !== 'all' || isShowingAll;
-  const featuredProducts = hasActiveFilter ? sortedProducts : sortedProducts.filter(p => p.stock).slice(0, 8);
+  const featuredProducts = hasActiveFilter ? sortedProducts : sortedProducts.filter(p => p.stock).slice(0, 9);
 
   const renderProduct = (p) => {
     const cartQty = cart.find(c => c.id === p.id)?.qty || 0;
@@ -400,14 +422,11 @@ export default function Home() {
         </div>
         <div className="product-info">
           <div className="product-meta">
-            <span className="product-brand">{p.brandName}</span>
+            <span className={`product-brand brand-${p.brand}`}>{p.brandName}</span>
             {p.size && <span className="product-size">{p.size}</span>}
           </div>
           <h3 className="product-name" onClick={() => setSelectedProduct(p)}>{p.name}</h3>
           <p className="product-desc">{p.desc}</p>
-          <div className="product-tags">
-            {p.tags.slice(0, 3).map(t => <span key={t} className="product-tag">{t}</span>)}
-          </div>
           <div className="product-footer">
             <div className="product-price-wrap">
               <span className="product-price-original">Q{p.price.toFixed(2)}</span>
@@ -560,7 +579,6 @@ export default function Home() {
 
           <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
             <a href="#inicio" className="nav-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
-            <a href="#marcas" className="nav-link" onClick={() => setIsMenuOpen(false)}>Marcas</a>
             <a href="#productos" className="nav-link" onClick={() => setIsMenuOpen(false)}>Productos</a>
             <a href="#nosotros" className="nav-link" onClick={() => setIsMenuOpen(false)}>Nosotros</a>
             <a href="#contacto" className="nav-link" onClick={() => setIsMenuOpen(false)}>Redes</a>
@@ -625,18 +643,18 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ============ MOTHERS DAY BANNER ============ */}
-      <div className="mothers-day-banner">
-        <div className="mdb-petals">
-          {['🌸','💐','🌷','✨','💖','🌸','💐','🌷','✨','💖','🌸','💐'].map((e, i) => (
-            <span key={i} className="mdb-petal" style={{ animationDelay: `${i * 0.4}s` }}>{e}</span>
+      {/* ============ FATHERS DAY BANNER ============ */}
+      <div className="fathers-day-banner">
+        <div className="fdb-petals">
+          {['💙','👔','👑','✨','🎁','💙','👔','👑','✨','🎁','💙','👔'].map((e, i) => (
+            <span key={i} className="fdb-petal" style={{ animationDelay: `${i * 0.4}s` }}>{e}</span>
           ))}
         </div>
-        <div className="mdb-content">
-          <span className="mdb-eyebrow">✦ Especial de Mayo ✦</span>
-          <h2 className="mdb-title">💐 Feliz Día de la Madre 💐</h2>
-          <p className="mdb-sub">¡Celebra a mamá con el mejor skincare coreano! <strong>10% OFF</strong> en todos los productos</p>
-          <a href="#productos" className="mdb-btn">Ver Ofertas 🎁</a>
+        <div className="fdb-content">
+          <span className="fdb-eyebrow">✦ Especial de Junio ✦</span>
+          <h2 className="fdb-title">💙 Feliz Día del Padre 💙</h2>
+          <p className="fdb-sub">¡Celebra a papá con el mejor skincare coreano! <strong>10% OFF</strong> en todos los productos</p>
+          <a href="#productos" className="fdb-btn">Ver Ofertas 🎁</a>
         </div>
       </div>
 
@@ -702,7 +720,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">피부 유형</span>
-            <h2 className="section-title">Encuentra tu Rutina</h2>
+            <h2 className="section-title">Encuentra tu <em>Rutina</em></h2>
             <p className="section-desc">Productos seleccionados según tu tipo y preocupación de piel</p>
           </div>
           <div className="categories-grid">
@@ -716,7 +734,7 @@ export default function Home() {
             ].map(cat => (
               <div 
                 key={cat.id} 
-                className={`category-card ${activeCategoryZoom === cat.id ? 'zoomed' : ''}`} 
+                className={`category-card cat-${cat.id} ${activeCategoryZoom === cat.id ? 'zoomed' : ''}`} 
                 onClick={() => { 
                   setCurrentCategory(cat.id); 
                   if (cat.id === 'all') setIsShowingAll(true);
@@ -738,38 +756,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ MARCAS ============ */}
-      <section className="brands-section" id="marcas">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tag">브랜드</span>
-            <h2 className="section-title">Nuestras Marcas</h2>
-            <p className="section-desc">Las marcas de K-Beauty más reconocidas del mundo</p>
-          </div>
-
-          <div className="brand-tabs">
-            {['todos', 'anua', 'beautyofjoseon', 'mixsoon', 'roundlab', 'skin1004', 'sulwhasoo', 'tirtir'].map(brand => (
-              <button 
-                key={brand} 
-                className={`brand-tab ${currentBrand === brand ? 'active' : ''}`}
-                onClick={() => { setCurrentBrand(brand); document.getElementById('productos').scrollIntoView({ behavior: 'smooth' }); }}
-              >
-                {brand === 'todos' ? 'Todos' : brand.charAt(0).toUpperCase() + brand.slice(1).replace(/of/g, 'of ')}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ============ PRODUCTOS ============ */}
       <section className="products-section" id="productos">
         <div className="container">
           <div className="section-header">
             <span className="section-tag">제품</span>
-            <h2 className="section-title">Nuestros Productos</h2>
+            <h2 className="section-title">Nuestros <em>Productos</em></h2>
             <p className="section-desc">Skincare coreano auténtico, entregado en tu puerta</p>
             
-            <div className="sort-container">
+            <div className="brand-tabs" style={{ marginTop: '28px', marginBottom: '8px' }}>
+              {['todos', 'anua', 'beautyofjoseon', 'mixsoon', 'roundlab', 'skin1004', 'sulwhasoo', 'tirtir'].map(brand => (
+                <button 
+                  key={brand} 
+                  className={`brand-tab ${currentBrand === brand ? 'active' : ''}`}
+                  onClick={() => setCurrentBrand(brand)}
+                >
+                  {brand === 'todos' ? 'Todos' : brand.charAt(0).toUpperCase() + brand.slice(1).replace(/of/g, 'of ')}
+                </button>
+              ))}
+            </div>
+
+            <div className="sort-container" style={{ marginTop: '20px' }}>
               <label htmlFor="sort-price" className="sort-label">Ordenar por:</label>
               <select 
                 id="sort-price" 
@@ -797,42 +804,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ COLECCIÓN / COLLAGE ============ */}
-      <section className="collage-section">
+      {/* ============ COLECCIÓN / CAROUSEL ============ */}
+      <section className="collection-section">
         <div className="container">
           <div className="section-header">
             <span className="section-tag">컬렉션</span>
-            <h2 className="section-title">Nuestra Colección</h2>
+            <h2 className="section-title">Nuestra <em>Colección</em></h2>
           </div>
-          <div className="collage-grid">
-            <div className="collage-item large">
-              <img src="/assets/images/collage/an.jpeg" alt="Anua Collection" loading="lazy" />
-              <div className="collage-overlay"><span>Anua</span></div>
+          
+          <div className="collection-carousel-container">
+            <button 
+              className="collection-nav-btn prev" 
+              onClick={() => scrollCollection('left')} 
+              aria-label="Colección anterior"
+            >
+              &#8592;
+            </button>
+            
+            <div className="collection-viewport" ref={collectionCarouselRef}>
+              {collectionBrands.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="collection-card"
+                  onClick={() => {
+                    setCurrentBrand(item.id);
+                    document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <img src={item.img} alt={`${item.name} Collection`} loading="lazy" />
+                  <div className="collection-overlay">
+                    <h3>{item.name}</h3>
+                    <p>{item.desc}</p>
+                    <span className="collection-overlay-btn">Explorar Marca</span>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="collage-item">
-              <img src="/assets/images/collage/boj.jpeg" alt="Beauty of Joseon" loading="lazy" />
-              <div className="collage-overlay"><span>Beauty of Joseon</span></div>
-            </div>
-            <div className="collage-item">
-              <img src="/assets/images/collage/mix.jpeg" alt="Mixsoon" loading="lazy" />
-              <div className="collage-overlay"><span>Mixsoon</span></div>
-            </div>
-            <div className="collage-item">
-              <img src="/assets/images/collage/tirtirb.webp" alt="TirTir" loading="lazy" />
-              <div className="collage-overlay"><span>TirTir</span></div>
-            </div>
-            <div className="collage-item large">
-              <img src="/assets/images/collage/sk.jpeg" alt="Skin1004" loading="lazy" />
-              <div className="collage-overlay"><span>Skin1004</span></div>
-            </div>
-            <div className="collage-item">
-              <img src="/assets/images/collage/sul.jpeg" alt="Sulwhasoo" loading="lazy" />
-              <div className="collage-overlay"><span>Sulwhasoo</span></div>
-            </div>
-            <div className="collage-item">
-              <img src="/assets/images/collage/roundlabb.webp" alt="Round Lab" loading="lazy" />
-              <div className="collage-overlay"><span>Round Lab</span></div>
-            </div>
+            
+            <button 
+              className="collection-nav-btn next" 
+              onClick={() => scrollCollection('right')} 
+              aria-label="Siguiente colección"
+            >
+              &#8594;
+            </button>
           </div>
         </div>
       </section>
@@ -852,12 +867,16 @@ export default function Home() {
             </div>
             <div className="about-content">
               <span className="section-tag">우리에 대해</span>
-              <h2 className="section-title" style={{ textAlign: 'left' }}>¿Quiénes Somos?</h2>
-              <p>Somos <strong>Flor de Seúl GT</strong>, la tienda guatemalteca especializada en skincare coreano auténtico. Nuestra misión es acercar lo mejor de K-Beauty a Guatemala, con productos verificados y de las marcas más reconocidas del mundo.</p>
-              <p>Creemos que cada persona merece una rutina de cuidado de piel efectiva y accesible. Por eso importamos directamente desde Corea del Sur, garantizando la autenticidad de cada producto.</p>
+              <h2 className="section-title">¿Quiénes <em>Somos</em>?</h2>
+              <p style={{ textAlign: 'justify', textJustify: 'inter-word' }}>
+                Somos <strong>Flor de Seúl GT</strong>, la tienda guatemalteca especializada en skincare coreano auténtico. Nuestra misión es acercar lo mejor de K-Beauty a Guatemala, con productos verificados y de las marcas más reconocidas del mundo.
+              </p>
+              <p style={{ textAlign: 'justify', textJustify: 'inter-word' }}>
+                Creemos que cada persona merece una rutina de cuidado de piel efectiva y accesible. Por eso importamos directamente desde Corea del Sur, garantizando la autenticidad de cada producto.
+              </p>
               <div className="about-stats">
                 <div className="stat">
-                  <span className="stat-num">8+</span>
+                  <span className="stat-num">7+</span>
                   <span className="stat-label">Marcas Coreanas</span>
                 </div>
                 <div className="stat">
@@ -880,7 +899,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">왜 우리를 선택해야 할까요</span>
-            <h2 className="section-title">¿Por qué Flor de Seúl?</h2>
+            <h2 className="section-title">¿Por qué <em>Flor de Seúl</em>?</h2>
           </div>
           <div className="features-grid">
             {[
@@ -890,7 +909,7 @@ export default function Home() {
               { icon: '💳', title: 'Pago Flexible', desc: 'Aceptamos pago contra entrega y transferencia bancaria. Fácil y seguro.' }
             ].map((f, i) => (
               <div key={i} className="feature-card">
-                <div className="feature-icon">{f.icon}</div>
+                <div className="feature-icon-wrapper">{f.icon}</div>
                 <h3>{f.title}</h3>
                 <p>{f.desc}</p>
               </div>
@@ -904,52 +923,79 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">소셜 미디어</span>
-            <h2 className="section-title">Redes Sociales</h2>
+            <h2 className="section-title">Redes <em>Sociales</em></h2>
             <p className="section-desc">Síguenos y contáctanos para encontrar el skincare perfecto</p>
           </div>
-          <div className="contact-grid" style={{ display: 'flex', justifyContent: 'center', gap: '40px', maxWidth: '1000px', margin: '0 auto' }}>
-            <div className="contact-info" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '28px', width: '100%' }}>
-              <div className="contact-item tiktok">
-                <span className="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.43-.17-.11-.34-.23-.5-.35-.02 3.11-.01 6.22-.03 9.33-.06 2.09-.76 4.14-2.18 5.67-1.74 1.88-4.32 2.81-6.87 2.49-2.58-.33-4.88-2.12-5.77-4.57-1-2.73-.25-5.9 1.93-7.85 1.51-1.35 3.52-1.95 5.51-1.63v4.13c-1.3-.24-2.73.08-3.66 1.05-.85.89-1.07 2.27-.55 3.39.52 1.11 1.7 1.87 2.92 1.87 1.15-.02 2.18-.8 2.61-1.86.19-.47.24-.98.24-1.48-.01-3.64-.01-7.29-.01-10.93-.01-1.36-.01-2.73-.01-4.09z"/>
-                  </svg>
-                </span>
-                <div>
-                  <h4>TikTok</h4>
-                  <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener">@flor.de.seul.gt</a>
-                </div>
+          <div className="social-grid">
+            <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener" className="social-card tiktok">
+              <div className="social-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.43-.17-.11-.34-.23-.5-.35-.02 3.11-.01 6.22-.03 9.33-.06 2.09-.76 4.14-2.18 5.67-1.74 1.88-4.32 2.81-6.87 2.49-2.58-.33-4.88-2.12-5.77-4.57-1-2.73-.25-5.9 1.93-7.85 1.51-1.35 3.52-1.95 5.51-1.63v4.13c-1.3-.24-2.73.08-3.66 1.05-.85.89-1.07 2.27-.55 3.39.52 1.11 1.7 1.87 2.92 1.87 1.15-.02 2.18-.8 2.61-1.86.19-.47.24-.98.24-1.48-.01-3.64-.01-7.29-.01-10.93-.01-1.36-.01-2.73-.01-4.09z"/>
+                </svg>
               </div>
-              <div className="contact-item instagram">
-                <span className="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                </span>
-                <div>
-                  <h4>Instagram</h4>
-                  <a href="https://www.instagram.com/flordeseul_gt" target="_blank" rel="noopener">@flordeseul_gt</a>
-                </div>
+              <div className="social-content">
+                <span className="social-tag">TikTok</span>
+                <h3 className="social-username">@flor.de.seul.gt</h3>
               </div>
-              <div className="contact-item facebook">
-                <span className="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                  </svg>
-                </span>
-                <div>
-                  <h4>Facebook</h4>
-                  <a href="https://www.facebook.com/people/Flor-De-Seúl-Gt/61577355537632/" target="_blank" rel="noopener">Flor De Seúl Gt</a>
-                </div>
+              <div className="social-action">
+                <span>Seguir</span>
+                <svg className="social-action-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
               </div>
-              <div className="contact-item location">
-                <span className="contact-icon">📍</span>
-                <div>
-                  <h4>Ubicación</h4>
-                  <p>Guatemala 🇬🇹</p>
-                </div>
+            </a>
+
+            <a href="https://www.instagram.com/flordeseul_gt" target="_blank" rel="noopener" className="social-card instagram">
+              <div className="social-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </div>
+              <div className="social-content">
+                <span className="social-tag">Instagram</span>
+                <h3 className="social-username">@flordeseul_gt</h3>
+              </div>
+              <div className="social-action">
+                <span>Seguir</span>
+                <svg className="social-action-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
+            </a>
+
+            <a href="https://www.facebook.com/people/Flor-De-Seúl-Gt/61577355537632/" target="_blank" rel="noopener" className="social-card facebook">
+              <div className="social-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </div>
+              <div className="social-content">
+                <span className="social-tag">Facebook</span>
+                <h3 className="social-username">Flor De Seúl Gt</h3>
+              </div>
+              <div className="social-action">
+                <span>Visitar</span>
+                <svg className="social-action-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
+            </a>
+
+            <div className="social-card location">
+              <div className="social-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div className="social-content">
+                <span className="social-tag">Ubicación</span>
+                <h3 className="social-username">Guatemala 🇬🇹</h3>
+              </div>
+              <div className="social-action">
+                <span>Envíos Nacionales</span>
               </div>
             </div>
           </div>
@@ -1004,11 +1050,13 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="footer-bottom" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '15px', padding: '40px 0', width: '100%', borderTop: '1px solid var(--footer-border)' }}>
-            <p className="designer-credit" style={{ fontSize: '1rem', margin: 0, color: 'var(--text-primary)', fontWeight: '500' }}>
-              Esta página fue hecha por <a href="https://lienzoblanco.online/" target="_blank" rel="noopener" className="rainbow-text" style={{ fontSize: '1.1rem' }}>© Lienzo Blanco</a>.
+        </div>
+        <div className="footer-bottom" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '8px', padding: '24px 0', width: '100%', background: 'var(--footer-bg)', borderTop: '1.5px solid var(--accent-rose)' }}>
+          <div className="container">
+            <p className="designer-credit" style={{ fontSize: '0.95rem', margin: 0, color: 'var(--text-primary)', fontWeight: '500' }}>
+              Esta página fue hecha por <a href="https://lienzoblanco.online/" target="_blank" rel="noopener" className="rainbow-text" style={{ fontSize: '1.05rem' }}>© Lienzo Blanco</a>.
             </p>
-            <p className="footer-korean" style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.8rem' }}>아름다운 피부를 위한 최고의 선택</p>
+            <p className="footer-korean" style={{ margin: '4px 0 0', color: 'var(--text-muted)', fontSize: '0.75rem', fontFamily: 'var(--font-noto-sans-kr)' }}>아름다운 피부를 위한 최고의 선택</p>
           </div>
         </div>
       </footer>

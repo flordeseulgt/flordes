@@ -234,7 +234,7 @@ export const PRODUCTS = [
     benefits: ['Kit completo', 'Ideal para principiantes', 'Ahorro especial'],
   },
   {
-    id: 35, stock: 2,
+    id: 35, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Mascarilla en Barra Poros',

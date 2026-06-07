@@ -192,7 +192,7 @@ export async function POST(request) {
         `<b>📦 Productos:</b>\n` +
         orderItemsDetails.map(detail => `${escapeHtml(detail.name)} (x${detail.qty})`).join('\n') +
         `\n\n<b>💰 Subtotal:</b> Q${subtotal.toFixed(2)}` +
-        `\n<b>🎁 Descuento (10% Día de la Madre):</b> -Q${discountAmount.toFixed(2)}` +
+        `\n<b>🎁 Descuento (10% Día del Padre):</b> -Q${discountAmount.toFixed(2)}` +
         `\n<b>💰 Total:</b> Q${finalTotal.toFixed(2)}\n\n`;
 
       if (customer) {
