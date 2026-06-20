@@ -374,7 +374,7 @@ export default function Home() {
     }
   };
 
-  const DISCOUNT = 0.9;
+  const DISCOUNT = 1.0;
 
   const cartTotal = cart.reduce((sum, c) => {
     const p = productsData.find(pr => pr.id === c.id);
@@ -437,9 +437,7 @@ export default function Home() {
           <p className="product-desc">{p.desc}</p>
           <div className="product-footer">
             <div className="product-price-wrap">
-              <span className="product-price-original">Q{p.price.toFixed(2)}</span>
-              <span className="product-price sale">Q{(p.price * 0.9).toFixed(2)}</span>
-              <span className="product-discount-badge">-10%</span>
+              <span className="product-price">Q{p.price.toFixed(2)}</span>
             </div>
             <button 
               className={`add-to-cart-btn ${isDisabled ? 'disabled' : ''}`} 
@@ -663,20 +661,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ============ FATHERS DAY BANNER ============ */}
-      <div className="fathers-day-banner">
-        <div className="fdb-petals">
-          {['💙','👔','👑','✨','🎁','💙','👔','👑','✨','🎁','💙','👔'].map((e, i) => (
-            <span key={i} className="fdb-petal" style={{ animationDelay: `${i * 0.4}s` }}>{e}</span>
-          ))}
-        </div>
-        <div className="fdb-content">
-          <span className="fdb-eyebrow">✦ Especial de Junio ✦</span>
-          <h2 className="fdb-title">💙 Feliz Día del Padre 💙</h2>
-          <p className="fdb-sub">¡Celebra a papá con el mejor skincare coreano! <strong>10% OFF</strong> en todos los productos</p>
-          <a href="#productos" className="fdb-btn">Ver Ofertas 🎁</a>
-        </div>
-      </div>
+
 
       {/* ============ HERO ============ */}
       <section className="hero" id="inicio">
@@ -1354,9 +1339,7 @@ export default function Home() {
                 </div>
                 <div className="product-modal-price-row">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: '1rem', textDecoration: 'line-through', color: 'var(--text-muted)', opacity: 0.7 }}>Q{selectedProduct.price.toFixed(2)}</span>
-                    <div className="product-modal-price" style={{ color: '#e8597d' }}>Q{(selectedProduct.price * DISCOUNT).toFixed(2)}</div>
-                    <span className="product-discount-badge">-10%</span>
+                    <div className="product-modal-price" style={{ color: '#e8597d' }}>Q{selectedProduct.price.toFixed(2)}</div>
                   </div>
                   {selectedProduct.size && <div className="product-modal-size">Contenido: {selectedProduct.size}</div>}
                 </div>

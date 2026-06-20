@@ -179,8 +179,7 @@ export async function POST(request) {
     }
 
     const subtotal = totalAmount;
-    const discountAmount = subtotal * 0.10;
-    const finalTotal = subtotal - discountAmount;
+    const finalTotal = subtotal;
 
     // 4. Enviar notificación a Telegram (Usando HTML-safe escaping para evitar fallos de parseo en Telegram)
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
@@ -191,9 +190,7 @@ export async function POST(request) {
         `<b>🔢 Orden:</b> #${newOrderNumber}\n\n` +
         `<b>📦 Productos:</b>\n` +
         orderItemsDetails.map(detail => `${escapeHtml(detail.name)} (x${detail.qty})`).join('\n') +
-        `\n\n<b>💰 Subtotal:</b> Q${subtotal.toFixed(2)}` +
-        `\n<b>🎁 Descuento (10% Día del Padre):</b> -Q${discountAmount.toFixed(2)}` +
-        `\n<b>💰 Total:</b> Q${finalTotal.toFixed(2)}\n\n`;
+        `\n\n<b>💰 Total:</b> Q${finalTotal.toFixed(2)}\n\n`;
 
       if (customer) {
         message += `<b>👤 Cliente:</b>\n` +
