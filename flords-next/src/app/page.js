@@ -1106,8 +1106,14 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="cart-item-price">
-                    <span style={{ fontSize: '0.75rem', textDecoration: 'line-through', color: 'var(--text-muted)', opacity: 0.7 }}>Q{(p.price * c.qty).toFixed(2)}</span>
-                    <span style={{ display: 'block', color: '#3aaa35', fontWeight: 700 }}>Q{(p.price * DISCOUNT * c.qty).toFixed(2)}</span>
+                    {DISCOUNT < 1 ? (
+                      <>
+                        <span style={{ fontSize: '0.75rem', textDecoration: 'line-through', color: 'var(--text-muted)', opacity: 0.7, display: 'block' }}>Q{(p.price * c.qty).toFixed(2)}</span>
+                        <span style={{ display: 'block', color: '#3aaa35', fontWeight: 700 }}>Q{(p.price * DISCOUNT * c.qty).toFixed(2)}</span>
+                      </>
+                    ) : (
+                      <span>Q{(p.price * c.qty).toFixed(2)}</span>
+                    )}
                   </div>
                 </div>
               );
@@ -1231,8 +1237,14 @@ export default function Home() {
                               <div className="summary-item-qty">x{c.qty} · {p.brandName}</div>
                             </div>
                             <div className="summary-item-price">
-                              <span style={{ fontSize: '0.72rem', textDecoration: 'line-through', color: 'var(--text-muted)', opacity: 0.7, display: 'block' }}>Q{(p.price * c.qty).toFixed(2)}</span>
-                              <span style={{ color: '#3aaa35', fontWeight: 700 }}>Q{(p.price * DISCOUNT * c.qty).toFixed(2)}</span>
+                              {DISCOUNT < 1 ? (
+                                <>
+                                  <span style={{ fontSize: '0.72rem', textDecoration: 'line-through', color: 'var(--text-muted)', opacity: 0.7, display: 'block' }}>Q{(p.price * c.qty).toFixed(2)}</span>
+                                  <span style={{ color: '#3aaa35', fontWeight: 700 }}>Q{(p.price * DISCOUNT * c.qty).toFixed(2)}</span>
+                                </>
+                              ) : (
+                                <span>Q{(p.price * c.qty).toFixed(2)}</span>
+                              )}
                             </div>
                           </div>
                         );
