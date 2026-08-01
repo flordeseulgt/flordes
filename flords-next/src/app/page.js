@@ -770,13 +770,17 @@ export default function Home() {
             <p className="section-desc">Skincare coreano auténtico, entregado en tu puerta</p>
             
             <div className="brand-tabs" style={{ marginTop: '28px', marginBottom: '8px' }}>
-              {['todos', 'anua', 'beautyofjoseon', 'mixsoon', 'roundlab', 'skin1004', 'sulwhasoo', 'tirtir'].map(brand => (
+              {['todos', 'anua', 'beautyofjoseon', 'mixsoon', 'roundlab', 'skin1004', 'sulwhasoo', 'tirtir', 'blab', 'mary'].map(brand => (
                 <button 
                   key={brand} 
                   className={`brand-tab ${currentBrand === brand ? 'active' : ''}`}
                   onClick={() => setCurrentBrand(brand)}
                 >
-                  {brand === 'todos' ? 'Todos' : brand.charAt(0).toUpperCase() + brand.slice(1).replace(/of/g, 'of ')}
+                  {brand === 'todos' ? 'Todos' : 
+                   brand === 'beautyofjoseon' ? 'Beauty of Joseon' :
+                   brand === 'blab' ? 'B:Lab' :
+                   brand === 'mary' ? 'Mary & May' :
+                   brand.charAt(0).toUpperCase() + brand.slice(1)}
                 </button>
               ))}
             </div>

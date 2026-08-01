@@ -47,6 +47,8 @@
   --brand-color-skin1004: #d6005d; /* Fuchsia */
   --brand-color-roundlab: #1565c0;
   --brand-color-beautyofjoseon: #6a1b9a;
+  --brand-color-blab: #2e6f40;
+  --brand-color-mary: #b5495b;
 
   /* Add to Cart Button (Light) */
   --btn-pink-bg: linear-gradient(135deg, #f0819c 0%, #e8597d 100%);
@@ -92,6 +94,8 @@
   --brand-color-skin1004: #ff4081; /* Fuchsia */
   --brand-color-roundlab: #64b5f6;
   --brand-color-beautyofjoseon: #ba68c8;
+  --brand-color-blab: #a2d2a4;
+  --brand-color-mary: #f48fb1;
 
   /* Add to Cart Button (Dark) */
   --btn-pink-bg: linear-gradient(135deg, #ff6085 0%, #ff2d60 100%);
@@ -1147,6 +1151,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .product-brand.brand-skin1004 { color: var(--brand-color-skin1004); }
 .product-brand.brand-sulwhasoo { color: var(--brand-color-sulwhasoo); }
 .product-brand.brand-tirtir { color: var(--brand-color-tirtir); }
+.product-brand.brand-blab { color: var(--brand-color-blab); }
+.product-brand.brand-mary { color: var(--brand-color-mary); }
 
 
 .product-name {
