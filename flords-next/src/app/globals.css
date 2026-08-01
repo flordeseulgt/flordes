@@ -903,10 +903,51 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: linear-gradient(135deg, rgba(255, 152, 0, 0.03), var(--bg-card));
 }
 
+.category-card.cat-all {
+  border-color: var(--accent-rose);
+  animation: cat-all-hop 3s infinite ease-in-out, cat-all-glow 2s infinite alternate;
+}
+
 .category-card.cat-all:hover {
   border-color: var(--accent-rose);
-  box-shadow: 0 12px 30px rgba(232, 89, 125, 0.22);
   background: linear-gradient(135deg, rgba(232, 89, 125, 0.04), var(--bg-card));
+  animation: cat-all-hop-fast 1.5s infinite ease-in-out, cat-all-glow-intense 1s infinite alternate;
+}
+
+@keyframes cat-all-hop {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+@keyframes cat-all-hop-fast {
+  0%, 100% {
+    transform: translateY(-6px) scale(1.03);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+@keyframes cat-all-glow {
+  0% {
+    box-shadow: 0 0 10px rgba(232, 89, 125, 0.2), var(--shadow-sm);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(244, 151, 173, 0.5), 0 0 5px rgba(232, 89, 125, 0.3), var(--shadow-sm);
+  }
+}
+
+@keyframes cat-all-glow-intense {
+  0% {
+    box-shadow: 0 0 15px rgba(232, 89, 125, 0.4), var(--shadow-sm);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(244, 151, 173, 0.8), 0 0 10px rgba(232, 89, 125, 0.5), var(--shadow-sm);
+  }
 }
 
 /* Efecto de 'Long Press' (Controlado por JS) */
