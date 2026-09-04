@@ -32,6 +32,7 @@ export default function Home() {
   const [isShowingAll, setIsShowingAll] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [theme, setTheme] = useState('light');
+  const [isRotating, setIsRotating] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -131,7 +132,7 @@ export default function Home() {
   };
 
   const triggerConfetti = () => {
-    const colors = ['#f497ad', '#b39cd0', '#e8597d', '#FFD700', '#00F5FF', '#FF6B6B', '#4ECDC4', '#FFE66D', '#FF922B'];
+    const colors = ['#ff75a0', '#b39cd0', '#e8597d', '#FFD700', '#00F5FF', '#FF6B6B', '#4ECDC4', '#FFE66D', '#FF922B'];
     const emojis = ['🌸', '✨', '⭐', '💖', '💠'];
     
     // 5 ráfagas grandes en abanico
@@ -310,6 +311,8 @@ export default function Home() {
 
   // --- ACTIONS ---
   const toggleTheme = () => {
+    setIsRotating(true);
+    setTimeout(() => setIsRotating(false), 650);
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
     document.documentElement.setAttribute('data-theme', next);
@@ -532,7 +535,7 @@ export default function Home() {
               <svg viewBox="0 0 24 24" className="intro-logo-svg">
                 <defs>
                   <linearGradient id="intro-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#f497ad" />
+                    <stop offset="0%" stopColor="#ff75a0" />
                     <stop offset="100%" stopColor="#b39cd0" />
                   </linearGradient>
                 </defs>
@@ -565,35 +568,12 @@ export default function Home() {
         </div>
       )}
       {/* ============ NAVBAR ============ */}
+      {/* ============ NAVBAR ============ */}
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-container">
-          <div className="nav-logo">
-            <div className="logo-icon">
-              <svg viewBox="0 0 24 24" className="logo-svg">
-                <defs>
-                  <linearGradient id="sakura-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#f497ad" />
-                    <stop offset="100%" stopColor="#b39cd0" />
-                  </linearGradient>
-                </defs>
-                <g transform="translate(12, 12)">
-                  {[0, 72, 144, 216, 288].map(deg => (
-                    <path 
-                      key={deg}
-                      transform={`rotate(${deg})`}
-                      fill="url(#sakura-grad)"
-                      d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" 
-                    />
-                  ))}
-                  <circle r="1.5" fill="white" fillOpacity="0.5" />
-                </g>
-              </svg>
-            </div>
-            <div className="logo-text">
-              <span className="logo-main">Flor de Seúl</span>
-              <span className="logo-sub">Skincare Coreano</span>
-            </div>
-          </div>
+          <a href="#inicio" className="nav-logo">
+            <span className="logo-main">FLOR DE SEÚL</span>
+          </a>
 
           <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
             <a href="#inicio" className="nav-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
@@ -603,10 +583,10 @@ export default function Home() {
           </nav>
 
           <div className="nav-actions">
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="Cambiar tema">
+            <button className={`theme-toggle ${isRotating ? 'is-rotating' : ''}`} onClick={toggleTheme} aria-label="Cambiar tema" title="Cambiar tema">
               <span className="sun-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF9D00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5"></circle>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFA726" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sun-svg-animated">
+                  <circle cx="12" cy="12" r="5" fill="#FFB74D" fillOpacity="0.3"></circle>
                   <line x1="12" y1="1" x2="12" y2="3"></line>
                   <line x1="12" y1="21" x2="12" y2="23"></line>
                   <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
@@ -654,44 +634,39 @@ export default function Home() {
               </svg>
               <span className="cart-count">{cartCount}</span>
             </button>
-            <button className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menú">
-              <span></span><span></span><span></span>
-            </button>
+            <a href="#productos" className="nav-pill-btn">Explorar</a>
           </div>
         </div>
       </header>
 
-
-
       {/* ============ HERO ============ */}
       <section className="hero" id="inicio">
-        <div className="hero-slider">
-          {heroSlides.map((slide, index) => (
-            <div 
-              key={slide.id} 
-              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-              style={{ backgroundImage: `url('${slide.img}')` }}
-            >
-              <div className="hero-overlay"></div>
-              <div className="hero-content">
-                <span className="hero-badge">{slide.badge}</span>
-                <h2 className="hero-title">{slide.title}</h2>
-                <p className="hero-desc">{slide.desc}</p>
-                <div className="hero-btns">
-                  <a href={slide.linkPrimary} className="btn-primary">{slide.btnPrimary}</a>
-                  {slide.btnGhost && <a href={slide.linkGhost} className="btn-ghost">{slide.btnGhost}</a>}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="hero-inner">
+          <div className="hero-luxury-tag">
+            <span className="kr-pill-stamp">🇰🇷 서울</span>
+            <span className="tag-divider">✦</span>
+            <span>Auténtico K-Beauty · Skincare Coreano</span>
+          </div>
+          <h2 className="hero-luxury-title">
+            Tu Ritual de Belleza<br/>Directo desde Corea
+          </h2>
+          <p className="hero-luxury-desc">
+            Descubre las fórmulas más galardonadas de Seúl elaboradas con botánicos puros y alta ciencia dermatológica. Encuentra tu rutina ideal — el secreto de una piel que cautiva.
+          </p>
+          <div className="hero-luxury-actions">
+            <a href="#productos" className="btn-luxury-primary">
+              <span>Explorar Colección</span>
+              <span className="btn-arrow-icon" aria-hidden="true">→</span>
+            </a>
+            <a href="#nosotros" className="btn-luxury-secondary">
+              <span className="btn-seal-stamp">우리</span>
+              <span>Nuestro Ritual</span>
+            </a>
+          </div>
         </div>
-        <button className="slider-btn slider-prev" onClick={() => setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length)}>&#8592;</button>
-        <button className="slider-btn slider-next" onClick={() => setCurrentSlide(prev => (prev + 1) % heroSlides.length)}>&#8594;</button>
-        <div className="slider-dots">
-          {heroSlides.map((_, i) => (
-            <button key={i} className={`slider-dot ${i === currentSlide ? 'active' : ''}`} onClick={() => setCurrentSlide(i)}></button>
-          ))}
-        </div>
+
+
+
         <div className="petals-container">
           {petals.map((petal) => (
             <div key={petal.id} className="petal" style={{
@@ -725,7 +700,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">피부 유형</span>
-            <h2 className="section-title">Encuentra tu <em>Rutina</em></h2>
+            <h2 className="section-title">Encuentra tu Rutina</h2>
             <p className="section-desc">Productos seleccionados según tu tipo y preocupación de piel</p>
           </div>
           <div className="categories-grid">
@@ -766,7 +741,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">제품</span>
-            <h2 className="section-title">Nuestros <em>Productos</em></h2>
+            <h2 className="section-title">Nuestros Productos</h2>
             <p className="section-desc">Skincare coreano auténtico, entregado en tu puerta</p>
             
             <div className="brand-tabs" style={{ marginTop: '28px', marginBottom: '8px' }}>
@@ -818,7 +793,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">컬렉션</span>
-            <h2 className="section-title">Nuestra <em>Colección</em></h2>
+            <h2 className="section-title">Nuestra Colección</h2>
           </div>
           
           <div className="collection-carousel-container">
@@ -876,7 +851,7 @@ export default function Home() {
             </div>
             <div className="about-content">
               <span className="section-tag">우리에 대해</span>
-              <h2 className="section-title">¿Quiénes <em>Somos</em>?</h2>
+              <h2 className="section-title">¿Quiénes Somos?</h2>
               <p style={{ textAlign: 'justify', textJustify: 'inter-word' }}>
                 Somos <strong>Flor de Seúl GT</strong>, la tienda guatemalteca especializada en skincare coreano auténtico. Nuestra misión es acercar lo mejor de K-Beauty a Guatemala, con productos verificados y de las marcas más reconocidas del mundo.
               </p>
@@ -908,7 +883,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="section-tag">왜 우리를 선택해야 할까요</span>
-            <h2 className="section-title">¿Por qué <em>Flor de Seúl</em>?</h2>
+            <h2 className="section-title">¿Por qué Flor de Seúl?</h2>
           </div>
           <div className="features-grid">
             {[
@@ -927,89 +902,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ CONTACTO ============ */}
-      <section className="contact-section" id="contacto">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tag">소셜 미디어</span>
-            <h2 className="section-title">Redes <em>Sociales</em></h2>
-            <p className="section-desc">Síguenos y contáctanos para encontrar el skincare perfecto</p>
-          </div>
-          <div className="social-grid">
-            <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener" className="social-card tiktok">
-              <div className="social-icon-wrapper">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.43-.17-.11-.34-.23-.5-.35-.02 3.11-.01 6.22-.03 9.33-.06 2.09-.76 4.14-2.18 5.67-1.74 1.88-4.32 2.81-6.87 2.49-2.58-.33-4.88-2.12-5.77-4.57-1-2.73-.25-5.9 1.93-7.85 1.51-1.35 3.52-1.95 5.51-1.63v4.13c-1.3-.24-2.73.08-3.66 1.05-.85.89-1.07 2.27-.55 3.39.52 1.11 1.7 1.87 2.92 1.87 1.15-.02 2.18-.8 2.61-1.86.19-.47.24-.98.24-1.48-.01-3.64-.01-7.29-.01-10.93-.01-1.36-.01-2.73-.01-4.09z"/>
-                </svg>
-              </div>
-              <div className="social-content">
-                <span className="social-tag">TikTok</span>
-                <h3 className="social-username">@flor.de.seul.gt</h3>
-              </div>
-              <div className="social-action">
-                <span>Seguir</span>
-                <svg className="social-action-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
-            </a>
-
-            <a href="https://www.instagram.com/flordeseul_gt" target="_blank" rel="noopener" className="social-card instagram">
-              <div className="social-icon-wrapper">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </div>
-              <div className="social-content">
-                <span className="social-tag">Instagram</span>
-                <h3 className="social-username">@flordeseul_gt</h3>
-              </div>
-              <div className="social-action">
-                <span>Seguir</span>
-                <svg className="social-action-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
-            </a>
-
-            <a href="https://www.facebook.com/people/Flor-De-Seúl-Gt/61577355537632/" target="_blank" rel="noopener" className="social-card facebook">
-              <div className="social-icon-wrapper">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-              </div>
-              <div className="social-content">
-                <span className="social-tag">Facebook</span>
-                <h3 className="social-username">Flor De Seúl Gt</h3>
-              </div>
-              <div className="social-action">
-                <span>Visitar</span>
-                <svg className="social-action-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
-            </a>
-
-            <div className="social-card location">
-              <div className="social-icon-wrapper">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <div className="social-content">
-                <span className="social-tag">Ubicación</span>
-                <h3 className="social-username">Guatemala 🇬🇹</h3>
-              </div>
-              <div className="social-action">
-                <span>Envíos Nacionales</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ============ FOOTER (y resto de secciones) ============ */}
       <footer className="footer">
@@ -1021,7 +913,7 @@ export default function Home() {
                   <svg viewBox="0 0 24 24" className="logo-svg">
                     <defs>
                       <linearGradient id="sakura-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#f497ad" />
+                        <stop offset="0%" stopColor="#ff75a0" />
                         <stop offset="100%" stopColor="#b39cd0" />
                       </linearGradient>
                     </defs>
@@ -1041,31 +933,31 @@ export default function Home() {
                   <span className="logo-main">Flor de Seúl</span>
                 </div>
               </div>
-              <h4 style={{ color: 'var(--accent-rose)', fontSize: '1rem', marginBottom: '8px' }}>Acerca de Nosotros</h4>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Copyright © Flor de Seúl Gt</p>
+              <h4 className="footer-highlight-link">Acerca de Nosotros</h4>
+              <p className="footer-copy-text">Copyright © Flor de Seúl Gt</p>
             </div>
 
             <div className="footer-links">
               <h4>Horarios</h4>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: '600', marginBottom: '4px' }}>8 AM a 10 PM</p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Lunes a Domingo</p>
+              <p className="footer-bold-info">8 AM a 10 PM</p>
+              <p className="footer-sub-info">Lunes a Domingo</p>
             </div>
             
             <div className="footer-links">
               <h4>Información Legal</h4>
-              <ul>
+              <ul className="footer-links-clean">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyOpen(true); }}>Políticas de Privacidad</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setIsTermsOpen(true); }}>Términos y Condiciones</a></li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="footer-bottom" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '8px', padding: '24px 0', width: '100%', background: 'var(--footer-bg)', borderTop: '1.5px solid var(--accent-rose)' }}>
+        <div className="footer-bottom">
           <div className="container">
-            <p className="designer-credit" style={{ fontSize: '0.95rem', margin: 0, color: 'var(--text-primary)', fontWeight: '500' }}>
-              Esta página fue hecha por <a href="https://lienzoblanco.online/" target="_blank" rel="noopener" className="rainbow-text" style={{ fontSize: '1.05rem' }}>© Lienzo Blanco</a>.
+            <p className="designer-credit">
+              Esta página fue hecha por <a href="https://lienzoblanco.online/" target="_blank" rel="noopener" className="credit-multicolor">© Lienzo Blanco</a>.
             </p>
-            <p className="footer-korean" style={{ margin: '4px 0 0', color: 'var(--text-muted)', fontSize: '0.75rem', fontFamily: 'var(--font-noto-sans-kr)' }}>아름다운 피부를 위한 최고의 선택</p>
+            <p className="footer-korean">아름다운 피부를 위한 최고의 선택</p>
           </div>
         </div>
       </footer>
@@ -1424,6 +1316,48 @@ export default function Home() {
           <button className="btn-primary full-width" onClick={() => setIsTermsOpen(false)} style={{ marginTop: '20px' }}>Acepto los términos 🌸</button>
         </div>
       </div>
+
+      {/* Floating Social Dock (Left Side - TikTok, Instagram, Facebook) */}
+      <aside className="social-dock" aria-label="Redes Sociales">
+        <div className="social-dock-item">
+          <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener" className="social-dock-btn btn-tiktok" aria-label="TikTok">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .586.046.86.13V9.42a6.34 6.34 0 0 0-.86-.06 6.34 6.34 0 1 0 6.34 6.34V8.75a8.28 8.28 0 0 0 3.77.94V6.69z"/>
+            </svg>
+          </a>
+          <div className="social-dock-tooltip tooltip-tiktok">
+            <span className="tooltip-bar bar-tiktok"></span>
+            <span className="tooltip-name">TIKTOK</span>
+            <span className="tooltip-handle handle-tiktok">@flor.de.seul.gt</span>
+          </div>
+        </div>
+
+        <div className="social-dock-item">
+          <a href="https://www.instagram.com/flordeseul_gt" target="_blank" rel="noopener" className="social-dock-btn btn-instagram" aria-label="Instagram">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <div className="social-dock-tooltip tooltip-instagram">
+            <span className="tooltip-bar bar-instagram"></span>
+            <span className="tooltip-name">INSTAGRAM</span>
+            <span className="tooltip-handle handle-instagram">@flordeseul_gt</span>
+          </div>
+        </div>
+
+        <div className="social-dock-item">
+          <a href="https://www.facebook.com/people/Flor-De-Seúl-Gt/61577355537632/" target="_blank" rel="noopener" className="social-dock-btn btn-facebook" aria-label="Facebook">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <div className="social-dock-tooltip tooltip-facebook">
+            <span className="tooltip-bar bar-facebook"></span>
+            <span className="tooltip-name">FACEBOOK</span>
+            <span className="tooltip-handle handle-facebook">Flor De Seúl Gt</span>
+          </div>
+        </div>
+      </aside>
 
       {/* Toast */}
       <div className={`toast ${toast.show ? 'show' : ''}`}>{toast.msg}</div>

@@ -169,20 +169,6 @@ const PRODUCTS = [
     benefits: ['Hidratación 24h', 'Sin comedógenos', 'Textura ligera'],
   },
   {
-    id: 10,
-    brand: 'mixsoon',
-    brandName: 'Mixsoon',
-    name: 'Glacier Water Essence',
-    nameLong: 'Mixsoon Glacier Water Essence',
-    price: 185,
-    img: 'public/assets/images/marcas/mixsoon/glacierwater.jpg',
-    desc: 'Esencia de agua glaciar ultraligera para una hidratación fresca e inmediata. Perfecta como primer paso después de limpiar, refresca y prepara la piel.',
-    tags: ['esencia', 'hidratacion', 'agua'],
-    badge: null,
-    categories: ['hidratacion'],
-    benefits: ['Hidratación rápida', 'Textura agua', 'Refrescante'],
-  },
-  {
     id: 11,
     brand: 'mixsoon',
     brandName: 'Mixsoon',
@@ -195,20 +181,6 @@ const PRODUCTS = [
     badge: 'popular',
     categories: ['solar'],
     benefits: ['SPF 50+', 'Sin oxido de zinc', 'Hidratante'],
-  },
-  {
-    id: 12,
-    brand: 'mixsoon',
-    brandName: 'Mixsoon',
-    name: 'Soondy Soothing Gel',
-    nameLong: 'Mixsoon Soondy Cicatrizing Gel',
-    price: 140,
-    img: 'public/assets/images/marcas/mixsoon/soondy.jpg',
-    desc: 'Gel calmante multifuncional con aloe vera y centella asiática. Calma irritaciones, hidrata y ayuda en la regeneración de la piel. Puede usarse en cara y cuerpo.',
-    tags: ['gel', 'calmante', 'aloe'],
-    badge: null,
-    categories: ['hidratacion', 'acne'],
-    benefits: ['Calmante', 'Regenerador', 'Multiuso'],
   },
 
   // --- PURITO ---
@@ -256,20 +228,7 @@ const PRODUCTS = [
     categories: ['hidratacion', 'limpieza'],
     benefits: ['Kit completo', 'Ideal para principiantes', 'Ahorro especial'],
   },
-  {
-    id: 16,
-    brand: 'roundlab',
-    brandName: 'Round Lab',
-    name: 'Mascarilla Round Lab',
-    nameLong: 'Round Lab 1025 Dokdo Toner Mask',
-    price: 175,
-    img: 'public/assets/images/marcas/roundlab/macarillaround.png',
-    desc: 'Mascarilla de tejido con agua del Mar de Dokdo ultrarica en minerales. Hidrata, calma y equilibra la piel en solo 20 minutos. Experiencia spa en casa.',
-    tags: ['mascarilla', 'hidratacion', 'minerales'],
-    badge: null,
-    categories: ['hidratacion'],
-    benefits: ['Hidratación intensa', 'Minerales marinos', 'Calmante'],
-  },
+
   {
     id: 17,
     brand: 'roundlab',
@@ -301,20 +260,6 @@ const PRODUCTS = [
     benefits: ['Ácido salicílico', 'Anti-acné', 'Limpieza profunda'],
   },
   {
-    id: 19,
-    brand: 'skin1004',
-    brandName: 'Skin1004',
-    name: 'Spot Cover Patch',
-    nameLong: 'Skin1004 Spot Cover Patch',
-    price: 85,
-    img: 'public/assets/images/marcas/skin1004/Acne/Spotcover.png',
-    desc: 'Parches invisibles de hidrogel para cubrir y tratar granos activos. Absorben el exceso de fluido, reducen inflamación y aceleran la cicatrización.',
-    tags: ['parche', 'acne', 'spot'],
-    badge: 'new',
-    categories: ['acne'],
-    benefits: ['Tratamiento localizado', 'Invisible', 'Cicatrizante'],
-  },
-  {
     id: 20,
     brand: 'skin1004',
     brandName: 'Skin1004',
@@ -327,20 +272,6 @@ const PRODUCTS = [
     badge: null,
     categories: ['acne'],
     benefits: ['Niacinamida', 'Control de grasa', 'Anti-inflamatoria'],
-  },
-  {
-    id: 21,
-    brand: 'skin1004',
-    brandName: 'Skin1004',
-    name: 'Mascarilla Anti-Acné',
-    nameLong: 'Skin1004 Zombie Beauty Acne Pack',
-    price: 140,
-    img: 'public/assets/images/marcas/skin1004/Acne/mascarillaacne.png',
-    desc: 'Mascarilla de arcilla de caolín con centella y extracto de zombie para purificar poros, calmar granos y regular la producción de sebo.',
-    tags: ['mascarilla', 'acne', 'arcilla'],
-    badge: null,
-    categories: ['acne', 'limpieza'],
-    benefits: ['Purificante', 'Arcilla kaolín', 'Control de sebo'],
   },
   {
     id: 22,
@@ -475,22 +406,6 @@ const PRODUCTS = [
     benefits: ['Anti-ojeras', 'Bakuchiol', 'Anti-edad'],
   },
 
-  // --- SKIN1004 Mascarilla Hialur ---
-  {
-    id: 31,
-    brand: 'skin1004',
-    brandName: 'Skin1004',
-    name: 'Mascarilla Hialurónica',
-    nameLong: 'Skin1004 Hyaluron Sheet Mask',
-    price: 80,
-    img: 'public/assets/images/marcas/skin1004/mascarillahyalu.png',
-    desc: 'Mascarilla de tejido con ácido hialurónico de triple peso molecular. Hidratación extrema en 20 minutos. Deja la piel de efecto glass skin.',
-    tags: ['mascarilla', 'hialuronico', 'glass skin'],
-    badge: 'popular',
-    categories: ['hidratacion'],
-    benefits: ['Ácido hialurónico', 'Glass skin', 'Rápida'],
-  },
-
   // --- SKIN1004 Poremizing ---
   {
     id: 32,
@@ -551,34 +466,6 @@ const PRODUCTS = [
 
   // --- SULWHASOO ---
   {
-    id: 36,
-    brand: 'sulwhasoo',
-    brandName: 'Sulwhasoo',
-    name: 'Limpiador Aceite Sulwhasoo',
-    nameLong: 'Sulwhasoo Gentle Cleansing Oil',
-    price: 285,
-    img: 'public/assets/images/marcas/sulwhasoo/limpiadoraceite.jpg',
-    desc: 'Aceite limpiador de lujo con ingredientes botánicos coreanos tradicionales. Disuelve impurezas y nutre la piel con una textura sedosa y aroma floral sofisticado.',
-    tags: ['limpieza', 'aceite', 'lujo'],
-    badge: null,
-    categories: ['limpieza'],
-    benefits: ['Lujo Coreano', 'Ingredientes botánicos', 'Nutritivo'],
-  },
-  {
-    id: 37,
-    brand: 'sulwhasoo',
-    brandName: 'Sulwhasoo',
-    name: 'Limpiador Espuma Sulwhasoo',
-    nameLong: 'Sulwhasoo Gentle Cleansing Foam',
-    price: 265,
-    img: 'public/assets/images/marcas/sulwhasoo/limpiadorespuma.jpg',
-    desc: 'Espuma limpiadora de lujo con extractos de hierbas medicinales coreanas. Limpia delicadamente mientras nutre y prepara la piel para la rutina.',
-    tags: ['limpieza', 'espuma', 'lujo'],
-    badge: null,
-    categories: ['limpieza'],
-    benefits: ['Hierbas medicinales', 'Lujo K-Beauty', 'Nutritiva'],
-  },
-  {
     id: 38,
     brand: 'sulwhasoo',
     brandName: 'Sulwhasoo',
@@ -595,20 +482,6 @@ const PRODUCTS = [
 
   // --- TIRTIR ---
   {
-    id: 39,
-    brand: 'tirtir',
-    brandName: 'Tirtir',
-    name: 'Glow Lavender Cushion',
-    nameLong: 'Tirtir Mask Fit Glow Cushion - Lavender',
-    price: 195,
-    img: 'public/assets/images/marcas/tirtir/glowlavanda.jpg',
-    desc: 'Cushion foundation con acabado glow en tono lavanda de moda. Cobertura buildable, hidratante y con SPF 40. El cushion favorito de las influencers coreanas.',
-    tags: ['cushion', 'makeup', 'glow'],
-    badge: 'new',
-    categories: ['hidratacion'],
-    benefits: ['SPF 40', 'Efecto glow', 'Cobertura buildable'],
-  },
-  {
     id: 40,
     brand: 'tirtir',
     brandName: 'Tirtir',
@@ -621,20 +494,6 @@ const PRODUCTS = [
     badge: null,
     categories: ['hidratacion'],
     benefits: ['Glass skin', 'Brillo natural', 'Hidratación'],
-  },
-  {
-    id: 41,
-    brand: 'tirtir',
-    brandName: 'Tirtir',
-    name: 'Matcha Repair Cream',
-    nameLong: 'Tirtir My Signature Matcha Repair Cream',
-    price: 220,
-    img: 'public/assets/images/marcas/tirtir/matchacream.jpg',
-    desc: 'Crema reparadora con té matcha, centella y pantenol. Regenera la barrera cutánea, calma pieles dañadas y aporta una hidratación nutritiva duradera.',
-    tags: ['crema', 'matcha', 'reparadora'],
-    badge: 'popular',
-    categories: ['hidratacion'],
-    benefits: ['Matcha antioxidante', 'Reparadora', 'Barrera cutánea'],
   },
   {
     id: 42,
@@ -683,6 +542,11 @@ function initTheme() {
 }
 
 function toggleTheme() {
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.classList.add('is-rotating');
+    setTimeout(() => btn.classList.remove('is-rotating'), 650);
+  }
   const current = document.documentElement.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
@@ -1157,5 +1021,195 @@ document.addEventListener('keydown', (e) => {
     closeCart();
     closeCheckout();
     closeProductModal();
+    closePrivacyModal();
+    closeTermsModal();
   }
 });
+
+// ============ LUXURY CARDS 3D INTERACTIVE TILT & MOTION ============
+function initCardMotion() {
+  const wrappers = document.querySelectorAll('.luxury-card-wrapper');
+  wrappers.forEach(wrapper => {
+    const card = wrapper.querySelector('.luxury-card');
+    const img = wrapper.querySelector('.luxury-card-img');
+    if (!card || !img) return;
+
+    wrapper.addEventListener('mousemove', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -9;
+      const rotateY = ((x - centerX) / centerX) * 9;
+      const moveX = ((x - centerX) / centerX) * 10;
+      const moveY = ((y - centerY) / centerY) * 10;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-10px)`;
+      img.style.transform = `translate3d(${moveX.toFixed(2)}px, ${(moveY - 14).toFixed(2)}px, 25px) scale(1.08)`;
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      img.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+    });
+  });
+}
+
+// ============ PINK MOUSE FOLLOWER LINE ============
+function initPinkMouseTrail() {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'pinkCursorTrail';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '999999';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const trail = [];
+  const MAX_POINTS = 32;
+
+  window.addEventListener('mousemove', (e) => {
+    trail.push({
+      x: e.clientX,
+      y: e.clientY,
+      time: Date.now()
+    });
+    if (trail.length > MAX_POINTS) trail.shift();
+  });
+
+  function drawTrail() {
+    ctx.clearRect(0, 0, width, height);
+
+    const now = Date.now();
+    while (trail.length > 0 && now - trail[0].time > 450) {
+      trail.shift();
+    }
+
+    if (trail.length >= 2) {
+      for (let i = 1; i < trail.length; i++) {
+        const p1 = trail[i - 1];
+        const p2 = trail[i];
+        const progress = i / trail.length;
+        const age = now - p2.time;
+        const opacity = Math.max(0, (1 - age / 450) * progress);
+
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(244, 114, 182, ${opacity * 0.95})`;
+        ctx.lineWidth = progress * 5 + 1.2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.shadowColor = '#F472B6';
+        ctx.shadowBlur = 12;
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(drawTrail);
+  }
+  requestAnimationFrame(drawTrail);
+}
+
+// ============ AUDIO CONTROLLER ============
+function initAudio() {
+  const audio = document.getElementById('bgAudio');
+  const btn = document.getElementById('audioToggle');
+  if (!audio) return;
+
+  audio.volume = 0.55;
+
+  const handlePlaySuccess = () => {
+    if (btn) {
+      btn.textContent = '🔊';
+      btn.classList.add('playing');
+    }
+  };
+
+  const playPromise = audio.play();
+  if (playPromise !== undefined) {
+    playPromise.then(handlePlaySuccess).catch(() => {
+      // Browser blocked autoplay; listen for first user click or tap anywhere
+      const unlockAudio = () => {
+        audio.play().then(handlePlaySuccess).catch(() => {});
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('touchstart', unlockAudio);
+      };
+      document.addEventListener('click', unlockAudio, { once: true });
+      document.addEventListener('touchstart', unlockAudio, { once: true });
+    });
+  }
+}
+
+function toggleAudio() {
+  const audio = document.getElementById('bgAudio');
+  const btn = document.getElementById('audioToggle');
+  if (!audio || !btn) return;
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      btn.textContent = '🔊';
+      btn.classList.add('playing');
+    }).catch(err => {
+      console.warn('Audio play error:', err);
+    });
+  } else {
+    audio.pause();
+    btn.textContent = '🔇';
+    btn.classList.remove('playing');
+  }
+}
+
+// ============ PRIVACY & TERMS MODALS ============
+function openPrivacyModal(e) {
+  if (e) e.preventDefault();
+  document.getElementById('privacyOverlay')?.classList.add('open');
+  document.getElementById('privacyModal')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePrivacyModal() {
+  document.getElementById('privacyOverlay')?.classList.remove('open');
+  document.getElementById('privacyModal')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openTermsModal(e) {
+  if (e) e.preventDefault();
+  document.getElementById('termsOverlay')?.classList.add('open');
+  document.getElementById('termsModal')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTermsModal() {
+  document.getElementById('termsOverlay')?.classList.remove('open');
+  document.getElementById('termsModal')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initCardMotion();
+    initPinkMouseTrail();
+    initAudio();
+  });
+} else {
+  initCardMotion();
+  initPinkMouseTrail();
+  initAudio();
+}
+

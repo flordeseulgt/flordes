@@ -67,95 +67,77 @@
   <!-- ============ NAVBAR ============ -->
   <header class="navbar" id="navbar">
     <div class="nav-container">
-      <div class="nav-logo">
-        <span class="logo-korean">꽃</span>
-        <div class="logo-text">
-          <span class="logo-main">Flor de Seúl</span>
-          <span class="logo-sub">GT &nbsp;·&nbsp; Korean Skincare</span>
-        </div>
-      </div>
+      <a href="#inicio" class="nav-logo">
+        <span class="logo-main">FLOR DE SEÚL</span>
+      </a>
 
       <nav class="nav-links" id="navLinks">
         <a href="#inicio" class="nav-link active" onclick="closeMenu()">Inicio</a>
         <a href="#productos" class="nav-link" onclick="closeMenu()">Productos</a>
         <a href="#nosotros" class="nav-link" onclick="closeMenu()">Nosotros</a>
-        <a href="#contacto" class="nav-link" onclick="closeMenu()">Contacto</a>
       </nav>
 
       <div class="nav-actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
-          <span class="sun-icon">☀️</span>
-          <span class="moon-icon">🌙</span>
+          <span class="sun-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFA726" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="sun-svg-animated">
+              <circle cx="12" cy="12" r="5" fill="#FFB74D" fill-opacity="0.3"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </span>
+          <span class="moon-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
         </button>
         <button class="cart-btn" id="cartBtn" aria-label="Ver carrito">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
             <line x1="3" y1="6" x2="21" y2="6"/>
             <path d="M16 10a4 4 0 01-8 0"/>
           </svg>
           <span class="cart-count" id="cartCount">0</span>
         </button>
-        <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="#productos" class="nav-pill-btn">Explorar</a>
       </div>
     </div>
   </header>
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="inicio">
-    <div class="hero-slider" id="heroSlider">
-      <div class="hero-slide active" style="background-image: url('public/assets/images/banners/anua1.jpg')">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">✦ NUEVO ✦</span>
-          <h2 class="hero-title">Tu Ritual de<br/><em>Skincare Coreano</em></h2>
-          <p class="hero-desc">Descubre el secreto de la piel perfecta con las mejores marcas de Corea del Sur, disponibles en Guatemala.</p>
-          <div class="hero-btns">
-            <a href="#productos" class="btn-primary">Explorar Productos</a>
-            <a href="#productos" class="btn-ghost">Ver Marcas</a>
-          </div>
-        </div>
+    <div class="hero-inner">
+      <div class="hero-luxury-tag">
+        <span class="kr-pill-stamp">🇰🇷 서울</span>
+        <span class="tag-divider">✦</span>
+        <span>Auténtico K-Beauty · Skincare Coreano</span>
       </div>
-      <div class="hero-slide" style="background-image: url('public/assets/images/banners/boj1.jpg')">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">✦ BESTSELLER ✦</span>
-          <h2 class="hero-title">Beauty of<br/><em>Joseon</em></h2>
-          <p class="hero-desc">Inspirado en los rituales de belleza de la dinastía Joseon. Lujo ancestral con fórmulas modernas.</p>
-          <div class="hero-btns">
-            <a href="#beautyofjoseon" class="btn-primary">Ver Colección</a>
-          </div>
-        </div>
-      </div>
-      <div class="hero-slide" style="background-image: url('public/assets/images/banners/mix1.jpg')">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">✦ TENDENCIA ✦</span>
-          <h2 class="hero-title">Ingredientes<br/><em>Naturales</em></h2>
-          <p class="hero-desc">Fórmulas limpias con ingredientes coreanos de alta calidad para una piel radiante y saludable.</p>
-          <div class="hero-btns">
-            <a href="#productos" class="btn-primary">Descubrir Ahora</a>
-          </div>
-        </div>
-      </div>
-      <div class="hero-slide" style="background-image: url('public/assets/images/banners/skin2.jpg')">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">✦ SKIN1004 ✦</span>
-          <h2 class="hero-title">Piel Perfecta<br/><em>desde Corea</em></h2>
-          <p class="hero-desc">Las rutinas más completas para todo tipo de piel. Desde acné hasta manchas, tenemos la solución.</p>
-          <div class="hero-btns">
-            <a href="#skin1004" class="btn-primary">Ver Skin1004</a>
-          </div>
-        </div>
+      <h2 class="hero-luxury-title">
+        Tu Ritual de Belleza<br/>Directo desde Corea
+      </h2>
+      <p class="hero-luxury-desc">
+        Descubre las fórmulas más galardonadas de Seúl elaboradas con botánicos puros y alta ciencia dermatológica. Encuentra tu rutina ideal el secreto de una piel que cautiva.
+      </p>
+      <div class="hero-luxury-actions">
+        <a href="#productos" class="btn-luxury-primary">
+          <span>Explorar Colección</span>
+          <span class="btn-arrow-icon" aria-hidden="true">→</span>
+        </a>
+        <a href="#nosotros" class="btn-luxury-secondary">
+          <span class="btn-seal-stamp">우리</span>
+          <span>Nuestro Ritual</span>
+        </a>
       </div>
     </div>
 
-    <!-- Slider Controls -->
-    <button class="slider-btn slider-prev" onclick="changeSlide(-1)" aria-label="Anterior">&#8592;</button>
-    <button class="slider-btn slider-next" onclick="changeSlide(1)" aria-label="Siguiente">&#8594;</button>
-    <div class="slider-dots" id="sliderDots"></div>
+
 
     <!-- Floating petals decoration -->
     <div class="petals-container" id="petalsContainer"></div>
@@ -279,10 +261,7 @@
           <img src="public/assets/images/collage/pur.jpeg" alt="Purito" loading="lazy" />
           <div class="collage-overlay"><span>Purito</span></div>
         </div>
-        <div class="collage-item large">
-          <img src="public/assets/images/collage/sk.jpeg" alt="Skin1004" loading="lazy" />
-          <div class="collage-overlay"><span>Skin1004</span></div>
-        </div>
+
         <div class="collage-item">
           <img src="public/assets/images/collage/sul.jpeg" alt="Sulwhasoo" loading="lazy" />
           <div class="collage-overlay"><span>Sulwhasoo</span></div>
@@ -365,126 +344,61 @@
     </div>
   </section>
 
-  <!-- ============ CONTACTO ============ -->
-  <section class="contact-section" id="contacto">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">연락처</span>
-        <h2 class="section-title">Contáctanos</h2>
-        <p class="section-desc">Estamos aquí para ayudarte a encontrar el skincare perfecto</p>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="contact-item">
-            <span class="contact-icon">📱</span>
-            <div>
-              <h4>WhatsApp</h4>
-              <a href="https://wa.me/50200000000" target="_blank" rel="noopener">+502 0000-0000</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📸</span>
-            <div>
-              <h4>Instagram</h4>
-              <a href="https://instagram.com/flordeseulgt" target="_blank" rel="noopener">@flordeseulgt</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📍</span>
-            <div>
-              <h4>Ubicación</h4>
-              <p>Guatemala City, Guatemala 🇬🇹</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">⏰</span>
-            <div>
-              <h4>Horario de Atención</h4>
-              <p>Lunes – Sábado: 9:00 AM – 7:00 PM</p>
-            </div>
-          </div>
-        </div>
-        <form class="contact-form" onsubmit="submitForm(event)">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre completo" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Correo</label>
-            <input type="email" id="email" placeholder="tu@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" rows="4" placeholder="¿En qué te podemos ayudar?" required></textarea>
-          </div>
-          <button type="submit" class="btn-primary full-width">Enviar Mensaje 🌸</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="nav-logo">
-            <span class="logo-korean">꽃</span>
-            <div class="logo-text">
-              <span class="logo-main">Flor de Seúl</span>
-              <span class="logo-sub">GT · Korean Skincare</span>
+      <div class="footer-grid-legacy">
+        <!-- Col 1: Brand & About -->
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand-logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24" class="logo-svg" width="28" height="28">
+                <defs>
+                  <linearGradient id="sakura-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff75a0" />
+                    <stop offset="100%" stop-color="#b39cd0" />
+                  </linearGradient>
+                </defs>
+                <g transform="translate(12, 12)">
+                  <path transform="rotate(0)" fill="url(#sakura-grad-footer)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+                  <path transform="rotate(72)" fill="url(#sakura-grad-footer)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+                  <path transform="rotate(144)" fill="url(#sakura-grad-footer)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+                  <path transform="rotate(216)" fill="url(#sakura-grad-footer)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+                  <path transform="rotate(288)" fill="url(#sakura-grad-footer)" d="M0,0 c-2.5-4.5-4.5-5.5-4.5-8.5 0-2 2.5-3 4.5-1 2-2 4.5-1 4.5 1 0 3-2 4-4.5 8.5z" />
+                </g>
+              </svg>
             </div>
+            <span class="footer-brand-title">Flor de Seúl</span>
           </div>
-          <p class="footer-tagline">진정한 아름다움 — Verdadera Belleza Coreana para Guatemala</p>
-          <div class="footer-social">
-            <a href="https://wa.me/50200000000" aria-label="WhatsApp" class="social-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </a>
-            <a href="https://instagram.com/flordeseulgt" aria-label="Instagram" class="social-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="https://facebook.com/flordeseulgt" aria-label="Facebook" class="social-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-          </div>
+          <a href="#nosotros" class="footer-highlight-link">Acerca de Nosotros</a>
+          <p class="footer-copy-text">Copyright © Flor de Seúl Gt</p>
         </div>
-        <div class="footer-links">
-          <h4>Navegación</h4>
-          <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
+
+        <!-- Col 2: Horarios -->
+        <div class="footer-col footer-col-middle">
+          <h4 class="footer-col-title">HORARIOS</h4>
+          <p class="footer-bold-info">8 AM a 10 PM</p>
+          <p class="footer-sub-info">Lunes a Domingo</p>
         </div>
-        <div class="footer-links">
-          <h4>Marcas</h4>
-          <ul>
-            <li><a href="#" onclick="showBrand('anua')">Anua</a></li>
-            <li><a href="#" onclick="showBrand('beautyofjoseon')">Beauty of Joseon</a></li>
-            <li><a href="#" onclick="showBrand('mixsoon')">Mixsoon</a></li>
-            <li><a href="#" onclick="showBrand('purito')">Purito</a></li>
-            <li><a href="#" onclick="showBrand('roundlab')">Round Lab</a></li>
-            <li><a href="#" onclick="showBrand('skin1004')">Skin1004</a></li>
-            <li><a href="#" onclick="showBrand('sulwhasoo')">Sulwhasoo</a></li>
-            <li><a href="#" onclick="showBrand('tirtir')">Tirtir</a></li>
-            <li><a href="#" onclick="showBrand('blab')">B:Lab</a></li>
-            <li><a href="#" onclick="showBrand('mary')">Mary & May</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Información</h4>
-          <ul>
-            <li><a href="#nosotros">¿Quiénes somos?</a></li>
-            <li><a href="#contacto">Envíos y entregas</a></li>
-            <li><a href="#contacto">Política de devoluciones</a></li>
-            <li><a href="#contacto">Asesoría de piel</a></li>
+
+        <!-- Col 3: Legal -->
+        <div class="footer-col footer-col-legal">
+          <h4 class="footer-col-title">INFORMACIÓN LEGAL</h4>
+          <ul class="footer-links-clean">
+            <li><a href="#" onclick="openPrivacyModal(event)">Políticas de Privacidad</a></li>
+            <li><a href="#" onclick="openTermsModal(event)">Términos y Condiciones</a></li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2025 Flor de Seúl GT · Todos los derechos reservados · Hecho con 🌸 en Guatemala</p>
-        <p class="footer-korean">아름다운 피부를 위한 최고의 선택</p>
+    </div>
+
+    <!-- Bottom Bar with Credits -->
+    <div class="footer-bottom-bar">
+      <div class="container">
+        <p class="designer-credit">
+          Esta página fue hecha por <a href="https://lienzoblanco.online/" target="_blank" rel="noopener" class="credit-multicolor">© Lienzo Blanco</a>.
+        </p>
+        <p class="footer-korean-phrase">아름다운 피부를 위한 최고의 선택</p>
       </div>
     </div>
   </footer>
@@ -618,8 +532,104 @@
   <!-- ============ TOAST ============ -->
   <div class="toast" id="toast"></div>
 
+  <!-- ============ FLOATING SOCIAL DOCK (LEFT SIDE) ============ -->
+  <aside class="social-dock" id="socialDock" aria-label="Redes Sociales">
+    <!-- TikTok -->
+    <div class="social-dock-item">
+      <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener" class="social-dock-btn btn-tiktok" aria-label="TikTok">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .586.046.86.13V9.42a6.34 6.34 0 0 0-.86-.06 6.34 6.34 0 1 0 6.34 6.34V8.75a8.28 8.28 0 0 0 3.77.94V6.69z"/>
+        </svg>
+      </a>
+      <div class="social-dock-tooltip tooltip-tiktok">
+        <span class="tooltip-bar bar-tiktok"></span>
+        <span class="tooltip-name">TIKTOK</span>
+        <span class="tooltip-handle handle-tiktok">@flor.de.seul.gt</span>
+      </div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="social-dock-item">
+      <a href="https://www.instagram.com/flordeseul_gt" target="_blank" rel="noopener" class="social-dock-btn btn-instagram" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <div class="social-dock-tooltip tooltip-instagram">
+        <span class="tooltip-bar bar-instagram"></span>
+        <span class="tooltip-name">INSTAGRAM</span>
+        <span class="tooltip-handle handle-instagram">@flordeseul_gt</span>
+      </div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="social-dock-item">
+      <a href="https://www.facebook.com/people/Flor-De-Seúl-Gt/61577355537632/" target="_blank" rel="noopener" class="social-dock-btn btn-facebook" aria-label="Facebook">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </a>
+      <div class="social-dock-tooltip tooltip-facebook">
+        <span class="tooltip-bar bar-facebook"></span>
+        <span class="tooltip-name">FACEBOOK</span>
+        <span class="tooltip-handle handle-facebook">Flor De Seúl Gt</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Audio Player & Toggle Button -->
+  <audio id="bgAudio" loop playsinline preload="auto">
+    <source src="public/Sparkle%20(Instrumental%20Only).mp3" type="audio/mpeg">
+    <source src="Sparkle%20(Instrumental%20Only).mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()" aria-label="Música ambiente">🔊</button>
+
   <!-- Back to top -->
   <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">↑</button>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal-overlay" id="privacyOverlay" onclick="closePrivacyModal()"></div>
+  <div class="checkout-modal info-modal" id="privacyModal">
+    <button class="close-modal" onclick="closePrivacyModal()">✕</button>
+    <div class="checkout-content">
+      <h2 class="checkout-title">🔒 Política de Privacidad</h2>
+      <div class="info-text">
+        <p>En <strong>Flor de Seúl</strong>, valoramos tu privacidad. Los datos recolectados (nombre, teléfono, dirección) son utilizados exclusivamente para:</p>
+        <ul>
+          <li>Procesar y entregar tus pedidos de manera eficiente.</li>
+          <li>Brindarte asesoría personalizada vía WhatsApp o Instagram.</li>
+          <li>Mantenerte informado sobre nuestras promociones (solo si lo autorizas).</li>
+        </ul>
+        <p>Tus datos están protegidos y nunca serán compartidos con terceros sin tu consentimiento expreso, cumpliendo con las normativas vigentes en Guatemala.</p>
+      </div>
+      <button class="btn-primary full-width" onclick="closePrivacyModal()" style="margin-top: 20px;">Entendido 🌸</button>
+    </div>
+  </div>
+
+  <!-- Terms & Conditions Modal -->
+  <div class="modal-overlay" id="termsOverlay" onclick="closeTermsModal()"></div>
+  <div class="checkout-modal info-modal" id="termsModal">
+    <button class="close-modal" onclick="closeTermsModal()">✕</button>
+    <div class="checkout-content">
+      <h2 class="checkout-title">📜 Términos y Condiciones</h2>
+      <div class="info-text">
+        <h3>1. Envíos y Entregas</h3>
+        <p>Realizamos envíos a toda Guatemala. Los tiempos de entrega varían según la ubicación (usualmente de 24 a 48 horas hábiles).</p>
+        
+        <h3>2. Métodos de Pago</h3>
+        <p>Aceptamos depósito bancario previo y pago contra entrega (sujeto a cobertura).</p>
+
+        <div class="policy-alert" style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; padding: 12px; border-radius: 8px; margin: 12px 0;">
+          <h4 style="color: #ef4444; margin-bottom: 6px;">⚠️ Política de Devoluciones</h4>
+          <p style="margin: 0; font-size: 0.9rem;">Debido a la naturaleza de los productos de cuidado personal y por estrictos motivos de higiene y seguridad de nuestros clientes, <strong>NO SE ACEPTAN DEVOLUCIONES</strong> ni cambios una vez que el producto ha sido entregado y aceptado.</p>
+        </div>
+
+        <h3>3. Garantía</h3>
+        <p>Solo se cubrirán garantías por defectos de fábrica evidentes al momento de la entrega.</p>
+      </div>
+      <button class="btn-primary full-width" onclick="closeTermsModal()" style="margin-top: 20px;">Acepto los términos 🌸</button>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="premium-bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFB5C5" />
-      <stop offset="50%" stop-color="#F497AD" />
+      <stop offset="50%" stop-color="#FF75A0" />
       <stop offset="100%" stop-color="#C5A3E8" />
     </linearGradient>
     <filter id="subtle-shadow" x="-10%" y="-10%" width="120%" height="120%">
