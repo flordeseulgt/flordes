@@ -50,9 +50,11 @@ export default function Home() {
   const [petals, setPetals] = useState([]);
   const [introPetals, setIntroPetals] = useState([]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
   const [productsData, setProductsData] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const searchInputRef = useRef(null);
+  const sortDropdownRef = useRef(null);
   const collectionCarouselRef = useRef(null);
 
   const scrollCollection = (direction) => {
@@ -71,6 +73,16 @@ export default function Home() {
       searchInputRef.current.focus();
     }
   }, [isSearchOpen]);
+
+  useEffect(() => {
+    const handleClickOutsideSort = (e) => {
+      if (sortDropdownRef.current && !sortDropdownRef.current.contains(e.target)) {
+        setIsSortOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutsideSort);
+    return () => document.removeEventListener('mousedown', handleClickOutsideSort);
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -960,18 +972,112 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="sort-container" style={{ marginTop: '20px' }}>
-              <label htmlFor="sort-price" className="sort-label">Ordenar por:</label>
-              <select 
-                id="sort-price" 
-                className="sort-select" 
-                value={sortByPrice} 
-                onChange={(e) => setSortByPrice(e.target.value)}
-              >
-                <option value="default">Relevancia</option>
-                <option value="low-high">Precio: Menor a Mayor</option>
-                <option value="high-low">Precio: Mayor a Menor</option>
-              </select>
+            {/* ============ EDITORIAL LUXURY SORT CONTROLS ============ */}
+            <div className="editorial-sort-container" ref={sortDropdownRef}>
+              <div className="sort-label-group">
+                <span className="sort-kr-badge">정렬</span>
+                <span className="sort-label-text">ORDENAR POR</span>
+              </div>
+
+              {/* Botón Selector Personalizado (Custom Dropdown) */}
+              <div className="custom-sort-dropdown">
+                <button
+                  type="button"
+                  className={`sort-trigger-btn ${isSortOpen ? 'active' : ''}`}
+                  onClick={() => setIsSortOpen(!isSortOpen)}
+                  aria-haspopup="listbox"
+                  aria-expanded={isSortOpen}
+                >
+                  <span className="sort-current-icon">
+                    {sortByPrice === 'low-high' ? '↓' : sortByPrice === 'high-low' ? '↑' : '✦'}
+                  </span>
+                  <span className="sort-current-label">
+                    {sortByPrice === 'low-high' ? 'Precio: Menor a Mayor' : sortByPrice === 'high-low' ? 'Precio: Mayor a Menor' : 'Relevancia (Destacados)'}
+                  </span>
+                  <svg className={`sort-caret-svg ${isSortOpen ? 'rotated' : ''}`} width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                {isSortOpen && (
+                  <div className="custom-sort-menu" role="listbox">
+                    <div className="sort-menu-header">
+                      <span>ORDEN DE CATÁLOGO</span>
+                      <span>정렬 기준</span>
+                    </div>
+
+                    <div 
+                      className={`custom-sort-option ${sortByPrice === 'default' ? 'selected' : ''}`}
+                      onClick={() => { setSortByPrice('default'); setIsSortOpen(false); }}
+                      role="option"
+                      aria-selected={sortByPrice === 'default'}
+                    >
+                      <span className="sort-opt-icon">✦</span>
+                      <div className="sort-opt-text-wrap">
+                        <span className="sort-opt-title">Relevancia</span>
+                        <span className="sort-opt-desc">Orden editorial y recomendados</span>
+                      </div>
+                      {sortByPrice === 'default' && <span className="sort-opt-check">✓</span>}
+                    </div>
+
+                    <div 
+                      className={`custom-sort-option ${sortByPrice === 'low-high' ? 'selected' : ''}`}
+                      onClick={() => { setSortByPrice('low-high'); setIsSortOpen(false); }}
+                      role="option"
+                      aria-selected={sortByPrice === 'low-high'}
+                    >
+                      <span className="sort-opt-icon">↓</span>
+                      <div className="sort-opt-text-wrap">
+                        <span className="sort-opt-title">Precio: Menor a Mayor</span>
+                        <span className="sort-opt-desc">Los productos más accesibles primero</span>
+                      </div>
+                      {sortByPrice === 'low-high' && <span className="sort-opt-check">✓</span>}
+                    </div>
+
+                    <div 
+                      className={`custom-sort-option ${sortByPrice === 'high-low' ? 'selected' : ''}`}
+                      onClick={() => { setSortByPrice('high-low'); setIsSortOpen(false); }}
+                      role="option"
+                      aria-selected={sortByPrice === 'high-low'}
+                    >
+                      <span className="sort-opt-icon">↑</span>
+                      <div className="sort-opt-text-wrap">
+                        <span className="sort-opt-title">Precio: Mayor a Menor</span>
+                        <span className="sort-opt-desc">Fórmulas premium y de lujo primero</span>
+                      </div>
+                      {sortByPrice === 'high-low' && <span className="sort-opt-check">✓</span>}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Accesos rápidos Segmentados para Desktop */}
+              <div className="sort-quick-pills" role="toolbar" aria-label="Accesos rápidos de ordenamiento">
+                <button
+                  type="button"
+                  className={`quick-pill-btn ${sortByPrice === 'default' ? 'active' : ''}`}
+                  onClick={() => setSortByPrice('default')}
+                >
+                  <span>✦</span>
+                  <span>Relevancia</span>
+                </button>
+                <button
+                  type="button"
+                  className={`quick-pill-btn ${sortByPrice === 'low-high' ? 'active' : ''}`}
+                  onClick={() => setSortByPrice('low-high')}
+                >
+                  <span>↓</span>
+                  <span>Menor</span>
+                </button>
+                <button
+                  type="button"
+                  className={`quick-pill-btn ${sortByPrice === 'high-low' ? 'active' : ''}`}
+                  onClick={() => setSortByPrice('high-low')}
+                >
+                  <span>↑</span>
+                  <span>Mayor</span>
+                </button>
+              </div>
             </div>
           </div>
 
