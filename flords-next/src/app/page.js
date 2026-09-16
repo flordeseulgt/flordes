@@ -276,11 +276,32 @@ export default function Home() {
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
 
-    // Scroll listener
+    // Scroll listener & Purito brand shrink animation (de grande a pequeño al bajar por la página)
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      const scrollY = window.scrollY;
+      const isScrolled = scrollY > 40;
+      setScrolled(isScrolled);
+
+      if (isScrolled) {
+        document.body.classList.add('page-scrolled');
+      } else {
+        document.body.classList.remove('page-scrolled');
+      }
+
+      const brandHeading = document.getElementById('puritoBrandHeading');
+      if (brandHeading) {
+        const shrinkThreshold = 140;
+        const progress = Math.min(Math.max(scrollY / shrinkThreshold, 0), 1);
+        const scale = 1 - progress * 0.48; // scale from 1 down to ~0.52 (de grande a pequeño)
+        const translateY = -progress * 28; // slide up slightly toward the navbar
+        const opacity = Math.max(1 - progress * 1.3, 0);
+
+        brandHeading.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+        brandHeading.style.opacity = `${opacity}`;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     // Escape listener
     const handleKeyDown = (e) => {
@@ -310,6 +331,7 @@ export default function Home() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.body.classList.remove('page-scrolled');
       window.removeEventListener('keydown', handleKeyDown);
       clearInterval(interval);
     };
@@ -606,7 +628,7 @@ export default function Home() {
         </div>
       )}
       {/* ============ PURITO-STYLE BRAND HERO BANNER ============ */}
-      <div className="purito-brand-stage" id="puritoBrandStage">
+      <div className={`purito-brand-stage ${scrolled ? 'scrolled' : ''}`} id="puritoBrandStage">
         <div className="purito-brand-content">
           <span className="purito-korean-pill">✨ 서울의 맑은 빛 · AUTHENTIC K-BEAUTY</span>
           <h1 className="purito-brand-heading" id="puritoBrandHeading">FLOR DE SEÚL</h1>

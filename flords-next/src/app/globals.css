@@ -397,14 +397,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: opacity 0.25s ease;
 }
 
-body.page-scrolled .purito-brand-stage {
+body.page-scrolled .purito-brand-stage,
+.purito-brand-stage.scrolled {
   padding-top: 14px;
   padding-bottom: 8px;
   border-bottom-color: transparent;
 }
 
 body.page-scrolled .purito-brand-tagline,
-body.page-scrolled .purito-korean-pill {
+body.page-scrolled .purito-korean-pill,
+.purito-brand-stage.scrolled .purito-brand-tagline,
+.purito-brand-stage.scrolled .purito-korean-pill {
   opacity: 0.15;
 }
 
