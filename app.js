@@ -843,7 +843,7 @@ function renderProducts() {
         <div class="product-meta-row">
           <span class="product-brand">${p.brandName}</span>
           ${isOutOfStock ? `
-            <span class="stock-indicator out">Agotado</span>
+            <span class="stock-indicator out">AGOTADO</span>
           ` : (p.stock <= 3 ? `
             <span class="stock-indicator low">¡Solo ${p.stock} disp.!</span>
           ` : `
@@ -863,8 +863,8 @@ function renderProducts() {
             <span class="product-price">Q${discountedPrice}</span>
           </div>
           ${isOutOfStock ? `
-            <button class="add-to-cart-btn disabled" disabled title="Producto agotado">
-              Agotado
+            <button class="add-to-cart-btn is-out-of-stock-btn disabled" disabled title="Producto agotado">
+              AGOTADO
             </button>
           ` : `
             <button class="add-to-cart-btn" onclick="addToCart(${p.id})" id="addBtn-${p.id}">
@@ -1231,7 +1231,7 @@ function openProductModal(id) {
       <div class="product-modal-brand-row">
         <span class="product-modal-brand">${p.brandName} &nbsp;·&nbsp; K-Beauty</span>
         ${isOutOfStock ? `
-          <span class="stock-badge out">Sin existencias</span>
+          <span class="stock-badge out">AGOTADO</span>
         ` : (p.stock <= 3 ? `
           <span class="stock-badge low">¡Solo ${p.stock} disponibles!</span>
         ` : `
@@ -1250,8 +1250,8 @@ function openProductModal(id) {
       </div>
       <div style="margin-top: 20px;">
         ${isOutOfStock ? `
-          <button class="btn-primary disabled" disabled style="width: 100%; opacity: 0.6; cursor: not-allowed;">
-            Producto Temporalmente Agotado
+          <button class="btn-primary is-out-of-stock-btn disabled" disabled style="width: 100%;">
+            AGOTADO
           </button>
         ` : `
           <button class="btn-primary" onclick="addToCart(${p.id}); closeProductModal();" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">

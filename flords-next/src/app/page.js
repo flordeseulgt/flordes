@@ -436,19 +436,22 @@ export default function Home() {
     const originalPrice = p.price.toFixed(2);
 
     return (
-      <article key={p.id} className={`product-card ${!p.stock ? 'out-of-stock' : ''}`}>
+      <article key={p.id} className={`product-card ${!p.stock ? 'out-of-stock is-out-of-stock' : ''}`}>
         <div className="product-img-wrap" onClick={() => setSelectedProduct(p)}>
           <img src={p.img} alt={p.name} loading="lazy" />
-          {!p.stock && (
-            <div className="out-of-stock-overlay">
-              <span>Agotado</span>
-            </div>
-          )}
+          {!p.stock ? (
+            <span className="product-badge badge-out-of-stock">AGOTADO</span>
+          ) : (p.badge ? (
+            <span className={`product-badge ${p.badge}`}>
+              {p.badge === 'new' ? 'Nuevo' : p.badge === 'popular' ? 'Popular' : 'Oferta'}
+            </span>
+          ) : null)}
         </div>
         <div className="product-info">
           <div className="product-meta">
             <span className={`product-brand brand-${p.brand}`}>{p.brandName}</span>
             {p.size && <span className="product-size">{p.size}</span>}
+            {!p.stock && <span className="stock-indicator out">AGOTADO</span>}
           </div>
           <h3 className="product-name" onClick={() => setSelectedProduct(p)}>{p.name}</h3>
           <p className="product-desc">{p.desc}</p>
@@ -458,11 +461,11 @@ export default function Home() {
               <span className="product-price">Q{discountedPrice}</span>
             </div>
             <button 
-              className={`add-to-cart-btn ${isDisabled ? 'disabled' : ''}`} 
+              className={`add-to-cart-btn ${isDisabled ? 'disabled' : ''} ${!p.stock ? 'is-out-of-stock-btn' : ''}`} 
               onClick={() => !isDisabled && addToCart(p.id)}
               disabled={isDisabled}
             >
-              {!p.stock ? 'Agotado' : (isMaxReached ? 'Límite alcanzado' : (
+              {!p.stock ? 'AGOTADO' : (isMaxReached ? 'Límite alcanzado' : (
                 <>
                   <svg className="btn-bag-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
@@ -1527,6 +1530,9 @@ export default function Home() {
             <div className="product-modal-content">
               <div className="product-modal-img">
                 <img src={selectedProduct.img} alt={selectedProduct.nameLong} />
+                {!selectedProduct.stock && (
+                  <span className="product-badge badge-out-of-stock in-modal">AGOTADO</span>
+                )}
               </div>
               <div className="product-modal-info">
                 <div className="product-modal-brand">{selectedProduct.brandName} · K-Beauty</div>
@@ -1540,12 +1546,15 @@ export default function Home() {
                 <div className="product-modal-price-row">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                     <div className="product-modal-price" style={{ color: '#e8597d' }}>Q{selectedProduct.price.toFixed(2)}</div>
+                    {!selectedProduct.stock && (
+                      <span className="stock-indicator out">AGOTADO</span>
+                    )}
                   </div>
                   {selectedProduct.size && <div className="product-modal-size">Contenido: {selectedProduct.size}</div>}
                 </div>
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                   <button 
-                    className={`btn-primary ${(!selectedProduct.stock || (cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock)) ? 'disabled' : ''}`} 
+                    className={`btn-primary ${!selectedProduct.stock ? 'is-out-of-stock-btn disabled' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'disabled' : '')}`} 
                     onClick={() => { 
                       if (selectedProduct.stock && (cart.find(c => c.id === selectedProduct.id)?.qty || 0) < selectedProduct.stock) {
                         addToCart(selectedProduct.id); 
@@ -1555,7 +1564,7 @@ export default function Home() {
                     style={{ flex: 1, minWidth: '160px' }}
                     disabled={!selectedProduct.stock || (cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock)}
                   >
-                    {!selectedProduct.stock ? '❌ Agotado' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : (
+                    {!selectedProduct.stock ? 'AGOTADO' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : (
                       <>
                         <svg className="btn-bag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                           <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
