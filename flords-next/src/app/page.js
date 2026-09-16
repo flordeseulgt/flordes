@@ -1296,9 +1296,10 @@ export default function Home() {
       {/* ============ FOOTER (y resto de secciones) ============ */}
       <footer className="footer">
         <div className="container">
-          <div className="footer-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', textAlign: 'center', alignItems: 'start' }}>
-            <div className="footer-brand" style={{ margin: '0 auto' }}>
-              <div className="nav-logo" style={{ justifyContent: 'center', marginBottom: '12px' }}>
+          <div className="footer-grid">
+            {/* Columna 1: Marca & Esencia */}
+            <div className="footer-col footer-col-brand">
+              <div className="footer-brand-header">
                 <div className="logo-icon">
                   <svg viewBox="0 0 24 24" className="logo-svg">
                     <defs>
@@ -1319,35 +1320,89 @@ export default function Home() {
                     </g>
                   </svg>
                 </div>
-                <div className="logo-text">
+                <div className="footer-logo-title">
                   <span className="logo-main">Flor de Seúl</span>
+                  <span className="footer-logo-sub">KOREAN SKINCARE · GUATEMALA</span>
                 </div>
               </div>
-              <h4 className="footer-highlight-link">Acerca de Nosotros</h4>
-              <p className="footer-copy-text">Copyright © Flor de Seúl Gt</p>
+              <p className="footer-brand-desc">
+                Tu tienda de confianza de K-Beauty en Guatemala. Fórmulas auténticas y cuidado de la piel 100% original importado directo desde Corea del Sur.
+              </p>
+              <div className="footer-trust-pills">
+                <span className="footer-pill">🇬🇹 Envíos a todo el país</span>
+                <span className="footer-pill">💵 Pago Contra Entrega</span>
+              </div>
             </div>
 
-            <div className="footer-links">
-              <h4>Horarios</h4>
-              <p className="footer-bold-info">8 AM a 10 PM</p>
-              <p className="footer-sub-info">Lunes a Domingo</p>
+            {/* Columna 2: Horarios & Envíos */}
+            <div className="footer-col footer-col-info">
+              <h4 className="footer-col-title">⏰ Horarios & Atención</h4>
+              <div className="footer-schedule-card">
+                <p className="footer-bold-info">8:00 AM – 10:00 PM</p>
+                <p className="footer-sub-info">Lunes a Domingo · Atención Continua</p>
+              </div>
+              <p className="footer-service-desc">
+                Asesoría personalizada por redes sociales para ayudarte a encontrar la rutina ideal según tu tipo de piel.
+              </p>
+              <div className="footer-delivery-badge">
+                <span>🚚 Entregas en 24 a 48 hrs hábiles</span>
+              </div>
             </div>
-            
-            <div className="footer-links">
-              <h4>Información Legal</h4>
+
+            {/* Columna 3: Información Legal & Compras */}
+            <div className="footer-col footer-col-legal">
+              <h4 className="footer-col-title">📜 Información & Enlaces</h4>
               <ul className="footer-links-clean">
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyOpen(true); }}>Políticas de Privacidad</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setIsTermsOpen(true); }}>Términos y Condiciones</a></li>
+                <li>
+                  <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyOpen(true); }}>
+                    🔒 Políticas de Privacidad
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={(e) => { e.preventDefault(); setIsTermsOpen(true); }}>
+                    📄 Términos y Condiciones
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq-guatemala">
+                    ❓ Preguntas Frecuentes
+                  </a>
+                </li>
+                <li>
+                  <a href="#productos">
+                    🌸 Ver Todos los Productos
+                  </a>
+                </li>
               </ul>
+              <div className="footer-social-inline">
+                <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener" aria-label="TikTok" className="footer-social-link">
+                  TikTok
+                </a>
+                <span className="dot-sep">·</span>
+                <a href="https://www.instagram.com/flordeseul_gt" target="_blank" rel="noopener" aria-label="Instagram" className="footer-social-link">
+                  Instagram
+                </a>
+                <span className="dot-sep">·</span>
+                <a href="https://www.facebook.com/flordeseulgt" target="_blank" rel="noopener" aria-label="Facebook" className="footer-social-link">
+                  Facebook
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Barra Inferior del Footer */}
         <div className="footer-bottom">
-          <div className="container">
+          <div className="container footer-bottom-flex">
+            <p className="footer-copy-text">
+              © {new Date().getFullYear()} Flor de Seúl GT. Todos los derechos reservados.
+            </p>
+            <p className="footer-korean-phrase">
+              아름다운 피부를 위한 최고의 선택 🌸
+            </p>
             <p className="designer-credit">
               Esta página fue hecha por <a href="https://lienzoblanco.online/" target="_blank" rel="noopener" className="credit-multicolor">© Lienzo Blanco</a>.
             </p>
-            <p className="footer-korean">아름다운 피부를 위한 최고의 선택</p>
           </div>
         </div>
       </footer>
