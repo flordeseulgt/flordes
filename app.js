@@ -5,8 +5,9 @@
 
 // ============ PRODUCT DATABASE ============
 const PRODUCTS = [
+  // --- B:LAB ---
   {
-    id: 43,
+    id: 43, stock: 4,
     brand: 'blab',
     brandName: 'B:Lab',
     name: 'Protector en Barra Matcha',
@@ -19,10 +20,11 @@ const PRODUCTS = [
     badge: 'new',
     categories: ['solar'],
     benefits: ['SPF50+ PA++++', 'Extracto de Matcha', 'Formato práctico en barra'],
-    stock: 4,
   },
+
+  // --- MARY & MAY ---
   {
-    id: 44,
+    id: 44, stock: 10,
     brand: 'mary',
     brandName: 'Mary & May',
     name: 'Crema para Ojeras',
@@ -35,16 +37,17 @@ const PRODUCTS = [
     badge: 'new',
     categories: ['hidratacion', 'manchas'],
     benefits: ['Ácido Tranexámico', 'Glutatión', 'Efecto iluminador'],
-    stock: 10,
   },
+
   // --- ANUA ---
   {
-    id: 1,
+    id: 1, stock: 2,
     brand: 'anua',
     brandName: 'Anua',
-    name: 'Heartleaf Aceite Limpiador',
+    name: 'Limpiador en Aceite Heartleaf',
     nameLong: 'Heartleaf Pore Control Cleansing Oil',
-    price: 145,
+    price: 240,
+    size: '200ml',
     img: 'public/assets/images/marcas/anua/heartleafaceite.png',
     desc: 'Aceite limpiador de doble limpieza con hojas de corazón para poros dilatados. Disuelve maquillaje, protector solar y suciedad sin resecar la piel.',
     tags: ['limpieza', 'poros', 'aceite'],
@@ -53,12 +56,13 @@ const PRODUCTS = [
     benefits: ['Control de poros', 'Doble limpieza', 'Sin sulfatos'],
   },
   {
-    id: 2,
+    id: 2, stock: 0,
     brand: 'anua',
     brandName: 'Anua',
-    name: 'Heartleaf Espuma Limpiadora',
+    name: 'Limpiador en Espuma Heartleaf',
     nameLong: 'Heartleaf Pore Control Cleansing Foam',
-    price: 130,
+    price: 200,
+    size: '150ml',
     img: 'public/assets/images/marcas/anua/heartleafespuma.png',
     desc: 'Espuma suave con extracto de heartleaf. Limpia profundamente sin alterar el pH natural de la piel. Ideal para piel sensible y con acné.',
     tags: ['limpieza', 'espuma', 'sensible'],
@@ -69,12 +73,13 @@ const PRODUCTS = [
 
   // --- BEAUTY OF JOSEON ---
   {
-    id: 3,
+    id: 3, stock: 0,
     brand: 'beautyofjoseon',
     brandName: 'Beauty of Joseon',
     name: 'Mascarilla de Miel y Arroz',
     nameLong: 'Revive Moisturizing Glow Honey & Rice Mask',
-    price: 165,
+    price: 230,
+    size: '150ml',
     img: 'public/assets/images/marcas/beautyofjoseon/Mascarilla de miel y arroz .png',
     desc: 'Mascarilla de tejido con miel y arroz para una hidratación profunda y brillo instantáneo. Inspirada en los rituales de belleza de la corte Joseon.',
     tags: ['hidratacion', 'mascarilla', 'brillo'],
@@ -83,12 +88,13 @@ const PRODUCTS = [
     benefits: ['Hidratación intensa', 'Efecto glow', 'Nutritiva'],
   },
   {
-    id: 4,
+    id: 4, stock: 0,
     brand: 'beautyofjoseon',
     brandName: 'Beauty of Joseon',
-    name: 'Bean Pore Mask',
+    name: 'Mascarilla de Frijol Rojo',
     nameLong: 'Red Bean Refreshing Pore Mask',
-    price: 150,
+    price: 220,
+    size: '140ml',
     img: 'public/assets/images/marcas/beautyofjoseon/beanporemask.jpg',
     desc: 'Mascarilla de arcilla con extracto de frijol rojo para minimizar poros y controlar el exceso de sebo. Limpia y refresca profundamente.',
     tags: ['poros', 'mascarilla', 'arcilla'],
@@ -97,12 +103,13 @@ const PRODUCTS = [
     benefits: ['Minimiza poros', 'Control de sebo', 'Purificante'],
   },
   {
-    id: 5,
+    id: 5, stock: 0,
     brand: 'beautyofjoseon',
     brandName: 'Beauty of Joseon',
-    name: 'Sérum de Ginseng Jin',
-    nameLong: 'Revive Serum: Ginseng + Snail Mucin',
-    price: 230,
+    name: 'Crema para Ojeras Ginseng',
+    nameLong: 'Revive Serum: Ginseng + Retinal',
+    price: 210,
+    size: '30ml',
     img: 'public/assets/images/marcas/beautyofjoseon/serumjin.png',
     desc: 'Sérum con ginseng coreano y mucina de caracol para una piel firme, luminosa y con aspecto de cristal. El icónico sérum de K-Beauty.',
     tags: ['serum', 'antiedad', 'ginseng'],
@@ -111,12 +118,13 @@ const PRODUCTS = [
     benefits: ['Firmeza', 'Luminosidad', 'Anti-edad'],
   },
   {
-    id: 6,
+    id: 6, stock: 0,
     brand: 'beautyofjoseon',
     brandName: 'Beauty of Joseon',
-    name: 'Sérum de Vitamina C Dynasty',
+    name: 'Crema para Ojeras Vita C',
     nameLong: 'Glow Serum: Propolis + Niacinamide',
     price: 210,
+    size: '30ml',
     img: 'public/assets/images/marcas/beautyofjoseon/serumvita.png',
     desc: 'Sérum de brillo con propóleo y niacinamida al 2%. Unifica el tono, reduce manchas y aporta un brillo natural. Fórmula inspirada en la mítica belleza de la dinastía Joseon.',
     tags: ['serum', 'manchas', 'brillo'],
@@ -127,12 +135,13 @@ const PRODUCTS = [
 
   // --- MIXSOON ---
   {
-    id: 7,
+    id: 7, stock: 0,
     brand: 'mixsoon',
     brandName: 'Mixsoon',
     name: 'Bean Essence 30ml',
     nameLong: 'Mixsoon Bean Essence 30ml',
-    price: 175,
+    price: 235,
+    size: '30ml',
     img: 'public/assets/images/marcas/mixsoon/beanessence30.jpg',
     desc: 'Esencia minimalista de frijol fermentado para recuperar la barrera cutánea y lograr una piel hidratada y elástica. Fórmula limpia, 100% natural.',
     tags: ['esencia', 'barrera', 'fermentado'],
@@ -141,12 +150,13 @@ const PRODUCTS = [
     benefits: ['Barrera cutánea', 'Hidratación', 'Minimal clean'],
   },
   {
-    id: 8,
+    id: 8, stock: 1,
     brand: 'mixsoon',
     brandName: 'Mixsoon',
     name: 'Bean Essence 50ml',
     nameLong: 'Mixsoon Bean Essence 50ml',
-    price: 249,
+    price: 260,
+    size: '50ml',
     img: 'public/assets/images/marcas/mixsoon/beanessence50.png',
     desc: 'Versión grande de la icónica esencia de frijol fermentado. Hidrata, fortalece y recupera la vitalidad de la piel con solo un ingrediente estrella.',
     tags: ['esencia', 'barrera', 'fermentado'],
@@ -155,12 +165,13 @@ const PRODUCTS = [
     benefits: ['Barrera cutánea', 'Hidratación profunda', 'Clean beauty'],
   },
   {
-    id: 9,
+    id: 9, stock: 0,
     brand: 'mixsoon',
     brandName: 'Mixsoon',
     name: 'Crema Mixsoon',
     nameLong: 'Mixsoon Bean Cream',
-    price: 210,
+    price: 300,
+    size: '50ml',
     img: 'public/assets/images/marcas/mixsoon/cremamixsoon.jpg',
     desc: 'Crema hidratante ligera con extracto de frijol fermentado. Proporciona una hidratación duradera sin sensación grasosa. Perfecta para el paso final de tu rutina.',
     tags: ['crema', 'hidratacion', 'ligera'],
@@ -169,12 +180,13 @@ const PRODUCTS = [
     benefits: ['Hidratación 24h', 'Sin comedógenos', 'Textura ligera'],
   },
   {
-    id: 11,
+    id: 11, stock: 1,
     brand: 'mixsoon',
     brandName: 'Mixsoon',
-    name: 'Protector Solar SPF50',
+    name: 'Protector Solar SPF 50',
     nameLong: 'Mixsoon Watery Sun Essence SPF50+',
-    price: 160,
+    price: 250,
+    size: '50ml',
     img: 'public/assets/images/marcas/mixsoon/protectorsolar.jpg',
     desc: 'Protector solar en esencia con SPF 50+. Textura aguada, sin residuo blanco y con botón hidratante. El aliado perfecto para una vida libre de manchas.',
     tags: ['solar', 'spf50', 'esencia'],
@@ -185,12 +197,13 @@ const PRODUCTS = [
 
   // --- PURITO ---
   {
-    id: 13,
+    id: 13, stock: 0,
     brand: 'purito',
     brandName: 'Purito',
     name: 'Centella Green Level Buffet Sérum',
     nameLong: 'Purito Centella Green Level Buffet Serum',
     price: 195,
+    size: '60ml',
     img: 'public/assets/images/marcas/purito/puritoc.jpg',
     desc: 'Sérum con centella asiática al 20% y múltiples péptidos. Calma pieles sensibles, reduce rojeces y fortalece la barrera cutánea. Ideal para piel reactiva.',
     tags: ['serum', 'centella', 'sensible'],
@@ -201,26 +214,28 @@ const PRODUCTS = [
 
   // --- ROUND LAB ---
   {
-    id: 14,
-    brand: 'roundlab',
-    brandName: 'Round Lab',
-    name: 'Birch Foam Cleanser',
-    nameLong: 'Round Lab Birch Juice Moisturizing Foam Cleanser',
-    price: 145,
-    img: 'public/assets/images/marcas/roundlab/foambean.png',
-    desc: 'Espuma limpiadora hidratante con savia de abedul coreano. Limpia suavemente sin alterar el manto hidrolipídico. Deja la piel fresca y sin tensión.',
-    tags: ['limpieza', 'espuma', 'abedul'],
+    id: 40, stock: 1,
+    brand: 'tirtir',
+    brandName: 'Tirtir',
+    name: 'Caja de Mascarillas Hidratantes',
+    nameLong: 'Tirtir Glow Luminous Mask',
+    price: 285,
+    size: '30 Unidades',
+    img: 'public/assets/images/marcas/tirtir/masktirtir.png',
+    desc: 'Mascarilla de tejido glow con ingredientes luminosos para una piel con aspecto de vidrio. Hidrata profundamente y aporta un brillo natural irresistible.',
+    tags: ['mascarilla', 'glow', 'glass skin'],
     badge: null,
-    categories: ['limpieza'],
-    benefits: ['Limpieza suave', 'Hidratante', 'Sin sulfatos agresivos'],
+    categories: ['hidratacion'],
+    benefits: ['Glass skin', 'Brillo natural', 'Hidratación'],
   },
   {
-    id: 15,
+    id: 15, stock: 1,
     brand: 'roundlab',
     brandName: 'Round Lab',
     name: 'Kit Round Lab',
     nameLong: 'Round Lab Birch Starter Kit',
-    price: 320,
+    price: 275,
+    size: 'Mini Kit',
     img: 'public/assets/images/marcas/roundlab/kitroundlab.jpg',
     desc: 'Kit completo de inicio con los productos esenciales de la línea Birch Juice de Round Lab. Perfecto para comenzar tu rutina coreana desde cero.',
     tags: ['kit', 'abedul', 'rutina'],
@@ -228,14 +243,29 @@ const PRODUCTS = [
     categories: ['hidratacion', 'limpieza'],
     benefits: ['Kit completo', 'Ideal para principiantes', 'Ahorro especial'],
   },
-
   {
-    id: 17,
+    id: 35, stock: 1,
+    brand: 'skin1004',
+    brandName: 'Skin1004',
+    name: 'Mascarilla en Barra Poros',
+    nameLong: 'Skin1004 Poremizing Cleansing Stick',
+    price: 220,
+    size: '20g',
+    img: 'public/assets/images/marcas/skin1004/poremizing/stickpore.png',
+    desc: 'Stick limpiador sólido en barra para limpieza profunda de poros. Práctico, sin desperdicio y perfecto para usar en viaje. Con extracto purificante de arcilla.',
+    tags: ['limpieza', 'stick', 'poros'],
+    badge: null,
+    categories: ['limpieza'],
+    benefits: ['Formato barra', 'Portátil', 'Purificante'],
+  },
+  {
+    id: 17, stock: 1,
     brand: 'roundlab',
     brandName: 'Round Lab',
-    name: 'SPF50 Round Lab Sunscreen',
+    name: 'Protector Solar En Barra SPF 50',
     nameLong: 'Round Lab Birch Juice Moisturizing Sun Cream SPF50+',
-    price: 165,
+    price: 260,
+    size: '19g',
     img: 'public/assets/images/marcas/roundlab/spf50roundlab.jpg',
     desc: 'Crema solar hidratante con savia de abedul y SPF 50+ PA++++. Sin residuo blanco, textura cremosa y ligera. Protege mientras hidrata profundamente.',
     tags: ['solar', 'spf50', 'crema'],
@@ -243,15 +273,31 @@ const PRODUCTS = [
     categories: ['solar'],
     benefits: ['SPF 50+ PA++++', 'Hidratante', 'Sin residuo blanco'],
   },
+  {
+    id: 20, stock: 1,
+    brand: 'skin1004',
+    brandName: 'Skin1004',
+    name: 'Crema Tea Trica',
+    nameLong: 'Skin1004 Zombie Beauty Acne Cream',
+    price: 255,
+    size: '75ml',
+    img: 'public/assets/images/marcas/skin1004/Acne/creamaacne.png',
+    desc: 'Crema tratante con niacinamida y zinc para controlar brotes, reducir poros y matificar. Perfecta para piel grasa con tendencia al acné.',
+    tags: ['crema', 'acne', 'niacinamida'],
+    badge: null,
+    categories: ['acne'],
+    benefits: ['Niacinamida', 'Control de grasa', 'Anti-inflamatoria'],
+  },
 
   // --- SKIN1004 Acne ---
   {
-    id: 18,
+    id: 18, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Limpiador en Espuma para Acné',
     nameLong: 'Skin1004 Acne Foam Cleanser 125ml',
-    price: 135,
+    price: 215,
+    size: '125ml',
     img: 'public/assets/images/marcas/skin1004/Acne/Limpiador en Espuma para Acne 125 ml.jpg',
     desc: 'Espuma limpiadora especialmente formulada para piel con acné. Con ácido salicílico y extracto de centella para limpiar poros y reducir brotes sin resecar.',
     tags: ['limpieza', 'acne', 'espuma'],
@@ -260,26 +306,13 @@ const PRODUCTS = [
     benefits: ['Ácido salicílico', 'Anti-acné', 'Limpieza profunda'],
   },
   {
-    id: 20,
+    id: 22, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
-    name: 'Crema Anti-Acné',
-    nameLong: 'Skin1004 Zombie Beauty Acne Cream',
-    price: 175,
-    img: 'public/assets/images/marcas/skin1004/Acne/creamaacne.png',
-    desc: 'Crema tratante con niacinamida y zinc para controlar brotes, reducir poros y matificar. Perfecta para piel grasa con tendencia al acné.',
-    tags: ['crema', 'acne', 'niacinamida'],
-    badge: null,
-    categories: ['acne'],
-    benefits: ['Niacinamida', 'Control de grasa', 'Anti-inflamatoria'],
-  },
-  {
-    id: 22,
-    brand: 'skin1004',
-    brandName: 'Skin1004',
-    name: 'Spot Acne Serum',
-    nameLong: 'Skin1004 Zombie Beauty Spot Serum',
-    price: 160,
+    name: 'Tea Trica Crema para Acne',
+    nameLong: 'Skin1004',
+    price: 225,
+    size: '20ml',
     img: 'public/assets/images/marcas/skin1004/Acne/spotacne.png',
     desc: 'Sérum spot corrector para tratamiento local de granos activos. Actúa rápidamente para reducir la inflamación y dejar marcas mínimas.',
     tags: ['serum', 'spot', 'acne'],
@@ -288,12 +321,13 @@ const PRODUCTS = [
     benefits: ['Acción rápida', 'Spot treatment', 'Sin marcas'],
   },
   {
-    id: 23,
+    id: 23, stock: 2,
     brand: 'skin1004',
     brandName: 'Skin1004',
-    name: 'Thé Trica Ampoule',
+    name: 'Ampolla para Acne Tea Trica',
     nameLong: 'Skin1004 Tea-Trica Ampoule',
-    price: 185,
+    price: 240,
+    size: '100ml',
     img: 'public/assets/images/marcas/skin1004/Acne/teatricaampoule.jpg',
     desc: 'Ampolla de alta concentración con árbol de té y centella asiática. Trata activamente el acné, calma la inflamación y previene nuevos brotes.',
     tags: ['ampolla', 'acne', 'arbol de te'],
@@ -302,12 +336,13 @@ const PRODUCTS = [
     benefits: ['Alta concentración', 'Árbol de té', 'Preventivo'],
   },
   {
-    id: 24,
+    id: 24, stock: 2,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Tónico Anti-Acné',
     nameLong: 'Skin1004 Zombie Beauty Toner',
-    price: 155,
+    price: 230,
+    size: '210ml',
     img: 'public/assets/images/marcas/skin1004/Acne/toneracne.png',
     desc: 'Tónico exfoliante suave con BHA y extracto de centella. Elimina células muertas, desobstruye poros y prepara la piel para absorber mejor los siguientes pasos.',
     tags: ['tonico', 'exfoliante', 'bha'],
@@ -318,12 +353,13 @@ const PRODUCTS = [
 
   // --- SKIN1004 Centella ---
   {
-    id: 25,
+    id: 25, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
-    name: 'Limpiador Aceite Centella',
+    name: 'Limpiador en Aceite de Centella',
     nameLong: 'Skin1004 Centella Asiatica Cleansing Oil 200ml',
-    price: 170,
+    price: 235,
+    size: '200ml',
     img: 'public/assets/images/marcas/skin1004/Centella/Limpiador en Aceite Centella 200 ml.jpg',
     desc: 'Aceite limpiador de primera limpieza con centella asiática al 79%. Disuelve impurezas, maquillaje y SPF sin irritar. Deja la piel tersa y calmada.',
     tags: ['limpieza', 'aceite', 'centella'],
@@ -332,12 +368,13 @@ const PRODUCTS = [
     benefits: ['Centella 79%', 'Primera limpieza', 'Calmante'],
   },
   {
-    id: 26,
+    id: 26, stock: 1,
     brand: 'skin1004',
     brandName: 'Skin1004',
-    name: 'Limpiador Espuma Centella',
+    name: 'Limpiador en Espuma de Centella',
     nameLong: 'Skin1004 Centella Asiatica Cleansing Foam 125ml',
-    price: 135,
+    price: 215,
+    size: '125ml',
     img: 'public/assets/images/marcas/skin1004/Centella/Limpiador en Espuma Centella 125 ml.jpg',
     desc: 'Espuma gentil de segunda limpieza con centella asiática. Remueve residuos, equilibra el pH y deja la piel lista para los siguientes pasos de la rutina.',
     tags: ['limpieza', 'espuma', 'centella'],
@@ -346,12 +383,13 @@ const PRODUCTS = [
     benefits: ['Segunda limpieza', 'pH equilibrado', 'Con centella'],
   },
   {
-    id: 27,
+    id: 27, stock: 4,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Mascarilla Centella',
     nameLong: 'Skin1004 Centella Asiatica Pack',
-    price: 145,
+    price: 50,
+    size: '1 Unidad',
     img: 'public/assets/images/marcas/skin1004/Centella/mascarillacne.png',
     desc: 'Mascarilla calmante con centella asiática al 100% para pieles sensibles e irritadas. Reduce el enrojecimiento y aporta calma inmediata después de la exposición solar.',
     tags: ['mascarilla', 'centella', 'sensible'],
@@ -362,12 +400,13 @@ const PRODUCTS = [
 
   // --- SKIN1004 Manchas ---
   {
-    id: 28,
+    id: 28, stock: 0,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Ampolla para Manchas',
     nameLong: 'Skin1004 Brightening Ampoule 100ml',
-    price: 220,
+    price: 235,
+    size: '100ml',
     img: 'public/assets/images/marcas/skin1004/Manchas/Ampolla para Manchas 100ml.png',
     desc: 'Ampolla aclarante con niacinamida, kojic acid y vitamina C para unificar el tono, reducir manchas oscuras y dejar una piel luminosa y uniforme.',
     tags: ['ampolla', 'manchas', 'vitamina c'],
@@ -378,12 +417,13 @@ const PRODUCTS = [
 
   // --- SKIN1004 Probio-Cica ---
   {
-    id: 29,
+    id: 29, stock: 0,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Crema Probio-Cica',
     nameLong: 'Skin1004 Probio-Cica Calming Cream',
-    price: 195,
+    price: 250,
+    size: '50ml',
     img: 'public/assets/images/marcas/skin1004/Probiocica/Crema Probio-Cica.jpg',
     desc: 'Crema calmante con probióticos y centella asiatica. Restaura el microbioma de la piel, reduce sensibilidad extrema y fortalece la barrera protectora.',
     tags: ['crema', 'probioticos', 'sensible'],
@@ -392,12 +432,13 @@ const PRODUCTS = [
     benefits: ['Probióticos', 'Barrera cutánea', 'Anti-sensibilidad'],
   },
   {
-    id: 30,
+    id: 30, stock: 0,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Crema de Ojos Probio-Cica',
     nameLong: 'Skin1004 Probio-Cica Eye Cream with Bakuchiol',
     price: 210,
+    size: '20ml',
     img: 'public/assets/images/marcas/skin1004/Probiocica/Crema de Ojos Probio-Cica Bakuchiol.jpg',
     desc: 'Crema de ojos antiedad con probióticos y bakuchiol retinol natural. Reduce ojeras, bolsas y líneas de expresión alrededor del contorno de ojos.',
     tags: ['ojos', 'antiedad', 'bakuchiol'],
@@ -408,12 +449,13 @@ const PRODUCTS = [
 
   // --- SKIN1004 Poremizing ---
   {
-    id: 32,
+    id: 32, stock: 0,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Crema en Gel Poremizing',
     nameLong: 'Skin1004 Poremizing Green Fit Cream',
-    price: 180,
+    price: 240,
+    size: '75ml',
     img: 'public/assets/images/marcas/skin1004/poremizing/Crema en Gel Ligera Poremizing.png',
     desc: 'Crema gel ultraligera con extractos verdes para piel grasa y con poros dilatados. Matifica, hidrata y minimiza los poros visibles.',
     tags: ['crema', 'poros', 'gel'],
@@ -422,12 +464,13 @@ const PRODUCTS = [
     benefits: ['Matificante', 'Minimiza poros', 'Textura gel'],
   },
   {
-    id: 33,
+    id: 33, stock: 0,
     brand: 'skin1004',
     brandName: 'Skin1004',
-    name: 'Limpiador Espuma Rosa',
+    name: 'Limpiador en Espuma Poremizing',
     nameLong: 'Skin1004 Poremizing Foam Cleanser',
-    price: 140,
+    price: 215,
+    size: '125ml',
     img: 'public/assets/images/marcas/skin1004/poremizing/limpiadorespumarosa.png',
     desc: 'Espuma limpiadora con extracto de rosa y ácido salicílico para limpiar poros dilatados y reducir el exceso de grasa sin resecar.',
     tags: ['limpieza', 'rosa', 'poros'],
@@ -436,12 +479,13 @@ const PRODUCTS = [
     benefits: ['Rosa & BHA', 'Anti-poros', 'Equilibrante'],
   },
   {
-    id: 34,
+    id: 34, stock: 0,
     brand: 'skin1004',
     brandName: 'Skin1004',
-    name: 'Sérum Rosa Poremizing',
+    name: 'Ampolla para Poros',
     nameLong: 'Skin1004 Poremizing Rose Serum',
-    price: 185,
+    price: 240,
+    size: '100ml',
     img: 'public/assets/images/marcas/skin1004/poremizing/serumrosa.png',
     desc: 'Sérum con rosa y niacinamida para minimizar poros y controlar el exceso de sebo. Textura acuosa que se absorbe al instante, sin brillos.',
     tags: ['serum', 'rosa', 'poros'],
@@ -450,30 +494,32 @@ const PRODUCTS = [
     benefits: ['Rosa & niacinamida', 'Control de poros', 'Matificante'],
   },
   {
-    id: 35,
-    brand: 'skin1004',
-    brandName: 'Skin1004',
-    name: 'Stick Pore Control',
-    nameLong: 'Skin1004 Poremizing Cleansing Stick',
-    price: 120,
-    img: 'public/assets/images/marcas/skin1004/poremizing/stickpore.png',
-    desc: 'Stick limpiador sólido en barra para limpieza profunda de poros. Práctico, sin desperdicio y perfecto para usar en viaje. Con extracto purificante de arcilla.',
-    tags: ['limpieza', 'stick', 'poros'],
+    id: 16, stock: 0,
+    brand: 'roundlab',
+    brandName: 'Round Lab',
+    name: 'Mascarilla Camellia Colageno',
+    nameLong: 'Round Lab 1025 Dokdo Toner Mask',
+    price: 60,
+    size: '1 Unidad',
+    img: 'public/assets/images/marcas/roundlab/macarillaround.png',
+    desc: 'Mascarilla de tejido con agua del Mar de Dokdo ultrarica en minerales. Hidrata, calma y equilibra la piel en solo 20 minutos. Experiencia spa en casa.',
+    tags: ['mascarilla', 'hidratacion', 'minerales'],
     badge: null,
-    categories: ['limpieza'],
-    benefits: ['Formato barra', 'Portátil', 'Purificante'],
+    categories: ['hidratacion'],
+    benefits: ['Hidratación intensa', 'Minerales marinos', 'Calmante'],
   },
 
   // --- SULWHASOO ---
   {
-    id: 38,
+    id: 38, stock: 0,
     brand: 'sulwhasoo',
     brandName: 'Sulwhasoo',
-    name: 'First Care Mini Sérum',
+    name: 'Serum Vl Mini',
     nameLong: 'Sulwhasoo First Care Activating Serum Mini',
-    price: 245,
+    price: 250,
+    size: '15ml',
     img: 'public/assets/images/marcas/sulwhasoo/miniserum.jpg',
-    desc: 'El icónico primer sérum de Sulwhasoo en versión mini. Activador del cuidado con 5 plantas medicinales coreanas para una piel revitalizada y con luminosidad profunda.',
+    desc: 'El icónico primer sérum de Sulwhasoo en version mini. Activador del cuidado con 5 plantas medicinales coreanas para una piel revitalizada y con luminosidad profunda.',
     tags: ['serum', 'lujo', 'herbolaria'],
     badge: 'popular',
     categories: ['hidratacion', 'manchas'],
@@ -482,26 +528,28 @@ const PRODUCTS = [
 
   // --- TIRTIR ---
   {
-    id: 40,
-    brand: 'tirtir',
-    brandName: 'Tirtir',
-    name: 'Glow Skin Tirtir Mask',
-    nameLong: 'Tirtir Glow Luminous Mask',
-    price: 115,
-    img: 'public/assets/images/marcas/tirtir/masktirtir.png',
-    desc: 'Mascarilla de tejido glow con ingredientes luminosos para una piel con aspecto de vidrio. Hidrata profundamente y aporta un brillo natural irresistible.',
-    tags: ['mascarilla', 'glow', 'glass skin'],
+    id: 14, stock: 1,
+    brand: 'roundlab',
+    brandName: 'Round Lab',
+    name: 'Limpiador en Espuma Soybean',
+    nameLong: 'Round Lab Birch Juice Moisturizing Foam Cleanser',
+    price: 225,
+    size: '150ml',
+    img: 'public/assets/images/marcas/roundlab/foambean.png',
+    desc: 'Espuma limpiadora hidratante con savia de abedul coreano. Limpia suavemente sin alterar el manto hidrolipídico. Deja la piel fresca y sin tensión.',
+    tags: ['limpieza', 'espuma', 'abedul'],
     badge: null,
-    categories: ['hidratacion'],
-    benefits: ['Glass skin', 'Brillo natural', 'Hidratación'],
+    categories: ['limpieza'],
+    benefits: ['Limpieza suave', 'Hidratante', 'Sin sulfatos agresivos'],
   },
   {
-    id: 42,
+    id: 42, stock: 0,
     brand: 'tirtir',
     brandName: 'Tirtir',
-    name: 'Mask Fit Red Cushion 13C',
+    name: 'Base Fit Red Cushion 13C',
     nameLong: 'Tirtir Mask Fit Red Cushion Foundation 13C',
-    price: 210,
+    price: 145,
+    size: 'Mini',
     img: 'public/assets/images/marcas/tirtir/tirtir13c.jpg',
     desc: 'El famoso cushion rojo de Tirtir en tono 13C (ivory fresco). Cobertura media-alta buildable, acabado semi-mate natural, resistente al agua y con protección solar.',
     tags: ['cushion', 'makeup', 'cobertura'],
@@ -520,62 +568,130 @@ let searchQuery = '';
 let currentSlide = 0;
 let sliderInterval;
 
-// ============ INIT ============
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  initSlider();
-  renderProducts();
-  updateCartUI();
-  createPetals();
-  initScrollEffects();
-  initPaymentToggle();
-  initNavScroll();
-
-  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-  document.getElementById('cartBtn').addEventListener('click', openCart);
-});
-
 // ============ THEME ============
 function initTheme() {
   const saved = localStorage.getItem('flordseul_theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
+  if (document.body) {
+    document.body.setAttribute('data-theme', saved);
+  }
+  updateThemeButton(saved);
 }
 
-function toggleTheme() {
+function updateThemeButton(theme) {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  if (theme === 'dark') {
+    btn.setAttribute('title', 'Cambiar a modo claro');
+    btn.setAttribute('aria-label', 'Cambiar a modo claro');
+  } else {
+    btn.setAttribute('title', 'Cambiar a modo oscuro');
+    btn.setAttribute('aria-label', 'Cambiar a modo oscuro');
+  }
+}
+
+function toggleTheme(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  if (document.body) {
+    document.body.setAttribute('data-theme', next);
+  }
+  try {
+    localStorage.setItem('flordseul_theme', next);
+  } catch (err) {
+    console.warn('localStorage access error:', err);
+  }
+
   const btn = document.getElementById('themeToggle');
   if (btn) {
+    btn.classList.remove('is-rotating');
+    void btn.offsetWidth;
     btn.classList.add('is-rotating');
     setTimeout(() => btn.classList.remove('is-rotating'), 650);
   }
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('flordseul_theme', next);
+  updateThemeButton(next);
 }
+window.toggleTheme = toggleTheme;
 
-// ============ NAVBAR SCROLL ============
+// Execute immediately to prevent flash of wrong theme
+initTheme();
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn && !themeBtn.onclick) {
+    themeBtn.addEventListener('click', toggleTheme);
+  }
+  const cartBtn = document.getElementById('cartBtn');
+  if (cartBtn) {
+    cartBtn.addEventListener('click', openCart);
+  }
+
+  try { initSlider(); } catch (err) { console.warn('Slider err:', err); }
+  try { renderProducts(); } catch (err) { console.warn('Render err:', err); }
+  try { updateCartUI(); } catch (err) { console.warn('Cart err:', err); }
+  try { createPetals(); } catch (err) { console.warn('Petals err:', err); }
+  try { initScrollEffects(); } catch (err) { console.warn('Scroll err:', err); }
+  try { initPaymentToggle(); } catch (err) { console.warn('Payment err:', err); }
+  try { initNavScroll(); } catch (err) { console.warn('Nav err:', err); }
+});
+
+// ============ PURITO BRAND SHRINK & NAVBAR SCROLL ============
 function initNavScroll() {
   const navbar = document.getElementById('navbar');
   const backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      navbar.classList.add('scrolled');
-      backToTop.classList.add('visible');
-    } else {
-      navbar.classList.remove('scrolled');
-      backToTop.classList.remove('visible');
+  const brandStage = document.getElementById('puritoBrandStage');
+  const brandHeading = document.getElementById('puritoBrandHeading');
+
+  function handleScroll() {
+    const scrollY = window.scrollY;
+
+    // Purito brand text smooth shrink & dock animation
+    if (brandHeading) {
+      const shrinkThreshold = 140;
+      const progress = Math.min(Math.max(scrollY / shrinkThreshold, 0), 1);
+      const scale = 1 - progress * 0.48; // scale from 1 down to ~0.52
+      const translateY = -progress * 28; // slide up slightly toward the navbar
+      const opacity = Math.max(1 - progress * 1.3, 0);
+
+      brandHeading.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+      brandHeading.style.opacity = `${opacity}`;
     }
+
+    if (scrollY > 40) {
+      navbar?.classList.add('scrolled');
+      document.body.classList.add('page-scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+      document.body.classList.remove('page-scrolled');
+    }
+
+    if (backToTop) {
+      if (scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }
+
     // Active nav link
-    const sections = ['inicio','productos','nosotros','contacto'];
+    const sections = ['inicio', 'categorias', 'productos', 'marcas', 'nosotros', 'contacto'];
     let found = 'inicio';
     sections.forEach(id => {
       const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 120) found = id;
+      if (el && scrollY >= el.offsetTop - 140) found = id;
     });
     document.querySelectorAll('.nav-link').forEach(a => {
       a.classList.toggle('active', a.getAttribute('href') === `#${found}`);
     });
-  });
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
 }
 
 // ============ HAMBURGER MENU ============
@@ -590,6 +706,7 @@ function closeMenu() {
 function initSlider() {
   const slides = document.querySelectorAll('.hero-slide');
   const dotsContainer = document.getElementById('sliderDots');
+  if (!dotsContainer || slides.length === 0) return;
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
@@ -629,17 +746,20 @@ function goToSlide(i) {
 // ============ CHERRY BLOSSOM PETALS ============
 function createPetals() {
   const container = document.getElementById('petalsContainer');
-  for (let i = 0; i < 18; i++) {
+  if (!container) return;
+  container.innerHTML = '';
+  for (let i = 0; i < 28; i++) {
     const petal = document.createElement('div');
     petal.className = 'petal';
-    const size = Math.random() * 12 + 6;
+    const size = Math.random() * 10 + 8;
+    const duration = Math.random() * 7 + 6;
+    const delay = Math.random() * 8;
     petal.style.cssText = `
       left: ${Math.random() * 100}%;
       width: ${size}px;
-      height: ${size}px;
-      animation-duration: ${Math.random() * 8 + 6}s;
-      animation-delay: ${Math.random() * 8}s;
-      opacity: ${Math.random() * 0.6 + 0.2};
+      height: ${size * 1.25}px;
+      animation-duration: ${duration}s;
+      animation-delay: ${delay}s;
     `;
     container.appendChild(petal);
   }
@@ -661,9 +781,13 @@ function initScrollEffects() {
   });
 }
 
+// ============ PATRIOTIC DISCOUNT CONFIG ============
+const DISCOUNT_PERCENT = 10;
+const DISCOUNT_FACTOR = 0.90;
+
 // ============ PRODUCTS RENDER ============
 function getFilteredProducts() {
-  return PRODUCTS.filter(p => {
+  const filtered = PRODUCTS.filter(p => {
     const matchBrand = currentBrand === 'todos' || p.brand === currentBrand;
     const matchCategory = currentCategory === 'all' || p.categories.includes(currentCategory);
     const q = searchQuery.toLowerCase();
@@ -674,6 +798,15 @@ function getFilteredProducts() {
       p.tags.some(t => t.includes(q));
     return matchBrand && matchCategory && matchSearch;
   });
+
+  // Ordenar: Disponibles (stock > 0) arriba, Agotados (stock === 0) hasta abajo
+  return filtered.sort((a, b) => {
+    const aStock = a.stock || 0;
+    const bStock = b.stock || 0;
+    if (aStock > 0 && bStock === 0) return -1;
+    if (aStock === 0 && bStock > 0) return 1;
+    return 0; // mantener orden por defecto
+  });
 }
 
 function renderProducts() {
@@ -683,40 +816,62 @@ function renderProducts() {
 
   if (filtered.length === 0) {
     grid.innerHTML = '';
-    noResults.style.display = 'block';
+    if (noResults) noResults.style.display = 'block';
     return;
   }
-  noResults.style.display = 'none';
+  if (noResults) noResults.style.display = 'none';
 
   grid.innerHTML = filtered.map(p => {
-    const inWishlist = wishlist.includes(p.id);
-    const cartItem = cart.find(c => c.id === p.id);
+    const isOutOfStock = p.stock === 0;
+    const discountedPrice = (p.price * DISCOUNT_FACTOR).toFixed(2);
+    const originalPrice = p.price.toFixed(2);
+
     return `
-    <article class="product-card" data-id="${p.id}">
+    <article class="product-card ${isOutOfStock ? 'is-out-of-stock' : ''}" data-id="${p.id}">
       <div class="product-img-wrap" onclick="openProductModal(${p.id})">
         <img src="${p.img}" alt="${p.name}" loading="lazy" />
-        ${p.badge ? `<span class="product-badge ${p.badge}">${
-          p.badge === 'new' ? 'Nuevo' : p.badge === 'popular' ? 'Popular' : 'Oferta'
-        }</span>` : ''}
-        <button class="product-wishlist ${inWishlist ? 'active' : ''}" 
-          onclick="toggleWishlist(event, ${p.id})" 
-          aria-label="Favorito"
-          title="${inWishlist ? 'Quitar de favoritos' : 'Agregar a favoritos'}">
-          ${inWishlist ? '❤️' : '🤍'}
-        </button>
+        ${isOutOfStock ? `
+          <span class="product-badge badge-out-of-stock">AGOTADO</span>
+        ` : (p.badge ? `
+          <span class="product-badge ${p.badge}">${
+            p.badge === 'new' ? 'Nuevo' : p.badge === 'popular' ? 'Popular' : 'Oferta'
+          }</span>
+        ` : '')}
       </div>
+
       <div class="product-info">
-        <span class="product-brand">${p.brandName}</span>
+        <div class="product-meta-row">
+          <span class="product-brand">${p.brandName}</span>
+          ${isOutOfStock ? `
+            <span class="stock-indicator out">Agotado</span>
+          ` : (p.stock <= 3 ? `
+            <span class="stock-indicator low">¡Solo ${p.stock} disp.!</span>
+          ` : `
+            <span class="stock-indicator in">Stock: ${p.stock}</span>
+          `)}
+        </div>
+
         <h3 class="product-name" onclick="openProductModal(${p.id})">${p.name}</h3>
         <p class="product-desc">${p.desc}</p>
         <div class="product-tags">
-          ${p.tags.slice(0,3).map(t => `<span class="product-tag">${t}</span>`).join('')}
+          ${p.tags.slice(0, 3).map(t => `<span class="product-tag">${t}</span>`).join('')}
         </div>
+
         <div class="product-footer">
-          <span class="product-price">Q${p.price.toFixed(2)}</span>
-          <button class="add-to-cart-btn" onclick="addToCart(${p.id})" id="addBtn-${p.id}">
-            🛍 Agregar
-          </button>
+          <div class="price-container">
+            <span class="price-original">Q${originalPrice}</span>
+            <span class="product-price">Q${discountedPrice}</span>
+          </div>
+          ${isOutOfStock ? `
+            <button class="add-to-cart-btn disabled" disabled title="Producto agotado">
+              Agotado
+            </button>
+          ` : `
+            <button class="add-to-cart-btn" onclick="addToCart(${p.id})" id="addBtn-${p.id}">
+              <svg class="btn-bag-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              <span>Agregar</span>
+            </button>
+          `}
         </div>
       </div>
     </article>
@@ -731,19 +886,67 @@ function showBrand(brand) {
     btn.classList.toggle('active', btn.dataset.brand === brand);
   });
   renderProducts();
-  document.getElementById('productos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ============ CATEGORY FILTER ============
 function filterCategory(cat) {
   currentCategory = cat;
   renderProducts();
-  document.getElementById('productos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ============ SEARCH ============
+// ============ SEARCH IN CATALOG ============
 function searchProducts() {
-  searchQuery = document.getElementById('searchInput').value;
+  const catalogInput = document.getElementById('searchInput');
+  const navInput = document.getElementById('navSearchInput');
+  searchQuery = catalogInput ? catalogInput.value.trim() : '';
+  if (navInput && catalogInput) {
+    navInput.value = catalogInput.value;
+  }
+  renderProducts();
+}
+
+// ============ SEARCH IN NAVBAR ============
+function toggleNavSearch() {
+  const bar = document.getElementById('navSearchBar');
+  const input = document.getElementById('navSearchInput');
+  if (!bar) return;
+  const isOpen = bar.classList.toggle('open');
+  if (isOpen && input) {
+    setTimeout(() => input.focus(), 150);
+  }
+}
+
+function closeNavSearch() {
+  const bar = document.getElementById('navSearchBar');
+  if (bar) bar.classList.remove('open');
+}
+
+function handleNavSearch(val) {
+  searchQuery = (val || '').trim();
+  const catalogInput = document.getElementById('searchInput');
+  if (catalogInput) {
+    catalogInput.value = searchQuery;
+  }
+  renderProducts();
+
+  // If typing search query, scroll softly to products section
+  if (searchQuery.length >= 2) {
+    const prodSection = document.getElementById('productos');
+    if (prodSection) {
+      const top = prodSection.getBoundingClientRect().top + window.pageYOffset - 100;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+}
+
+function clearNavSearch() {
+  const navInput = document.getElementById('navSearchInput');
+  const catalogInput = document.getElementById('searchInput');
+  if (navInput) navInput.value = '';
+  if (catalogInput) catalogInput.value = '';
+  searchQuery = '';
   renderProducts();
 }
 
@@ -765,8 +968,16 @@ function toggleWishlist(e, id) {
 function addToCart(id) {
   const product = PRODUCTS.find(p => p.id === id);
   if (!product) return;
+  if (product.stock === 0) {
+    showToast('⚠️ Este producto está temporalmente agotado.');
+    return;
+  }
   const existing = cart.find(c => c.id === id);
   if (existing) {
+    if (existing.qty >= product.stock) {
+      showToast(`⚠️ Solo hay ${product.stock} unidades disponibles en stock.`);
+      return;
+    }
     existing.qty++;
   } else {
     cart.push({ id, qty: 1 });
@@ -774,16 +985,16 @@ function addToCart(id) {
   saveCart();
   updateCartUI();
   openCart();
-  showToast(`🌸 ¡${product.name} agregado al carrito!`);
+  showToast(`🌸 ¡${product.name} agregado con 10% OFF Patrio!`);
+
   // Animate button
   const btn = document.getElementById(`addBtn-${id}`);
   if (btn) {
+    const originalText = btn.textContent;
     btn.textContent = '✓ Agregado';
-    btn.style.background = 'linear-gradient(135deg, #5d8a63, #8aab8e)';
     setTimeout(() => {
-      btn.textContent = '🛍 Agregar';
-      btn.style.background = '';
-    }, 1600);
+      btn.textContent = originalText;
+    }, 1400);
   }
 }
 
@@ -796,6 +1007,11 @@ function removeFromCart(id) {
 function changeQty(id, delta) {
   const item = cart.find(c => c.id === id);
   if (!item) return;
+  const product = PRODUCTS.find(p => p.id === id);
+  if (delta > 0 && product && item.qty >= product.stock) {
+    showToast(`⚠️ No hay más de ${product.stock} unidades en existencia.`);
+    return;
+  }
   item.qty += delta;
   if (item.qty <= 0) removeFromCart(id);
   else {
@@ -808,11 +1024,19 @@ function saveCart() {
   localStorage.setItem('flordseul_cart', JSON.stringify(cart));
 }
 
-function getCartTotal() {
+function getCartSubtotal() {
   return cart.reduce((sum, c) => {
     const p = PRODUCTS.find(pr => pr.id === c.id);
     return sum + (p ? p.price * c.qty : 0);
   }, 0);
+}
+
+function getCartDiscount() {
+  return getCartSubtotal() * 0.10;
+}
+
+function getCartTotal() {
+  return getCartSubtotal() * DISCOUNT_FACTOR;
 }
 
 function getCartCount() {
@@ -821,33 +1045,48 @@ function getCartCount() {
 
 function updateCartUI() {
   const count = getCartCount();
+  const subtotal = getCartSubtotal();
+  const discount = getCartDiscount();
   const total = getCartTotal();
-  document.getElementById('cartCount').textContent = count;
+
+  const countEl = document.getElementById('cartCount');
+  if (countEl) countEl.textContent = count;
 
   const cartItems = document.getElementById('cartItems');
   const cartEmpty = document.getElementById('cartEmpty');
   const cartFooter = document.getElementById('cartFooter');
-  const cartTotal = document.getElementById('cartTotal');
+  const cartSubtotalEl = document.getElementById('cartSubtotal');
+  const cartDiscountEl = document.getElementById('cartDiscount');
+  const cartTotalEl = document.getElementById('cartTotal');
 
   if (cart.length === 0) {
-    cartEmpty.style.display = 'flex';
-    cartFooter.style.display = 'none';
-    cartItems.innerHTML = '';
-    cartItems.appendChild(cartEmpty);
+    if (cartEmpty) cartEmpty.style.display = 'flex';
+    if (cartFooter) cartFooter.style.display = 'none';
+    if (cartItems) {
+      cartItems.innerHTML = '';
+      if (cartEmpty) cartItems.appendChild(cartEmpty);
+    }
     return;
   }
 
-  cartEmpty.style.display = 'none';
-  cartFooter.style.display = 'flex';
-  cartTotal.textContent = `Q${total.toFixed(2)}`;
+  if (cartEmpty) cartEmpty.style.display = 'none';
+  if (cartFooter) cartFooter.style.display = 'block';
+
+  if (cartSubtotalEl) cartSubtotalEl.textContent = `Q${subtotal.toFixed(2)}`;
+  if (cartDiscountEl) cartDiscountEl.textContent = `-Q${discount.toFixed(2)}`;
+  if (cartTotalEl) cartTotalEl.textContent = `Q${total.toFixed(2)}`;
 
   const itemsHtml = cart.map(c => {
     const p = PRODUCTS.find(pr => pr.id === c.id);
     if (!p) return '';
+    const discountedUnit = p.price * DISCOUNT_FACTOR;
+    const discountedTotal = discountedUnit * c.qty;
+    const originalTotal = p.price * c.qty;
+
     return `
     <div class="cart-item" id="cartItem-${c.id}">
       <div class="cart-item-img"><img src="${p.img}" alt="${p.name}" /></div>
-      <div>
+      <div class="cart-item-details">
         <div class="cart-item-brand">${p.brandName}</div>
         <div class="cart-item-name">${p.name}</div>
         <div class="cart-item-controls">
@@ -857,24 +1096,28 @@ function updateCartUI() {
           <button class="remove-item" onclick="removeFromCart(${c.id})" aria-label="Eliminar">✕</button>
         </div>
       </div>
-      <div class="cart-item-price">Q${(p.price * c.qty).toFixed(2)}</div>
+      <div class="cart-item-pricing">
+        <span class="cart-item-old-price">Q${originalTotal.toFixed(2)}</span>
+        <span class="cart-item-price">Q${discountedTotal.toFixed(2)}</span>
+      </div>
     </div>
     `;
   }).join('');
 
-  cartItems.innerHTML = '';
-  cartItems.insertAdjacentHTML('beforeend', itemsHtml);
+  if (cartItems) {
+    cartItems.innerHTML = itemsHtml;
+  }
 }
 
 function openCart() {
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer')?.classList.add('open');
+  document.getElementById('cartOverlay')?.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeCart() {
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer')?.classList.remove('open');
+  document.getElementById('cartOverlay')?.classList.remove('open');
   document.body.style.overflow = '';
 }
 
@@ -882,51 +1125,58 @@ function closeCart() {
 function openCheckout() {
   closeCart();
   updateSummary();
-  document.getElementById('checkoutModal').classList.add('open');
-  document.getElementById('checkoutOverlay').classList.add('open');
+  document.getElementById('checkoutModal')?.classList.add('open');
+  document.getElementById('checkoutOverlay')?.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeCheckout() {
-  document.getElementById('checkoutModal').classList.remove('open');
-  document.getElementById('checkoutOverlay').classList.remove('open');
+  document.getElementById('checkoutModal')?.classList.remove('open');
+  document.getElementById('checkoutOverlay')?.classList.remove('open');
   document.body.style.overflow = '';
 }
 
 function updateSummary() {
   const summaryItems = document.getElementById('summaryItems');
   const summarySubtotal = document.getElementById('summarySubtotal');
+  const summaryDiscount = document.getElementById('summaryDiscount');
   const summaryTotal = document.getElementById('summaryTotal');
+  const subtotal = getCartSubtotal();
+  const discount = getCartDiscount();
   const total = getCartTotal();
 
-  summaryItems.innerHTML = cart.map(c => {
-    const p = PRODUCTS.find(pr => pr.id === c.id);
-    if (!p) return '';
-    return `
-    <div class="summary-item">
-      <img src="${p.img}" alt="${p.name}" />
-      <div class="summary-item-info">
-        <div class="summary-item-name">${p.name}</div>
-        <div class="summary-item-qty">x${c.qty} &nbsp;·&nbsp; ${p.brandName}</div>
+  if (summaryItems) {
+    summaryItems.innerHTML = cart.map(c => {
+      const p = PRODUCTS.find(pr => pr.id === c.id);
+      if (!p) return '';
+      const discountedTotal = p.price * DISCOUNT_FACTOR * c.qty;
+      return `
+      <div class="summary-item">
+        <img src="${p.img}" alt="${p.name}" />
+        <div class="summary-item-info">
+          <div class="summary-item-name">${p.name}</div>
+          <div class="summary-item-qty">x${c.qty} &nbsp;·&nbsp; ${p.brandName}</div>
+        </div>
+        <div class="summary-item-price">Q${discountedTotal.toFixed(2)}</div>
       </div>
-      <div class="summary-item-price">Q${(p.price * c.qty).toFixed(2)}</div>
-    </div>
-    `;
-  }).join('');
+      `;
+    }).join('');
+  }
 
-  summarySubtotal.textContent = `Q${total.toFixed(2)}`;
-  summaryTotal.textContent = `Q${total.toFixed(2)}`;
+  if (summarySubtotal) summarySubtotal.textContent = `Q${subtotal.toFixed(2)}`;
+  if (summaryDiscount) summaryDiscount.textContent = `-Q${discount.toFixed(2)}`;
+  if (summaryTotal) summaryTotal.textContent = `Q${total.toFixed(2)}`;
 }
 
 function initPaymentToggle() {
   document.querySelectorAll('input[name="pago"]').forEach(radio => {
     radio.addEventListener('change', () => {
       const bankInfo = document.getElementById('bankInfo');
-      bankInfo.classList.toggle('show', radio.value === 'deposito' && radio.checked);
+      if (bankInfo) {
+        bankInfo.classList.toggle('show', radio.value === 'deposito' && radio.checked);
+      }
     });
   });
-  // Show bank info by default (deposito selected)
-  document.getElementById('bankInfo').classList.add('show');
 }
 
 function placeOrder(e) {
@@ -934,15 +1184,21 @@ function placeOrder(e) {
   const nombre = document.getElementById('chkNombre').value;
   const tel = document.getElementById('chkTel').value;
   const dir = document.getElementById('chkDir').value;
-  const pago = document.querySelector('input[name="pago"]:checked').value;
+  const pago = document.querySelector('input[name="pago"]:checked')?.value || 'deposito';
+  const subtotal = getCartSubtotal();
+  const discount = getCartDiscount();
+  const total = getCartTotal();
 
-  const mensaje = `🌸 *Nuevo Pedido — Flor de Seúl GT*\n\n` +
+  const mensaje = `🌸 *Nuevo Pedido — Flor de Seúl GT*\n` +
+    `🇬🇹 *PROMOCIÓN MES PATRIO: 10% DE DESCUENTO APLICADO*\n\n` +
     `👤 *Cliente:* ${nombre}\n📱 *Teléfono:* ${tel}\n📍 *Dirección:* ${dir}\n💳 *Pago:* ${pago === 'deposito' ? 'Depósito Previo' : 'Contra Entrega'}\n\n` +
     `🛍 *Productos:*\n${cart.map(c => {
       const p = PRODUCTS.find(pr => pr.id === c.id);
-      return p ? `• ${p.name} x${c.qty} — Q${(p.price*c.qty).toFixed(2)}` : '';
+      return p ? `• ${p.name} x${c.qty} — Q${(p.price * DISCOUNT_FACTOR * c.qty).toFixed(2)} (Antes Q${(p.price * c.qty).toFixed(2)})` : '';
     }).join('\n')}\n\n` +
-    `💰 *Total: Q${getCartTotal().toFixed(2)}*`;
+    `💵 *Subtotal:* Q${subtotal.toFixed(2)}\n` +
+    `🇬🇹 *Descuento Mes Patrio (10%):* -Q${discount.toFixed(2)}\n` +
+    `💰 *Total a Pagar: Q${total.toFixed(2)}*`;
 
   const waUrl = `https://wa.me/50200000000?text=${encodeURIComponent(mensaje)}`;
   
@@ -961,31 +1217,53 @@ function placeOrder(e) {
 function openProductModal(id) {
   const p = PRODUCTS.find(pr => pr.id === id);
   if (!p) return;
+  const isOutOfStock = p.stock === 0;
+  const discountedPrice = (p.price * DISCOUNT_FACTOR).toFixed(2);
+  const originalPrice = p.price.toFixed(2);
   const content = document.getElementById('productModalContent');
+
   content.innerHTML = `
     <div class="product-modal-img">
       <img src="${p.img}" alt="${p.nameLong}" />
+      ${isOutOfStock ? `<span class="product-badge badge-out-of-stock in-modal">AGOTADO</span>` : ''}
     </div>
     <div class="product-modal-info">
-      <div class="product-modal-brand">${p.brandName} &nbsp;·&nbsp; K-Beauty</div>
+      <div class="product-modal-brand-row">
+        <span class="product-modal-brand">${p.brandName} &nbsp;·&nbsp; K-Beauty</span>
+        ${isOutOfStock ? `
+          <span class="stock-badge out">Sin existencias</span>
+        ` : (p.stock <= 3 ? `
+          <span class="stock-badge low">¡Solo ${p.stock} disponibles!</span>
+        ` : `
+          <span class="stock-badge in">En stock (${p.stock} unidades)</span>
+        `)}
+      </div>
       <h2 class="product-modal-title">${p.nameLong}</h2>
       <p class="product-modal-desc">${p.desc}</p>
-      <div class="product-tags" style="margin: 0;">
+      <div class="product-tags" style="margin: 0 0 16px 0;">
         ${(p.benefits || p.tags).map(b => `<span class="product-tag">✓ ${b}</span>`).join('')}
       </div>
-      <div class="product-modal-price">Q${p.price.toFixed(2)}</div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="addToCart(${p.id}); closeProductModal();" style="flex:1; min-width:160px;">
-          🛍 Agregar al Carrito
-        </button>
-        <button class="btn-ghost" onclick="toggleWishlist(event, ${p.id}); renderProducts();" style="flex:1; min-width:100px; color: var(--accent-rose); border-color: var(--accent-rose);">
-          ${wishlist.includes(p.id) ? '❤️ Favorito' : '🤍 Favorito'}
-        </button>
+      <div class="product-modal-pricing">
+        <span class="price-original modal-old-price">Q${originalPrice}</span>
+        <span class="product-modal-price">Q${discountedPrice}</span>
+        <span class="patriotic-save-tag">Ahorro: Q${(p.price * 0.10).toFixed(2)} (10% Mes Patrio 🇬🇹)</span>
+      </div>
+      <div style="margin-top: 20px;">
+        ${isOutOfStock ? `
+          <button class="btn-primary disabled" disabled style="width: 100%; opacity: 0.6; cursor: not-allowed;">
+            Producto Temporalmente Agotado
+          </button>
+        ` : `
+          <button class="btn-primary" onclick="addToCart(${p.id}); closeProductModal();" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+            <svg class="btn-bag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span>Agregar al Carrito (Q${discountedPrice})</span>
+          </button>
+        `}
       </div>
     </div>
   `;
-  document.getElementById('productModal').classList.add('open');
-  document.getElementById('productOverlay').classList.add('open');
+  document.getElementById('productModal')?.classList.add('open');
+  document.getElementById('productOverlay')?.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
@@ -1023,6 +1301,7 @@ document.addEventListener('keydown', (e) => {
     closeProductModal();
     closePrivacyModal();
     closeTermsModal();
+    closeNavSearch();
   }
 });
 
@@ -1203,13 +1482,13 @@ function closeTermsModal() {
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    initCardMotion();
-    initPinkMouseTrail();
-    initAudio();
+    try { initCardMotion(); } catch(e) {}
+    try { initPinkMouseTrail(); } catch(e) {}
+    try { initAudio(); } catch(e) {}
   });
 } else {
-  initCardMotion();
-  initPinkMouseTrail();
-  initAudio();
+  try { initCardMotion(); } catch(e) {}
+  try { initPinkMouseTrail(); } catch(e) {}
+  try { initAudio(); } catch(e) {}
 }
 

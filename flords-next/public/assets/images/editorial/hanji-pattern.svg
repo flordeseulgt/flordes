@@ -1,0 +1,25 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="hanji-noise" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.94   0 0 0 0 0.91   0 0 0 0 0.85  0 0 0 0.28 0" result="colorNoise"/>
+      <feBlend in="SourceGraphic" in2="colorNoise" mode="multiply"/>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="#F6F1E8"/>
+  <rect width="100%" height="100%" filter="url(#hanji-noise)" fill="#F6F1E8" opacity="0.6"/>
+  <!-- Subtle Hanji Mulberry Fibers -->
+  <g stroke="#D4C8B5" stroke-width="0.75" stroke-linecap="round" fill="none" opacity="0.45">
+    <path d="M20 50 Q 80 40 140 70 T 220 60"/>
+    <path d="M280 120 Q 320 150 380 130"/>
+    <path d="M50 240 Q 110 270 90 320"/>
+    <path d="M190 280 Q 230 310 290 290 T 360 330"/>
+    <path d="M310 30 Q 340 60 320 90"/>
+    <path d="M120 170 Q 150 200 130 230"/>
+  </g>
+  <!-- Faded Korean Watermark Seal -->
+  <g transform="translate(160, 160)" opacity="0.045" fill="#A81F26">
+    <rect x="-35" y="-35" width="70" height="70" rx="6" stroke="#A81F26" stroke-width="4" fill="none"/>
+    <text x="0" y="8" font-family="'Noto Serif KR', serif" font-size="28" font-weight="900" text-anchor="middle" dominant-baseline="middle">花</text>
+  </g>
+</svg>

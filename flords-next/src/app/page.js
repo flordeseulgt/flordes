@@ -447,7 +447,16 @@ export default function Home() {
               onClick={() => !isDisabled && addToCart(p.id)}
               disabled={isDisabled}
             >
-              {!p.stock ? 'Agotado' : (isMaxReached ? 'Límite alcanzado' : <><span className="cart-icon">🛍</span> Agregar</>)}
+              {!p.stock ? 'Agotado' : (isMaxReached ? 'Límite alcanzado' : (
+                <>
+                  <svg className="btn-bag-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                  </svg>
+                  <span>Agregar</span>
+                </>
+              ))}
             </button>
           </div>
         </div>
@@ -1263,7 +1272,16 @@ export default function Home() {
                     style={{ flex: 1, minWidth: '160px' }}
                     disabled={!selectedProduct.stock || (cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock)}
                   >
-                    {!selectedProduct.stock ? '❌ Agotado' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : <><span className="cart-icon">🛍</span> Agregar</>)}
+                    {!selectedProduct.stock ? '❌ Agotado' : ((cart.find(c => c.id === selectedProduct.id)?.qty >= selectedProduct.stock) ? 'Límite alcanzado' : (
+                      <>
+                        <svg className="btn-bag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                          <line x1="3" y1="6" x2="21" y2="6"/>
+                          <path d="M16 10a4 4 0 01-8 0"/>
+                        </svg>
+                        <span>Agregar</span>
+                      </>
+                    ))}
                   </button>
                 </div>
               </div>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <path id="circlePath" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
+  </defs>
+  <!-- Distressed Stamp Outer Ring -->
+  <circle cx="60" cy="60" r="54" fill="none" stroke="#A81F26" stroke-width="3.5" stroke-dasharray="80 3 40 2 60 4 30 2" opacity="0.9"/>
+  <circle cx="60" cy="60" r="48" fill="none" stroke="#A81F26" stroke-width="1.5" opacity="0.75"/>
+  <!-- Circular Curving Text -->
+  <text fill="#A81F26" font-size="8.5" font-family="'Inter', sans-serif" font-weight="700" letter-spacing="1.8" opacity="0.9">
+    <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
+      FLOR DE SEÚL • 100% ORIGINAL • SEOUL TO GT •
+    </textPath>
+  </text>
+  <!-- Center Korean Hangul characters in a square frame -->
+  <rect x="38" y="38" width="44" height="44" rx="4" fill="none" stroke="#A81F26" stroke-width="2.5" opacity="0.9"/>
+  <text x="60" y="55" fill="#A81F26" font-size="15" font-family="'Noto Serif KR', serif" font-weight="900" text-anchor="middle" dominant-baseline="middle">정품</text>
+  <text x="60" y="70" fill="#A81F26" font-size="11" font-family="'Noto Serif KR', serif" font-weight="700" text-anchor="middle" dominant-baseline="middle">인증</text>
+</svg>

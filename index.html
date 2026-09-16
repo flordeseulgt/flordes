@@ -26,7 +26,7 @@
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
   <!-- JSON-LD Structured Data -->
@@ -59,29 +59,67 @@
   }
   </script>
 </head>
-<body>
+<body class="editorial-theme">
   <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
     Flor de Seúl | Tienda de Skincare Coreano en Guatemala
   </h1>
 
+  <!-- ============ PURITO-STYLE BRAND HERO BANNER ============ -->
+  <div class="purito-brand-stage" id="puritoBrandStage">
+    <div class="purito-brand-content">
+      <span class="purito-korean-pill">✨ 서울의 맑은 빛 · AUTHENTIC K-BEAUTY</span>
+      <h1 class="purito-brand-heading" id="puritoBrandHeading">FLOR DE SEÚL</h1>
+      <p class="purito-brand-tagline">RITUALES DE CUIDADO COREANO AUTÉNTICO · EN GUATEMALA</p>
+    </div>
+  </div>
+
+  <!-- ============ CINTA PROMO MES PATRIO (ARRIBA DEL MENÚ) ============ -->
+  <aside class="top-patriotic-ribbon" id="topPatrioticRibbon" aria-label="Promoción Mes Patrio de Guatemala">
+    <div class="top-patriotic-wrapper">
+      <div class="top-flag-badge">
+        <span class="flag-stripe blue"></span>
+        <span class="flag-stripe white"></span>
+        <span class="flag-stripe blue"></span>
+      </div>
+      <span class="top-flag-icon">🇬🇹</span>
+      <span class="top-patriotic-title">Mes Patrio de Guatemala</span>
+      <span class="top-patriotic-pill">10% OFF EN TODO EL SKINCARE</span>
+      <span class="top-patriotic-sparkle">🌸</span>
+    </div>
+  </aside>
+
   <!-- ============ NAVBAR ============ -->
   <header class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#inicio" class="nav-logo">
-        <span class="logo-main">FLOR DE SEÚL</span>
+      <a href="#inicio" class="nav-logo" id="navLogo">
+        <span class="nav-logo-icon">✨</span>
+        <div class="logo-text-group">
+          <span class="logo-main">FLOR DE SEÚL</span>
+          <span class="logo-sub">KOREAN SKINCARE</span>
+        </div>
       </a>
 
       <nav class="nav-links" id="navLinks">
         <a href="#inicio" class="nav-link active" onclick="closeMenu()">Inicio</a>
+        <a href="#marcas" class="nav-link" onclick="closeMenu()">Marcas</a>
+        <a href="#categorias" class="nav-link" onclick="closeMenu()">Rutinas</a>
         <a href="#productos" class="nav-link" onclick="closeMenu()">Productos</a>
         <a href="#nosotros" class="nav-link" onclick="closeMenu()">Nosotros</a>
       </nav>
 
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
-          <span class="sun-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFA726" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="sun-svg-animated">
-              <circle cx="12" cy="12" r="5" fill="#FFB74D" fill-opacity="0.3"></circle>
+        <!-- Botón Lupa de Búsqueda -->
+        <button class="nav-search-btn" id="navSearchBtn" onclick="toggleNavSearch()" aria-label="Buscar en el catálogo" title="Buscar skincare">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme(event)" aria-label="Cambiar modo oscuro / claro" title="Cambiar tema">
+          <span class="sun-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
               <line x1="12" y1="1" x2="12" y2="3"></line>
               <line x1="12" y1="21" x2="12" y2="23"></line>
               <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
@@ -92,8 +130,8 @@
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
           </span>
-          <span class="moon-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <span class="moon-icon" aria-hidden="true">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </span>
@@ -106,125 +144,269 @@
           </svg>
           <span class="cart-count" id="cartCount">0</span>
         </button>
-        <a href="#productos" class="nav-pill-btn">Explorar</a>
+        <a href="#productos" class="nav-pill-btn">Ver Catálogo</a>
+      </div>
+    </div>
+
+    <!-- Barra Desplegable de Búsqueda en el Menú -->
+    <div class="nav-search-bar" id="navSearchBar">
+      <div class="nav-search-inner">
+        <svg class="search-inner-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="navSearchInput" placeholder="Buscar por producto, marca, ingrediente o beneficio..." oninput="handleNavSearch(this.value)" autocomplete="off" />
+        <button class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Limpiar búsqueda">✕</button>
       </div>
     </div>
   </header>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="inicio">
-    <div class="hero-inner">
-      <div class="hero-luxury-tag">
-        <span class="kr-pill-stamp">🇰🇷 서울</span>
-        <span class="tag-divider">✦</span>
-        <span>Auténtico K-Beauty · Skincare Coreano</span>
+  <!-- ============ HERO JOYFUL & MINIMALIST (CON PRODUCTOS REALES) ============ -->
+  <section class="hero-joyful" id="inicio">
+    <div class="petals-container" id="petalsContainer" aria-hidden="true"></div>
+    <div class="hero-joyful-container">
+      <!-- Columna Izquierda: Mensaje y CTA Alegre -->
+      <div class="hero-joyful-copy">
+        <div class="hero-joyful-badge">
+          <span class="badge-dot"></span>
+          <span>COSMÉTICA COREANA 100% ORIGINAL</span>
+          <span class="badge-kr">정품 보장</span>
+        </div>
+
+        <h2 class="hero-joyful-title">
+          Tu piel radiante,<br/>
+          <span class="text-coral-gradient">fresca y en calma.</span>
+        </h2>
+
+        <p class="hero-joyful-desc">
+          Descubre las fórmulas de K-Beauty más queridas del mundo: Centella pura de Madagascar, Ginseng tradicional, Heartleaf y Frijol fermentado para lograr una piel de cristal con un brillo natural y saludable.
+        </p>
+
+        <div class="hero-joyful-actions">
+          <a href="#productos" class="btn-purito-action">
+            <span>EXPLORAR COLECCIÓN</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#marcas" class="btn-joyful-secondary">
+            <span>✦ MARCAS DESTACADAS</span>
+          </a>
+        </div>
+
+        <div class="hero-trust-chips">
+          <div class="trust-chip">
+            <span class="chip-icon">✨</span>
+            <span>100% Originales</span>
+          </div>
+          <div class="trust-chip">
+            <span class="chip-icon">🇬🇹</span>
+            <span>Envíos a Toda GT</span>
+          </div>
+          <div class="trust-chip">
+            <span class="chip-icon">💳</span>
+            <span>Pago Contra Entrega</span>
+          </div>
+        </div>
       </div>
-      <h2 class="hero-luxury-title">
-        Tu Ritual de Belleza<br/>Directo desde Corea
-      </h2>
-      <p class="hero-luxury-desc">
-        Descubre las fórmulas más galardonadas de Seúl elaboradas con botánicos puros y alta ciencia dermatológica. Encuentra tu rutina ideal el secreto de una piel que cautiva.
-      </p>
-      <div class="hero-luxury-actions">
-        <a href="#productos" class="btn-luxury-primary">
-          <span>Explorar Colección</span>
-          <span class="btn-arrow-icon" aria-hidden="true">→</span>
-        </a>
-        <a href="#nosotros" class="btn-luxury-secondary">
-          <span class="btn-seal-stamp">우리</span>
-          <span>Nuestro Ritual</span>
-        </a>
+
+      <!-- Columna Derecha: Showcase con Productos Reales de la Tienda -->
+      <div class="hero-joyful-visual">
+        <div class="product-showcase-stage">
+          <!-- Card Principal: Anua Heartleaf Pore Cleansing Oil (Q240.00 -> Q216.00) -->
+          <div class="showcase-card card-primary" onclick="openProductModal(1)">
+            <div class="card-glow-pill">★ BESTSELLER COREANO</div>
+            <div class="card-img-box">
+              <img src="public/assets/images/marcas/anua/heartleafaceite.png" alt="Anua Limpiador en Aceite Heartleaf" />
+            </div>
+            <div class="card-info-box">
+              <span class="card-brand-tag">ANUA</span>
+              <h4>Limpiador en Aceite Heartleaf</h4>
+              <p class="card-price-tag"><span class="hero-old-price">Q240.00</span> <span class="hero-new-price">Q216.00</span></p>
+            </div>
+          </div>
+
+          <!-- Card Flotante 1: Crema para Ojeras Ginseng Beauty of Joseon (Q185.00 -> Q166.50) -->
+          <div class="showcase-card card-secondary card-top-right" onclick="openProductModal(44)">
+            <div class="card-mini-img">
+              <img src="public/assets/images/marcas/beautyofjoseon/serumjin.png" alt="Crema para Ojeras Ginseng Beauty of Joseon" />
+            </div>
+            <div class="card-mini-info">
+              <span class="card-pill-tag">✨ Ginseng + Retinal</span>
+              <h5>Crema Ojeras BOJ</h5>
+              <span class="card-mini-price"><s class="hero-old-price">Q185.00</s> <strong class="hero-new-price">Q166.50</strong></span>
+            </div>
+          </div>
+
+          <!-- Card Flotante 2: Mixsoon Bean Essence 50ml (Q260.00 -> Q234.00) -->
+          <div class="showcase-card card-secondary card-bottom-left" onclick="openProductModal(8)">
+            <div class="card-mini-img">
+              <img src="public/assets/images/marcas/mixsoon/beanessence50.png" alt="Mixsoon Bean Essence 50ml" />
+            </div>
+            <div class="card-mini-info">
+              <span class="card-pill-tag">💧 Piel de Cristal</span>
+              <h5>Mixsoon Bean 50ml</h5>
+              <span class="card-mini-price"><s class="hero-old-price">Q260.00</s> <strong class="hero-new-price">Q234.00</strong></span>
+            </div>
+          </div>
+
+          <!-- Floating Dew & Sparkle Accents -->
+          <div class="floating-dew dew-1">🌸</div>
+          <div class="floating-dew dew-2">✨</div>
+          <div class="floating-dew dew-3">🌿</div>
+        </div>
       </div>
     </div>
 
+    <!-- Diseños y Motivos Tradicionales Coreanos en el Fondo -->
+    <div class="hero-korean-deco-medallion deco-left" aria-hidden="true">
+      <svg width="280" height="280" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Medallón Floral Dancheong Coreano Tradicional -->
+        <circle cx="100" cy="100" r="92" stroke="url(#koreanGoldPink)" stroke-width="1.6" stroke-dasharray="3 3"/>
+        <circle cx="100" cy="100" r="82" stroke="#FF6584" stroke-width="1.2"/>
+        <circle cx="100" cy="100" r="66" stroke="#FFB703" stroke-width="1"/>
+        <!-- 8 Pétalos de Loto Sagrado (연꽃 단청문) -->
+        <g stroke="#FF6584" stroke-width="1.4" fill="#FFCAD4" fill-opacity="0.12">
+          <path d="M100 34 C92 56 92 78 100 100 C108 78 108 56 100 34 Z"/>
+          <path d="M100 166 C92 144 92 122 100 100 C108 122 108 144 100 166 Z"/>
+          <path d="M34 100 C56 92 78 92 100 100 C78 108 56 108 34 100 Z"/>
+          <path d="M166 100 C144 92 122 92 100 100 C122 108 144 108 166 100 Z"/>
+          <path d="M53 53 C70 65 85 82 100 100 C82 85 65 70 53 53 Z"/>
+          <path d="M147 147 C130 135 115 118 100 100 C118 115 135 130 147 147 Z"/>
+          <path d="M147 53 C135 70 118 85 100 100 C115 82 130 65 147 53 Z"/>
+          <path d="M53 147 C65 130 82 115 100 100 C85 118 70 135 53 147 Z"/>
+        </g>
+        <!-- Nubes Tradicionales Coreanas (운문) -->
+        <path d="M72 88 Q62 76 74 68 Q86 60 92 72 Q100 62 112 70 Q120 78 114 88" stroke="#FFB703" stroke-width="1.2" fill="none"/>
+        <path d="M72 112 Q62 124 74 132 Q86 140 92 128 Q100 138 112 130 Q120 122 114 112" stroke="#FFB703" stroke-width="1.2" fill="none"/>
+        <circle cx="100" cy="100" r="16" fill="url(#koreanGoldPink)" fill-opacity="0.25" stroke="#FF6584" stroke-width="1.2"/>
+        <circle cx="100" cy="100" r="7" fill="#FFB703" fill-opacity="0.6"/>
+        <defs>
+          <linearGradient id="koreanGoldPink" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FF6584"/>
+            <stop offset="1" stop-color="#FFB703"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
 
+    <div class="hero-korean-deco-medallion deco-right" aria-hidden="true">
+      <svg width="340" height="340" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Celosía Circular de Palacio de Joseon (창살 환문) -->
+        <circle cx="100" cy="100" r="95" stroke="#FFB703" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="88" stroke="#FF6584" stroke-width="0.8" stroke-dasharray="2 4"/>
+        <rect x="30" y="30" width="140" height="140" rx="4" stroke="#FF6584" stroke-width="1.2" transform="rotate(45 100 100)"/>
+        <rect x="42" y="42" width="116" height="116" rx="2" stroke="#FFB703" stroke-width="1" stroke-opacity="0.8"/>
+        <!-- Rayos de Sol y Pétalos -->
+        <g stroke="#FF6584" stroke-width="1.2">
+          <line x1="100" y1="5" x2="100" y2="26"/>
+          <line x1="100" y1="174" x2="100" y2="195"/>
+          <line x1="5" y1="100" x2="26" y2="100"/>
+          <line x1="174" y1="100" x2="195" y2="100"/>
+          <line x1="33" y1="33" x2="48" y2="48"/>
+          <line x1="152" y1="152" x2="167" y2="167"/>
+          <line x1="167" y1="33" x2="152" y2="48"/>
+          <line x1="33" y1="167" x2="48" y2="152"/>
+        </g>
+        <circle cx="100" cy="100" r="30" fill="#FFF0F4" fill-opacity="0.2" stroke="#FF6584" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="14" fill="#FFB703" fill-opacity="0.25"/>
+      </svg>
+    </div>
 
-    <!-- Floating petals decoration -->
-    <div class="petals-container" id="petalsContainer"></div>
+    <!-- Sello Real Tradicional Coreano (도장 / 인장) -->
+    <div class="hero-korean-seal" aria-hidden="true">
+      <div class="seal-inner">
+        <span>正品</span>
+        <span>韓美</span>
+      </div>
+      <small>한국정품</small>
+    </div>
+
+    <div class="hero-korean-watermark left" aria-hidden="true">조선의 맑은 빛</div>
+    <div class="hero-korean-watermark right" aria-hidden="true">맑고 투명한 피부</div>
   </section>
 
-  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <!-- ============ ANNOUNCEMENT TICKER ============ -->
   <div class="announcement-bar">
     <div class="announcement-track">
+      <span>🇬🇹 ¡MES PATRIO! 10% DE DESCUENTO EN TODO EL CATÁLOGO 🇬🇹</span>
+      <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
+      <span>🇰🇷 Importación Directa desde Seúl &nbsp;·&nbsp; 서울 직수입</span>
       <span>🇬🇹 Envíos a toda Guatemala &nbsp;·&nbsp; 무료배송</span>
+      <span>💳 Pago Contra Entrega en Guatemala</span>
+      <span>🌿 Fórmulas Limpias y Suaves &nbsp;·&nbsp; 저자극 스킨케어</span>
+      <span>🇬🇹 ¡MES PATRIO! 10% DE DESCUENTO EN TODO EL CATÁLOGO 🇬🇹</span>
       <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
-      <span>🇰🇷 Productos desde Corea</span>
-      <span>💳 Pago Contra Entrega disponible</span>
-      <span>🌸 Envíos a toda Guatemala &nbsp;·&nbsp; 무료배송</span>
-      <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
-      <span>🇰🇷 Productos desde Corea</span></span>
-      <span>💳 Pago Contra Entrega disponible</span>
+      <span>🇰🇷 Importación Directa desde Seúl &nbsp;·&nbsp; 서울 직수입</span>
+      <span>💳 Pago Contra Entrega en Guatemala</span>
     </div>
   </div>
 
-  <!-- ============ CATEGORÍAS ============ -->
-  <section class="categories-section">
+
+
+  <!-- ============ CATEGORÍAS EDITORIALES (ESTILO "75 WAYS TO BLOOM") ============ -->
+  <section class="categories-section" id="categorias">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">피부 유형</span>
-        <h2 class="section-title">Encuentra tu Rutina</h2>
-        <p class="section-desc">Productos seleccionados según tu tipo y preocupación de piel</p>
+      <div class="section-header-editorial">
+        <span class="section-tag-editorial">피부 유형별 솔루션 · 5 DIMENSIONES</span>
+        <h2 class="section-title-editorial">5 ENFOQUES DERMATOLÓGICOS.</h2>
+        <div class="story-red-dash center-dash"></div>
+        <p class="section-desc-editorial">Cuidado botánico de alta precisión seleccionado según tu tipo y preocupación de piel</p>
+        <div class="marginalia-horizontal">CLEANSE • HYDRATE • CLARIFY • PROTECT • SOOTHE</div>
       </div>
       <div class="categories-grid">
         <div class="category-card" onclick="filterCategory('acne')">
+          <div class="cat-card-stamp">여드름 케어</div>
           <div class="cat-icon">🌿</div>
           <h3>Anti-Acné</h3>
-          <p>Piel con imperfecciones</p>
+          <p>Control de sebo, calmar rojeces y purificar poros</p>
+          <span class="cat-action-arrow">VER COLECCIÓN →</span>
         </div>
         <div class="category-card" onclick="filterCategory('hidratacion')">
+          <div class="cat-card-stamp">수분 보습</div>
           <div class="cat-icon">💧</div>
           <h3>Hidratación</h3>
-          <p>Piel seca o deshidratada</p>
+          <p>Piel de cristal luminosa y barrera reforzada</p>
+          <span class="cat-action-arrow">VER COLECCIÓN →</span>
         </div>
         <div class="category-card" onclick="filterCategory('manchas')">
+          <div class="cat-card-stamp">미백·잡티</div>
           <div class="cat-icon">✨</div>
           <h3>Anti-Manchas</h3>
-          <p>Unifica y aclara el tono</p>
+          <p>Unifica el tono y atenúa manchas oscuras</p>
+          <span class="cat-action-arrow">VER COLECCIÓN →</span>
         </div>
         <div class="category-card" onclick="filterCategory('limpieza')">
+          <div class="cat-card-stamp">모공·클렌징</div>
           <div class="cat-icon">🫧</div>
           <h3>Limpieza</h3>
-          <p>Doble limpieza coreana</p>
+          <p>La icónica doble limpieza coreana sin sulfatos</p>
+          <span class="cat-action-arrow">VER COLECCIÓN →</span>
         </div>
         <div class="category-card" onclick="filterCategory('solar')">
+          <div class="cat-card-stamp">자외선 차단</div>
           <div class="cat-icon">☀️</div>
           <h3>Protección Solar</h3>
-          <p>Escudo contra el sol</p>
+          <p>Escudo invisible SPF50+ con acabados ligeros</p>
+          <span class="cat-action-arrow">VER COLECCIÓN →</span>
         </div>
         <div class="category-card cat-all" onclick="filterCategory('all')">
+          <div class="cat-card-stamp stamp-gold">전체 아카이브</div>
           <div class="cat-icon">💫</div>
           <h3>Ver Todo</h3>
-          <p>Explorar catálogo completo</p>
+          <p>Explorar el catálogo botánico completo de Seúl</p>
+          <span class="cat-action-arrow">EXPLORAR TODO →</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PRODUCTOS ============ -->
+  <!-- ============ PRODUCTOS (SKINCARE COREANO) ============ -->
   <section class="products-section" id="productos">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">제품</span>
-        <h2 class="section-title">Nuestros Productos</h2>
-        <p class="section-desc">Skincare coreano auténtico, entregado en tu puerta</p>
-
-        <div class="brand-tabs" id="brandTabs" style="margin-top: 24px; margin-bottom: 8px;">
-          <button class="brand-tab active" data-brand="todos" onclick="showBrand('todos')">Todos</button>
-          <button class="brand-tab" data-brand="anua" onclick="showBrand('anua')">Anua</button>
-          <button class="brand-tab" data-brand="beautyofjoseon" onclick="showBrand('beautyofjoseon')">Beauty of Joseon</button>
-          <button class="brand-tab" data-brand="mixsoon" onclick="showBrand('mixsoon')">Mixsoon</button>
-          <button class="brand-tab" data-brand="purito" onclick="showBrand('purito')">Purito</button>
-          <button class="brand-tab" data-brand="roundlab" onclick="showBrand('roundlab')">Round Lab</button>
-          <button class="brand-tab" data-brand="skin1004" onclick="showBrand('skin1004')">Skin1004</button>
-          <button class="brand-tab" data-brand="sulwhasoo" onclick="showBrand('sulwhasoo')">Sulwhasoo</button>
-          <button class="brand-tab" data-brand="tirtir" onclick="showBrand('tirtir')">Tirtir</button>
-          <button class="brand-tab" data-brand="blab" onclick="showBrand('blab')">B:Lab</button>
-          <button class="brand-tab" data-brand="mary" onclick="showBrand('mary')">Mary & May</button>
-        </div>
-      </div>
-
-      <div class="search-bar-container">
-        <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Buscar producto, marca o beneficio..." oninput="searchProducts()" />
+      <div class="section-header-editorial">
+        <span class="section-tag-editorial">공식 제품 아카이브 · CATÁLOGO COMPLETO</span>
+        <h2 class="section-title-editorial">SKINCARE COREANO</h2>
+        <div class="story-red-dash center-dash"></div>
+        <p class="section-desc-editorial">Skincare coreano auténtico importado directamente de Seúl a tu puerta en Guatemala · 🇬🇹 10% de Descuento por Mes Patrio en todo el catálogo</p>
       </div>
 
       <div class="products-grid" id="productsGrid">
@@ -232,45 +414,46 @@
       </div>
 
       <div class="no-results" id="noResults" style="display:none">
-        <p>🌸 No se encontraron productos. Intenta otra búsqueda.</p>
+        <p>🌸 No se encontraron productos con ese criterio. Intenta otra búsqueda.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ COLECCIÓN / COLLAGE ============ -->
-  <section class="collage-section">
+  <!-- ============ COLECCIÓN / COLLAGE EDITORIAL ============ -->
+  <section class="collage-section" id="marcas">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">컬렉션</span>
-        <h2 class="section-title">Nuestra Colección</h2>
+      <div class="section-header-editorial">
+        <span class="section-tag-editorial">브랜드 아카이브 · MARCAS DESTACADAS</span>
+        <h2 class="section-title-editorial">GALERÍA EDITORIAL DE SEÚL.</h2>
+        <div class="story-red-dash center-dash"></div>
       </div>
       <div class="collage-grid">
         <div class="collage-item large">
           <img src="public/assets/images/collage/an.jpeg" alt="Anua Collection" loading="lazy" />
-          <div class="collage-overlay"><span>Anua</span></div>
+          <div class="collage-overlay"><span>Anua · 아누아</span></div>
         </div>
         <div class="collage-item">
           <img src="public/assets/images/collage/boj.jpeg" alt="Beauty of Joseon" loading="lazy" />
-          <div class="collage-overlay"><span>Beauty of Joseon</span></div>
+          <div class="collage-overlay"><span>Beauty of Joseon · 조선미녀</span></div>
         </div>
         <div class="collage-item">
           <img src="public/assets/images/collage/mix.jpeg" alt="Mixsoon" loading="lazy" />
-          <div class="collage-overlay"><span>Mixsoon</span></div>
+          <div class="collage-overlay"><span>Mixsoon · 믹순</span></div>
         </div>
         <div class="collage-item">
           <img src="public/assets/images/collage/pur.jpeg" alt="Purito" loading="lazy" />
-          <div class="collage-overlay"><span>Purito</span></div>
+          <div class="collage-overlay"><span>Purito · 퓨리토</span></div>
         </div>
 
         <div class="collage-item">
           <img src="public/assets/images/collage/sul.jpeg" alt="Sulwhasoo" loading="lazy" />
-          <div class="collage-overlay"><span>Sulwhasoo</span></div>
+          <div class="collage-overlay"><span>Sulwhasoo · 설화수</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ NOSOTROS ============ -->
+  <!-- ============ NOSOTROS EDITORIAL ============ -->
   <section class="about-section" id="nosotros">
     <div class="container">
       <div class="about-grid">
@@ -280,32 +463,33 @@
           </div>
           <div class="about-korean-deco">
             <span>진정한 아름다움</span>
-            <small>Verdadera Belleza</small>
+            <small>Auténtico K-Beauty</small>
           </div>
         </div>
         <div class="about-content">
-          <span class="section-tag">우리에 대해</span>
-          <h2 class="section-title" style="text-align:left">¿Quiénes Somos?</h2>
-          <p>Somos <strong>Flor de Seúl GT</strong>, la tienda guatemalteca especializada en skincare coreano auténtico. Nuestra misión es acercar lo mejor de K-Beauty a Guatemala, con productos verificados y de las marcas más reconocidas del mundo.</p>
-          <p>Creemos que cada persona merece una rutina de cuidado de piel efectiva y accesible. Por eso importamos directamente desde Corea del Sur, garantizando la autenticidad de cada producto.</p>
+          <span class="story-tag">우리에 대해 · NUESTRA HISTORIA</span>
+          <h2 class="story-title" style="text-align:left">DE SEÚL A GUATEMALA: BELLEZA SIN COMPROMISOS.</h2>
+          <div class="story-red-dash"></div>
+          <p>Somos <strong>Flor de Seúl GT</strong>, la boutique guatemalteca especializada en cosmética y skincare coreano de alta fidelidad. Creemos en el poder transformador de las rutinas meditadas y en la pureza de los ingredientes milenarios.</p>
+          <p>Importamos directamente desde Seúl sin intermediarios, garantizando que cada fórmula llegue fresca, sellada y con certificación de autenticidad absoluta.</p>
           <div class="about-stats">
             <div class="stat">
-              <span class="stat-num">8+</span>
-              <span class="stat-label">Marcas Coreanas</span>
+              <span class="stat-num">10+</span>
+              <span class="stat-label">Marcas de Seúl</span>
             </div>
             <div class="stat">
               <span class="stat-num">50+</span>
-              <span class="stat-label">Productos</span>
+              <span class="stat-label">Fórmulas Puras</span>
             </div>
             <div class="stat">
               <span class="stat-num">100%</span>
-              <span class="stat-label">Auténticos</span>
+              <span class="stat-label">Originales 정품</span>
             </div>
           </div>
           <div class="about-badges">
-            <span class="badge">✓ Importación Directa</span>
+            <span class="badge">✓ Importación Oficial</span>
             <span class="badge">✓ Asesoría Personalizada</span>
-            <span class="badge">✓ Entrega a Domicilio</span>
+            <span class="badge">✓ Entrega Inmediata GT</span>
           </div>
         </div>
       </div>
@@ -315,30 +499,31 @@
   <!-- ============ POR QUÉ ELEGIRNOS ============ -->
   <section class="features-section">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">왜 우리를 선택해야 할까요</span>
-        <h2 class="section-title">¿Por qué Flor de Seúl?</h2>
+      <div class="section-header-editorial">
+        <span class="section-tag-editorial">우리의 약속 · NUESTROS PILARES</span>
+        <h2 class="section-title-editorial">LA EXPERIENCIA FLOR DE SEÚL.</h2>
+        <div class="story-red-dash center-dash"></div>
       </div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">🌸</div>
-          <h3>Productos Auténticos</h3>
-          <p>Importamos directamente desde Corea del Sur. Cero imitaciones, 100% garantizados.</p>
+          <div class="feature-icon">🇰🇷</div>
+          <h3>100% Originales de Corea</h3>
+          <p>Importación legal y directa desde Seúl. Cero imitaciones, productos sellados y certificados.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-          <h3>Envío Rápido</h3>
-          <p>Entregamos en toda Guatemala. Recibe tu skincare directamente en tu hogar.</p>
+          <div class="feature-icon">📦</div>
+          <h3>Envíos Rápidos a Toda GT</h3>
+          <p>Entregas seguras en Ciudad de Guatemala y todos los departamentos del país.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">💬</div>
-          <h3>Asesoría Personalizada</h3>
-          <p>Te orientamos sobre qué productos son mejores para tu tipo de piel.</p>
+          <h3>Asesoría Dermatológica</h3>
+          <p>Orientación experta para diseñar tu rutina paso a paso según tu tipo de piel.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">💳</div>
-          <h3>Pago Flexible</h3>
-          <p>Aceptamos pago contra entrega y transferencia bancaria. Fácil y seguro.</p>
+          <h3>Pago Flexible y Seguro</h3>
+          <p>Transferencia bancaria previa o pago contra entrega al recibir tu pedido.</p>
         </div>
       </div>
     </div>
@@ -418,6 +603,16 @@
       </div>
     </div>
     <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-breakdown">
+        <div class="cart-summary-line">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal">Q0.00</span>
+        </div>
+        <div class="cart-summary-line patriotic-discount-line">
+          <span>🇬🇹 Mes Patrio (10% OFF):</span>
+          <span id="cartDiscount" class="discount-val">-Q0.00</span>
+        </div>
+      </div>
       <div class="cart-total">
         <span>Total:</span>
         <strong id="cartTotal">Q0.00</strong>
@@ -486,15 +681,7 @@
               </div>
             </label>
           </div>
-          <div class="bank-info" id="bankInfo">
-            <div class="bank-details">
-              <h4>💳 Datos Bancarios</h4>
-              <p><strong>Banco:</strong> Banrural / BAC / Industrial</p>
-              <p><strong>Cuenta:</strong> 000-000000-00</p>
-              <p><strong>Nombre:</strong> Flor de Seúl GT</p>
-              <p class="bank-note">⚠️ Envía tu comprobante al WhatsApp después de pagar.</p>
-            </div>
-          </div>
+
           <button type="submit" class="btn-primary full-width checkout-submit">Confirmar Pedido 🌸</button>
         </form>
         <div class="checkout-summary">
@@ -505,17 +692,18 @@
               <span>Subtotal</span>
               <span id="summarySubtotal">Q0.00</span>
             </div>
+            <div class="summary-row patriotic-discount-row">
+              <span>🇬🇹 Descuento Mes Patrio (10%)</span>
+              <span id="summaryDiscount" class="discount-val">-Q0.00</span>
+            </div>
             <div class="summary-row">
               <span>Envío</span>
               <span class="free-shipping">Calculado al confirmar</span>
             </div>
             <div class="summary-row total-row">
-              <strong>Total</strong>
+              <strong>Total a Pagar</strong>
               <strong id="summaryTotal">Q0.00</strong>
             </div>
-          </div>
-          <div class="summary-note">
-            <p>🌸 <strong>Nota:</strong> Al confirmar tu pedido, nos comunicaremos por WhatsApp para coordinar la entrega y confirmar disponibilidad.</p>
           </div>
         </div>
       </div>
