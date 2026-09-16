@@ -25,7 +25,7 @@ export default function Home() {
   }, []);
   // --- STATE ---
   const [cart, setCart] = useState([]);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const [wishlist, setWishlist] = useState([]);
   const [currentBrand, setCurrentBrand] = useState('todos');
   const [currentCategory, setCurrentCategory] = useState('all');
@@ -377,7 +377,7 @@ export default function Home() {
     }
   };
 
-  const DISCOUNT = 1.0;
+  const DISCOUNT = 0.9;
 
   const cartTotal = cart.reduce((sum, c) => {
     const p = productsData.find(pr => pr.id === c.id);
@@ -405,8 +405,8 @@ export default function Home() {
     if (!a.stock && b.stock) return 1;
     
     // 2. Prioridad por precio si el filtro está activo
-    if (sortByPrice === 'low-high') return a.price - b.price;
-    if (sortByPrice === 'high-low') return b.price - a.price;
+    if (sortByPrice === 'low-high') return (a.price * DISCOUNT) - (b.price * DISCOUNT);
+    if (sortByPrice === 'high-low') return (b.price * DISCOUNT) - (a.price * DISCOUNT);
     
     return 0;
   });
@@ -420,6 +420,8 @@ export default function Home() {
     const cartQty = cart.find(c => c.id === p.id)?.qty || 0;
     const isMaxReached = cartQty >= p.stock;
     const isDisabled = !p.stock || isMaxReached;
+    const discountedPrice = (p.price * DISCOUNT).toFixed(2);
+    const originalPrice = p.price.toFixed(2);
 
     return (
       <article key={p.id} className={`product-card ${!p.stock ? 'out-of-stock' : ''}`}>
@@ -439,8 +441,9 @@ export default function Home() {
           <h3 className="product-name" onClick={() => setSelectedProduct(p)}>{p.name}</h3>
           <p className="product-desc">{p.desc}</p>
           <div className="product-footer">
-            <div className="product-price-wrap">
-              <span className="product-price">Q{p.price.toFixed(2)}</span>
+            <div className="price-container">
+              <span className="price-original">Q{originalPrice}</span>
+              <span className="product-price">Q{discountedPrice}</span>
             </div>
             <button 
               className={`add-to-cart-btn ${isDisabled ? 'disabled' : ''}`} 
@@ -576,26 +579,61 @@ export default function Home() {
           </div>
         </div>
       )}
+      {/* ============ PURITO-STYLE BRAND HERO BANNER ============ */}
+      <div className="purito-brand-stage" id="puritoBrandStage">
+        <div className="purito-brand-content">
+          <span className="purito-korean-pill">✨ 서울의 맑은 빛 · AUTHENTIC K-BEAUTY</span>
+          <h1 className="purito-brand-heading" id="puritoBrandHeading">FLOR DE SEÚL</h1>
+          <p className="purito-brand-tagline">RITUALES DE CUIDADO COREANO AUTÉNTICO · EN GUATEMALA</p>
+        </div>
+      </div>
+
+      {/* ============ CINTA PROMO MES PATRIO (ARRIBA DEL MENÚ) ============ */}
+      <aside className="top-patriotic-ribbon" id="topPatrioticRibbon" aria-label="Promoción Mes Patrio de Guatemala">
+        <div className="top-patriotic-wrapper">
+          <div className="top-flag-badge">
+            <span className="flag-stripe blue"></span>
+            <span className="flag-stripe white"></span>
+            <span className="flag-stripe blue"></span>
+          </div>
+          <span className="top-flag-icon">🇬🇹</span>
+          <span className="top-patriotic-title">Mes Patrio de Guatemala</span>
+          <span className="top-patriotic-pill">10% OFF EN TODO EL SKINCARE</span>
+          <span className="top-patriotic-sparkle">🌸</span>
+        </div>
+      </aside>
+
       {/* ============ NAVBAR ============ */}
-      {/* ============ NAVBAR ============ */}
-      <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <header className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
         <div className="nav-container">
-          <a href="#inicio" className="nav-logo">
-            <span className="logo-main">FLOR DE SEÚL</span>
+          <a href="#inicio" className="nav-logo" id="navLogo">
+            <span className="nav-logo-icon">✨</span>
+            <div className="logo-text-group">
+              <span className="logo-main">FLOR DE SEÚL</span>
+              <span className="logo-sub">KOREAN SKINCARE</span>
+            </div>
           </a>
 
-          <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+          <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`} id="navLinks">
             <a href="#inicio" className="nav-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
+            <a href="#marcas" className="nav-link" onClick={() => setIsMenuOpen(false)}>Marcas</a>
+            <a href="#categorias" className="nav-link" onClick={() => setIsMenuOpen(false)}>Rutinas</a>
             <a href="#productos" className="nav-link" onClick={() => setIsMenuOpen(false)}>Productos</a>
             <a href="#nosotros" className="nav-link" onClick={() => setIsMenuOpen(false)}>Nosotros</a>
-            <a href="#contacto" className="nav-link" onClick={() => setIsMenuOpen(false)}>Redes</a>
           </nav>
 
           <div className="nav-actions">
+            <button className="nav-search-btn" onClick={() => setIsSearchOpen(!isSearchOpen)} aria-label="Buscar en el catálogo" title="Buscar skincare">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+
             <button className={`theme-toggle ${isRotating ? 'is-rotating' : ''}`} onClick={toggleTheme} aria-label="Cambiar tema" title="Cambiar tema">
               <span className="sun-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFA726" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sun-svg-animated">
-                  <circle cx="12" cy="12" r="5" fill="#FFB74D" fillOpacity="0.3"></circle>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
                   <line x1="12" y1="1" x2="12" y2="3"></line>
                   <line x1="12" y1="21" x2="12" y2="23"></line>
                   <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
@@ -607,76 +645,56 @@ export default function Home() {
                 </svg>
               </span>
               <span className="moon-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A855F7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               </span>
             </button>
-            
-            <div className={`nav-search-wrap ${isSearchOpen ? 'open' : ''}`}>
-              <input 
-                ref={searchInputRef}
-                type="text" 
-                className="nav-search-input" 
-                placeholder="Buscar productos..."
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  if (e.target.value.length > 0) {
-                    const el = document.getElementById('productos');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
-              />
-              <button className="nav-search-btn" onClick={() => setIsSearchOpen(!isSearchOpen)} aria-label="Buscar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </button>
-            </div>
+
             <button className="cart-btn" onClick={() => setIsCartOpen(true)} aria-label="Ver carrito">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
               </svg>
               <span className="cart-count">{cartCount}</span>
             </button>
-            <a href="#productos" className="nav-pill-btn">Explorar</a>
+            <a href="#productos" className="nav-pill-btn">Ver Catálogo</a>
+          </div>
+        </div>
+
+        {/* Barra Desplegable de Búsqueda en el Menú */}
+        <div className={`nav-search-bar ${isSearchOpen ? 'open' : ''}`} id="navSearchBar">
+          <div className="nav-search-inner">
+            <svg className="search-inner-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              ref={searchInputRef}
+              type="text" 
+              id="navSearchInput" 
+              placeholder="Buscar por producto, marca, ingrediente o beneficio..." 
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if (e.target.value.length > 0) {
+                  const el = document.getElementById('productos');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }} 
+              autoComplete="off" 
+            />
+            {searchQuery && (
+              <button className="nav-search-clear" onClick={() => setSearchQuery('')} aria-label="Limpiar búsqueda">✕</button>
+            )}
           </div>
         </div>
       </header>
 
-      {/* ============ HERO ============ */}
-      <section className="hero" id="inicio">
-        <div className="hero-inner">
-          <div className="hero-luxury-tag">
-            <span className="kr-pill-stamp">🇰🇷 서울</span>
-            <span className="tag-divider">✦</span>
-            <span>Auténtico K-Beauty · Skincare Coreano</span>
-          </div>
-          <h2 className="hero-luxury-title">
-            Tu Ritual de Belleza<br/>Directo desde Corea
-          </h2>
-          <p className="hero-luxury-desc">
-            Descubre las fórmulas más galardonadas de Seúl elaboradas con botánicos puros y alta ciencia dermatológica. Encuentra tu rutina ideal — el secreto de una piel que cautiva.
-          </p>
-          <div className="hero-luxury-actions">
-            <a href="#productos" className="btn-luxury-primary">
-              <span>Explorar Colección</span>
-              <span className="btn-arrow-icon" aria-hidden="true">→</span>
-            </a>
-            <a href="#nosotros" className="btn-luxury-secondary">
-              <span className="btn-seal-stamp">우리</span>
-              <span>Nuestro Ritual</span>
-            </a>
-          </div>
-        </div>
-
-
-
-        <div className="petals-container">
+      {/* ============ HERO JOYFUL & MINIMALIST (CON PRODUCTOS REALES) ============ */}
+      <section className="hero-joyful" id="inicio">
+        <div className="petals-container" id="petalsContainer" aria-hidden="true">
           {petals.map((petal) => (
             <div key={petal.id} className="petal" style={{
               left: petal.left,
@@ -688,59 +706,231 @@ export default function Home() {
             }}></div>
           ))}
         </div>
+
+        <div className="hero-joyful-container">
+          {/* Columna Izquierda: Mensaje y CTA Alegre */}
+          <div className="hero-joyful-copy">
+            <div className="hero-joyful-badge">
+              <span className="badge-dot"></span>
+              <span>COSMÉTICA COREANA 100% ORIGINAL</span>
+              <span className="badge-kr">정품 보장</span>
+            </div>
+
+            <h2 className="hero-joyful-title">
+              Tu piel radiante,<br/>
+              <span className="text-coral-gradient">fresca y en calma.</span>
+            </h2>
+
+            <p className="hero-joyful-desc">
+              Descubre las fórmulas de K-Beauty más queridas del mundo: Centella pura de Madagascar, Ginseng tradicional, Heartleaf y Frijol fermentado para lograr una piel de cristal con un brillo natural y saludable.
+            </p>
+
+            <div className="hero-joyful-actions">
+              <a href="#productos" className="btn-purito-action">
+                <span>EXPLORAR COLECCIÓN</span>
+                <span className="btn-arrow" aria-hidden="true">→</span>
+              </a>
+              <a href="#marcas" className="btn-joyful-secondary">
+                <span>✦ MARCAS DESTACADAS</span>
+              </a>
+            </div>
+
+            <div className="hero-trust-chips">
+              <div className="trust-chip">
+                <span className="chip-icon">✨</span>
+                <span>100% Originales</span>
+              </div>
+              <div className="trust-chip">
+                <span className="chip-icon">🇬🇹</span>
+                <span>Envíos a Toda GT</span>
+              </div>
+              <div className="trust-chip">
+                <span className="chip-icon">💳</span>
+                <span>Pago Contra Entrega</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Columna Derecha: Showcase con Productos Reales de la Tienda */}
+          <div className="hero-joyful-visual">
+            <div className="product-showcase-stage">
+              {/* Card Principal: Anua Heartleaf Pore Cleansing Oil (Q240.00 -> Q216.00) */}
+              <div className="showcase-card card-primary" onClick={() => { const p = productsData.find(x => x.id === 1); if (p) setSelectedProduct(p); }}>
+                <div className="card-glow-pill">★ BESTSELLER COREANO</div>
+                <div className="card-img-box">
+                  <img src="/assets/images/marcas/anua/heartleafaceite.png" alt="Anua Limpiador en Aceite Heartleaf" />
+                </div>
+                <div className="card-info-box">
+                  <span className="card-brand-tag">ANUA</span>
+                  <h4>Limpiador en Aceite Heartleaf</h4>
+                  <p className="card-price-tag"><span className="hero-old-price">Q240.00</span> <span className="hero-new-price">Q216.00</span></p>
+                </div>
+              </div>
+
+              {/* Card Flotante 1: Crema para Ojeras Ginseng Beauty of Joseon (Q185.00 -> Q166.50) */}
+              <div className="showcase-card card-secondary card-top-right" onClick={() => { const p = productsData.find(x => x.id === 44); if (p) setSelectedProduct(p); }}>
+                <div className="card-mini-img">
+                  <img src="/assets/images/marcas/beautyofjoseon/serumjin.png" alt="Crema para Ojeras Ginseng Beauty of Joseon" />
+                </div>
+                <div className="card-mini-info">
+                  <span className="card-pill-tag">✨ Ginseng + Retinal</span>
+                  <h5>Crema Ojeras BOJ</h5>
+                  <span className="card-mini-price"><s className="hero-old-price">Q185.00</s> <strong className="hero-new-price">Q166.50</strong></span>
+                </div>
+              </div>
+
+              {/* Card Flotante 2: Mixsoon Bean Essence 50ml (Q260.00 -> Q234.00) */}
+              <div className="showcase-card card-secondary card-bottom-left" onClick={() => { const p = productsData.find(x => x.id === 8); if (p) setSelectedProduct(p); }}>
+                <div className="card-mini-img">
+                  <img src="/assets/images/marcas/mixsoon/beanessence50.png" alt="Mixsoon Bean Essence 50ml" />
+                </div>
+                <div className="card-mini-info">
+                  <span className="card-pill-tag">💧 Piel de Cristal</span>
+                  <h5>Mixsoon Bean 50ml</h5>
+                  <span className="card-mini-price"><s className="hero-old-price">Q260.00</s> <strong className="hero-new-price">Q234.00</strong></span>
+                </div>
+              </div>
+
+              {/* Floating Dew & Sparkle Accents */}
+              <div className="floating-dew dew-1">🌸</div>
+              <div className="floating-dew dew-2">✨</div>
+              <div className="floating-dew dew-3">🌿</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Diseños y Motivos Tradicionales Coreanos en el Fondo */}
+        <div className="hero-korean-deco-medallion deco-left" aria-hidden="true">
+          <svg width="280" height="280" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="92" stroke="url(#koreanGoldPink)" strokeWidth="1.6" strokeDasharray="3 3"/>
+            <circle cx="100" cy="100" r="82" stroke="#FF6584" strokeWidth="1.2"/>
+            <circle cx="100" cy="100" r="66" stroke="#FFB703" strokeWidth="1"/>
+            <g stroke="#FF6584" strokeWidth="1.4" fill="#FFCAD4" fillOpacity="0.12">
+              <path d="M100 34 C92 56 92 78 100 100 C108 78 108 56 100 34 Z"/>
+              <path d="M100 166 C92 144 92 122 100 100 C108 122 108 144 100 166 Z"/>
+              <path d="M34 100 C56 92 78 92 100 100 C78 108 56 108 34 100 Z"/>
+              <path d="M166 100 C144 92 122 92 100 100 C122 108 144 108 166 100 Z"/>
+              <path d="M53 53 C70 65 85 82 100 100 C82 85 65 70 53 53 Z"/>
+              <path d="M147 147 C130 135 115 118 100 100 C118 115 135 130 147 147 Z"/>
+              <path d="M147 53 C135 70 118 85 100 100 C115 82 130 65 147 53 Z"/>
+              <path d="M53 147 C65 130 82 115 100 100 C85 118 70 135 53 147 Z"/>
+            </g>
+            <path d="M72 88 Q62 76 74 68 Q86 60 92 72 Q100 62 112 70 Q120 78 114 88" stroke="#FFB703" strokeWidth="1.2" fill="none"/>
+            <path d="M72 112 Q62 124 74 132 Q86 140 92 128 Q100 138 112 130 Q120 122 114 112" stroke="#FFB703" strokeWidth="1.2" fill="none"/>
+            <circle cx="100" cy="100" r="16" fill="url(#koreanGoldPink)" fillOpacity="0.25" stroke="#FF6584" strokeWidth="1.2"/>
+            <circle cx="100" cy="100" r="7" fill="#FFB703" fillOpacity="0.6"/>
+            <defs>
+              <linearGradient id="koreanGoldPink" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#FF6584"/>
+                <stop offset="1" stopColor="#FFB703"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="hero-korean-deco-medallion deco-right" aria-hidden="true">
+          <svg width="340" height="340" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="95" stroke="#FFB703" strokeWidth="1.5"/>
+            <circle cx="100" cy="100" r="88" stroke="#FF6584" strokeWidth="0.8" strokeDasharray="2 4"/>
+            <rect x="30" y="30" width="140" height="140" rx="4" stroke="#FF6584" strokeWidth="1.2" transform="rotate(45 100 100)"/>
+            <rect x="42" y="42" width="116" height="116" rx="2" stroke="#FFB703" strokeWidth="1" strokeOpacity="0.8"/>
+            <g stroke="#FF6584" strokeWidth="1.2">
+              <line x1="100" y1="5" x2="100" y2="26"/>
+              <line x1="100" y1="174" x2="100" y2="195"/>
+              <line x1="5" y1="100" x2="26" y2="100"/>
+              <line x1="174" y1="100" x2="195" y2="100"/>
+              <line x1="33" y1="33" x2="48" y2="48"/>
+              <line x1="152" y1="152" x2="167" y2="167"/>
+              <line x1="167" y1="33" x2="152" y2="48"/>
+              <line x1="33" y1="167" x2="48" y2="152"/>
+            </g>
+            <circle cx="100" cy="100" r="30" fill="#FFF0F4" fillOpacity="0.2" stroke="#FF6584" strokeWidth="1.5"/>
+            <circle cx="100" cy="100" r="14" fill="#FFB703" fillOpacity="0.25"/>
+          </svg>
+        </div>
+
+        {/* Sello Real Tradicional Coreano */}
+        <div className="hero-korean-seal" aria-hidden="true">
+          <div className="seal-inner">
+            <span>正品</span>
+            <span>韓美</span>
+          </div>
+          <small>한국정품</small>
+        </div>
+
+        <div className="hero-korean-watermark left" aria-hidden="true">조선의 맑은 빛</div>
+        <div className="hero-korean-watermark right" aria-hidden="true">맑고 투명한 피부</div>
       </section>
 
-      {/* ============ ANNOUNCEMENT BAR ============ */}
+      {/* ============ ANNOUNCEMENT TICKER ============ */}
       <div className="announcement-bar">
         <div className="announcement-track">
-          <span>🌸 Envíos a toda Guatemala &nbsp;·&nbsp;</span>
+          <span>🇬🇹 ¡MES PATRIO! 10% DE DESCUENTO EN TODO EL CATÁLOGO 🇬🇹</span>
           <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
-          <span>🇰🇷 Productos desde Corea</span>
-          <span>💳 Pago Contra Entrega disponible</span>
-          <span>🌸 Envíos a toda Guatemala &nbsp;·&nbsp; 무료배송</span>
-          <span>✨ Productos 100% Auténticos &nbsp;·&nbsp;</span>
-          <span>🇰🇷 Productos desde Corea</span>
-          <span>💳 Pago Contra Entrega disponible</span>
+          <span>🇰🇷 Importación Directa desde Seúl &nbsp;·&nbsp; 서울 직수입</span>
+          <span>🇬🇹 Envíos a toda Guatemala &nbsp;·&nbsp; 무료배송</span>
+          <span>💳 Pago Contra Entrega en Guatemala</span>
+          <span>🌿 Fórmulas Limpias y Suaves &nbsp;·&nbsp; 저자극 스킨케어</span>
+          <span>🇬🇹 ¡MES PATRIO! 10% DE DESCUENTO EN TODO EL CATÁLOGO 🇬🇹</span>
+          <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
+          <span>🇰🇷 Importación Directa desde Seúl &nbsp;·&nbsp; 서울 직수입</span>
+          <span>💳 Pago Contra Entrega en Guatemala</span>
         </div>
       </div>
 
-      {/* ============ CATEGORÍAS ============ */}
-      <section className="categories-section">
+      {/* ============ CATEGORÍAS EDITORIALES ============ */}
+      <section className="categories-section" id="categorias">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">피부 유형</span>
-            <h2 className="section-title">Encuentra tu Rutina</h2>
-            <p className="section-desc">Productos seleccionados según tu tipo y preocupación de piel</p>
+          <div className="section-header-editorial">
+            <span className="section-tag-editorial">피부 유형별 솔루션 · 5 DIMENSIONES</span>
+            <h2 className="section-title-editorial">5 ENFOQUES DERMATOLÓGICOS.</h2>
+            <div className="story-red-dash center-dash"></div>
+            <p className="section-desc-editorial">Cuidado botánico de alta precisión seleccionado según tu tipo y preocupación de piel</p>
+            <div className="marginalia-horizontal">CLEANSE • HYDRATE • CLARIFY • PROTECT • SOOTHE</div>
           </div>
           <div className="categories-grid">
-            {[
-              { id: 'acne', icon: '🌿', title: 'Anti-Acné', desc: 'Piel con imperfecciones' },
-              { id: 'hidratacion', icon: '💧', title: 'Hidratación', desc: 'Piel seca o deshidratada' },
-              { id: 'manchas', icon: '✨', title: 'Anti-Manchas', desc: 'Unifica y aclara el tono' },
-              { id: 'limpieza', icon: '🫧', title: 'Limpieza', desc: 'Doble limpieza coreana' },
-              { id: 'solar', icon: '☀️', title: 'Protección Solar', desc: 'Escudo contra el sol' },
-              { id: 'all', icon: '💫', title: 'Ver Todo', desc: 'Explorar catálogo completo' }
-            ].map(cat => (
-              <div 
-                key={cat.id} 
-                className={`category-card cat-${cat.id} ${activeCategoryZoom === cat.id ? 'zoomed' : ''}`} 
-                onClick={() => { 
-                  setCurrentCategory(cat.id); 
-                  if (cat.id === 'all') setIsShowingAll(true);
-                  else setIsShowingAll(false);
-                  document.getElementById('productos').scrollIntoView({ behavior: 'smooth' }); 
-                }}
-                onMouseDown={() => handlePressStart(cat.id)}
-                onMouseUp={handlePressEnd}
-                onMouseLeave={handlePressEnd}
-                onTouchStart={() => handlePressStart(cat.id)}
-                onTouchEnd={handlePressEnd}
-              >
-                <div className="cat-icon">{cat.icon}</div>
-                <h3>{cat.title}</h3>
-                <p>{cat.desc}</p>
-              </div>
-            ))}
+            <div className="category-card" onClick={() => { setCurrentCategory('acne'); setIsShowingAll(false); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className="cat-card-stamp">여드름 케어</div>
+              <div className="cat-icon">🌿</div>
+              <h3>Anti-Acné</h3>
+              <p>Control de sebo, calmar rojeces y purificar poros</p>
+              <span className="cat-action-arrow">VER COLECCIÓN →</span>
+            </div>
+            <div className="category-card" onClick={() => { setCurrentCategory('hidratacion'); setIsShowingAll(false); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className="cat-card-stamp">수분 보습</div>
+              <div className="cat-icon">💧</div>
+              <h3>Hidratación</h3>
+              <p>Piel de cristal luminosa y barrera reforzada</p>
+              <span className="cat-action-arrow">VER COLECCIÓN →</span>
+            </div>
+            <div className="category-card" onClick={() => { setCurrentCategory('manchas'); setIsShowingAll(false); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className="cat-card-stamp">미백·잡티</div>
+              <div className="cat-icon">✨</div>
+              <h3>Anti-Manchas</h3>
+              <p>Unifica el tono y atenúa manchas oscuras</p>
+              <span className="cat-action-arrow">VER COLECCIÓN →</span>
+            </div>
+            <div className="category-card" onClick={() => { setCurrentCategory('limpieza'); setIsShowingAll(false); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className="cat-card-stamp">모공·클렌징</div>
+              <div className="cat-icon">🫧</div>
+              <h3>Limpieza</h3>
+              <p>La icónica doble limpieza coreana sin sulfatos</p>
+              <span className="cat-action-arrow">VER COLECCIÓN →</span>
+            </div>
+            <div className="category-card" onClick={() => { setCurrentCategory('solar'); setIsShowingAll(false); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className="cat-card-stamp">자외선 차단</div>
+              <div className="cat-icon">☀️</div>
+              <h3>Protección Solar</h3>
+              <p>Escudo invisible SPF50+ con acabados ligeros</p>
+              <span className="cat-action-arrow">VER COLECCIÓN →</span>
+            </div>
+            <div className="category-card cat-all" onClick={() => { setCurrentCategory('all'); setIsShowingAll(true); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className="cat-card-stamp stamp-gold">전체 아카이브</div>
+              <div className="cat-icon">💫</div>
+              <h3>Ver Todo</h3>
+              <p>Explorar el catálogo botánico completo de Seúl</p>
+              <span className="cat-action-arrow">EXPLORAR TODO →</span>
+            </div>
           </div>
         </div>
       </section>
@@ -748,10 +938,11 @@ export default function Home() {
       {/* ============ PRODUCTOS ============ */}
       <section className="products-section" id="productos">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">제품</span>
-            <h2 className="section-title">Nuestros Productos</h2>
-            <p className="section-desc">Skincare coreano auténtico, entregado en tu puerta</p>
+          <div className="section-header-editorial">
+            <span className="section-tag-editorial">공식 제품 아카이브 · CATÁLOGO COMPLETO</span>
+            <h2 className="section-title-editorial">SKINCARE COREANO</h2>
+            <div className="story-red-dash center-dash"></div>
+            <p className="section-desc-editorial">Skincare coreano auténtico importado directamente de Seúl a tu puerta en Guatemala · 🇬🇹 10% de Descuento por Mes Patrio en todo el catálogo</p>
             
             <div className="brand-tabs" style={{ marginTop: '28px', marginBottom: '8px' }}>
               {['todos', 'anua', 'beautyofjoseon', 'mixsoon', 'roundlab', 'skin1004', 'sulwhasoo', 'tirtir', 'blab', 'mary'].map(brand => (
@@ -797,55 +988,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ COLECCIÓN / CAROUSEL ============ */}
-      <section className="collection-section">
+      {/* ============ COLECCIÓN / COLLAGE EDITORIAL ============ */}
+      <section className="collage-section" id="marcas">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">컬렉션</span>
-            <h2 className="section-title">Nuestra Colección</h2>
+          <div className="section-header-editorial">
+            <span className="section-tag-editorial">브랜드 아카이브 · MARCAS DESTACADAS</span>
+            <h2 className="section-title-editorial">GALERÍA EDITORIAL DE SEÚL.</h2>
+            <div className="story-red-dash center-dash"></div>
           </div>
-          
-          <div className="collection-carousel-container">
-            <button 
-              className="collection-nav-btn prev" 
-              onClick={() => scrollCollection('left')} 
-              aria-label="Colección anterior"
-            >
-              &#8592;
-            </button>
-            
-            <div className="collection-viewport" ref={collectionCarouselRef}>
-              {collectionBrands.map((item) => (
-                <div 
-                  key={item.id} 
-                  className="collection-card"
-                  onClick={() => {
-                    setCurrentBrand(item.id);
-                    document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  <img src={item.img} alt={`${item.name} Collection`} loading="lazy" />
-                  <div className="collection-overlay">
-                    <h3>{item.name}</h3>
-                    <p>{item.desc}</p>
-                    <span className="collection-overlay-btn">Explorar Marca</span>
-                  </div>
-                </div>
-              ))}
+          <div className="collage-grid">
+            <div className="collage-item large" onClick={() => { setCurrentBrand('anua'); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <img src="/assets/images/collage/an.jpeg" alt="Anua Collection" loading="lazy" />
+              <div className="collage-overlay"><span>Anua · 아누아</span></div>
             </div>
-            
-            <button 
-              className="collection-nav-btn next" 
-              onClick={() => scrollCollection('right')} 
-              aria-label="Siguiente colección"
-            >
-              &#8594;
-            </button>
+            <div className="collage-item" onClick={() => { setCurrentBrand('beautyofjoseon'); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <img src="/assets/images/collage/boj.jpeg" alt="Beauty of Joseon" loading="lazy" />
+              <div className="collage-overlay"><span>Beauty of Joseon · 조선미녀</span></div>
+            </div>
+            <div className="collage-item" onClick={() => { setCurrentBrand('mixsoon'); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <img src="/assets/images/collage/mix.jpeg" alt="Mixsoon" loading="lazy" />
+              <div className="collage-overlay"><span>Mixsoon · 믹순</span></div>
+            </div>
+            <div className="collage-item" onClick={() => { setCurrentBrand('roundlab'); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <img src="/assets/images/collage/pur.jpeg" alt="Purito" loading="lazy" />
+              <div className="collage-overlay"><span>Purito · 퓨리토</span></div>
+            </div>
+            <div className="collage-item" onClick={() => { setCurrentBrand('sulwhasoo'); document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              <img src="/assets/images/collage/sul.jpeg" alt="Sulwhasoo" loading="lazy" />
+              <div className="collage-overlay"><span>Sulwhasoo · 설화수</span></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ============ NOSOTROS ============ */}
+      {/* ============ NOSOTROS EDITORIAL ============ */}
       <section className="about-section" id="nosotros">
         <div className="container">
           <div className="about-grid">
@@ -855,32 +1031,33 @@ export default function Home() {
               </div>
               <div className="about-korean-deco">
                 <span>진정한 아름다움</span>
-                <small>Verdadera Belleza</small>
+                <small>Auténtico K-Beauty</small>
               </div>
             </div>
             <div className="about-content">
-              <span className="section-tag">우리에 대해</span>
-              <h2 className="section-title">¿Quiénes Somos?</h2>
-              <p style={{ textAlign: 'justify', textJustify: 'inter-word' }}>
-                Somos <strong>Flor de Seúl GT</strong>, la tienda guatemalteca especializada en skincare coreano auténtico. Nuestra misión es acercar lo mejor de K-Beauty a Guatemala, con productos verificados y de las marcas más reconocidas del mundo.
-              </p>
-              <p style={{ textAlign: 'justify', textJustify: 'inter-word' }}>
-                Creemos que cada persona merece una rutina de cuidado de piel efectiva y accesible. Por eso importamos directamente desde Corea del Sur, garantizando la autenticidad de cada producto.
-              </p>
+              <span className="story-tag">우리에 대해 · NUESTRA HISTORIA</span>
+              <h2 className="story-title" style={{ textAlign: 'left' }}>DE SEÚL A GUATEMALA: BELLEZA SIN COMPROMISOS.</h2>
+              <div className="story-red-dash"></div>
+              <p>Somos <strong>Flor de Seúl GT</strong>, la boutique guatemalteca especializada en cosmética y skincare coreano de alta fidelidad. Creemos en el poder transformador de las rutinas meditadas y en la pureza de los ingredientes milenarios.</p>
+              <p>Importamos directamente desde Seúl sin intermediarios, garantizando que cada fórmula llegue fresca, sellada y con certificación de autenticidad absoluta.</p>
               <div className="about-stats">
                 <div className="stat">
-                  <span className="stat-num">7+</span>
-                  <span className="stat-label">Marcas Coreanas</span>
+                  <span className="stat-num">10+</span>
+                  <span className="stat-label">Marcas de Seúl</span>
+                </div>
+                <div className="stat">
+                  <span className="stat-num">50+</span>
+                  <span className="stat-label">Fórmulas Puras</span>
                 </div>
                 <div className="stat">
                   <span className="stat-num">100%</span>
-                  <span className="stat-label">Auténticos</span>
+                  <span className="stat-label">Originales 정품</span>
                 </div>
               </div>
               <div className="about-badges">
-                <span className="badge">✓ Importación Directa</span>
+                <span className="badge">✓ Importación Oficial</span>
                 <span className="badge">✓ Asesoría Personalizada</span>
-                <span className="badge">✓ Entrega a Domicilio</span>
+                <span className="badge">✓ Entrega Inmediata GT</span>
               </div>
             </div>
           </div>
