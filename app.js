@@ -383,7 +383,7 @@ const PRODUCTS = [
     benefits: ['Segunda limpieza', 'pH equilibrado', 'Con centella'],
   },
   {
-    id: 27, stock: 4,
+    id: 27, stock: 3,
     brand: 'skin1004',
     brandName: 'Skin1004',
     name: 'Mascarilla Centella',

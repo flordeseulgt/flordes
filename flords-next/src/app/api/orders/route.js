@@ -35,6 +35,19 @@ function checkRateLimit(ip) {
   return true;
 }
 
+// --- 2. CACHÉ DE DEDUPLICACIÓN DE PEDIDOS (Evita órdenes duplicadas por doble clic o reintentos) ---
+const recentOrdersDedupCache = new Map();
+const DEDUP_WINDOW_MS = 25000; // 25 segundos de ventana de protección
+
+function cleanDedupCache() {
+  const now = Date.now();
+  for (const [key, value] of recentOrdersDedupCache.entries()) {
+    if (now - value.timestamp > DEDUP_WINDOW_MS) {
+      recentOrdersDedupCache.delete(key);
+    }
+  }
+}
+
 // --- 2. CORS HEADERS (WHITELIST) ---
 const corsHeaders = {
   'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_SITE_URL || '*',
@@ -116,6 +129,22 @@ export async function POST(request) {
     if (paymentMethod !== 'deposito' && paymentMethod !== 'entrega') {
       return NextResponse.json({ success: false, error: 'Método de pago inválido' }, { status: 400, headers: corsHeaders });
     }
+
+    // --- VERIFICACIÓN DE DEDUPLICACIÓN (Prevención de orden doble por reintento rápido) ---
+    cleanDedupCache();
+    const cleanTel = (customer.tel || '').replace(/\D/g, '');
+    const itemsKey = items.map(i => `${i.id}:${i.qty}`).sort().join('|');
+    const dedupKey = `${cleanTel}_${(customer.nombre || '').trim().toLowerCase()}_${itemsKey}_${paymentMethod}`;
+
+    if (recentOrdersDedupCache.has(dedupKey)) {
+      const cached = recentOrdersDedupCache.get(dedupKey);
+      console.warn(`[Dedup] Petición duplicada detectada para ${cleanTel}. Reutilizando orden #${cached.orderNumber}`);
+      return NextResponse.json({ 
+        success: true, 
+        orderNumber: cached.orderNumber,
+        isDuplicate: true 
+      }, { headers: corsHeaders });
+    }
     
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -129,6 +158,12 @@ export async function POST(request) {
       
     const newOrderNumber = (count || 0) + 20;
 
+    // Registrar inmediatamente en la caché de deduplicación para bloquear solicitudes concurrentes instantáneas
+    recentOrdersDedupCache.set(dedupKey, {
+      orderNumber: newOrderNumber,
+      timestamp: Date.now()
+    });
+
     // 2. Insertar la orden en Supabase para que el contador avance
     // Asumimos que user_id ya es opcional (ver instrucciones al usuario)
     const { error: orderError } = await supabase
@@ -140,6 +175,7 @@ export async function POST(request) {
 
     if (orderError) {
       console.error('Error al crear la orden:', orderError);
+      recentOrdersDedupCache.delete(dedupKey);
       return NextResponse.json({ success: false, error: 'No se pudo registrar la orden' }, { status: 500, headers: corsHeaders });
     }
 

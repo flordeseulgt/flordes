@@ -53,6 +53,8 @@ export default function Home() {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [productsData, setProductsData] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+  const isSubmittingOrderRef = useRef(false);
   const searchInputRef = useRef(null);
   const sortDropdownRef = useRef(null);
   const collectionCarouselRef = useRef(null);
@@ -484,6 +486,9 @@ export default function Home() {
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
+    if (isSubmittingOrderRef.current) return;
+    isSubmittingOrderRef.current = true;
+    setIsSubmittingOrder(true);
     
     const formData = new FormData(e.target);
     const customer = {
@@ -531,6 +536,12 @@ export default function Home() {
     } catch (error) {
       console.error('Error de red:', error);
       showToast('❌ Error de conexión con el servidor.');
+    } finally {
+      setIsSubmittingOrder(false);
+      // Ventana de seguridad para re-habilitar el ref en caso de fallo
+      setTimeout(() => {
+        isSubmittingOrderRef.current = false;
+      }, 2000);
     }
   };
 
@@ -1197,6 +1208,68 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ============ SEO GUATEMALA & FAQ SECTION ============ */}
+      <section className="seo-guatemala-section" id="faq-guatemala">
+        <div className="container">
+          <div className="seo-header">
+            <span className="section-eyebrow">🇰🇷 K-BEAUTY EN GUATEMALA 🇬🇹</span>
+            <h2 className="section-title">Skincare Coreano 100% Original en Guatemala</h2>
+            <p className="section-subtitle">
+              Flor de Seúl es tu tienda de confianza en Guatemala. Traemos directamente desde Seúl, Corea del Sur, los productos más virales y recomendados por dermatólogos, con cobertura de entrega rápida en los 22 departamentos del país.
+            </p>
+          </div>
+
+          <div className="seo-cards-grid">
+            <div className="seo-card">
+              <span className="seo-card-badge">Envío Seguro</span>
+              <h3>🇬🇹 Cobertura en toda Guatemala</h3>
+              <p>Enviamos a Ciudad de Guatemala, Mixco, Villa Nueva, Quetzaltenango, Escuintla, Sacatepéquez, Alta Verapaz, Petén y todos los municipios del país con tiempos de entrega de 24 a 48 horas hábiles.</p>
+            </div>
+            <div className="seo-card">
+              <span className="seo-card-badge">Tranquilidad Total</span>
+              <h3>💵 Pago Contra Entrega</h3>
+              <p>Compra con total tranquilidad. Puedes pagar en efectivo en el momento exacto en que recibes tu paquete en la comodidad de tu casa o lugar de trabajo.</p>
+            </div>
+            <div className="seo-card">
+              <span className="seo-card-badge">Autenticidad</span>
+              <h3>🌸 Marcas Oficiales de Corea</h3>
+              <p>Distribuimos marcas líderes como Skin1004, Round Lab, Beauty of Joseon, Anua, Tirtir, Medicube y Torriden con sellos y lotes de origen 100% verificables.</p>
+            </div>
+          </div>
+
+          <div className="seo-faq-container">
+            <h3 className="seo-faq-title">Preguntas Frecuentes sobre Compras en Guatemala</h3>
+            <div className="faq-list">
+              {[
+                {
+                  q: '¿Cómo comprar skincare coreano en Flor de Seúl Guatemala?',
+                  a: 'Simplemente agrega tus productos favoritos al carrito, haz clic en "Proceder al Pago", llena tus datos de entrega y elige si deseas pagar mediante depósito bancario o Pago Contra Entrega al recibir.'
+                },
+                {
+                  q: '¿Los productos son 100% originales de Corea del Sur?',
+                  a: 'Totalmente. En Flor de Seúl importamos únicamente cosmética coreana auténtica con fórmulas originales aprobadas por los estándares de K-Beauty. No vendemos imitaciones ni réplicas.'
+                },
+                {
+                  q: '¿Cuánto tiempo tarda en llegar mi pedido en Guatemala?',
+                  a: 'En el perímetro de la Ciudad de Guatemala suele entregarse en 24 horas hábiles. Para los departamentos del interior del país, el tiempo promedio de entrega es de 24 a 48 horas hábiles.'
+                },
+                {
+                  q: '¿Tienen asesoría para elegir la rutina según mi tipo de piel?',
+                  a: '¡Sí! Puedes escribirnos directamente a nuestro Instagram o TikTok (@flordeseul_gt) y con gusto te asesoramos con la rutina ideal para piel grasa, seca, mixta o sensible en el clima de Guatemala.'
+                }
+              ].map((faq, idx) => (
+                <details key={idx} className="faq-item">
+                  <summary className="faq-question">
+                    <span>{faq.q}</span>
+                    <span className="faq-icon">+</span>
+                  </summary>
+                  <p className="faq-answer">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ============ FOOTER (y resto de secciones) ============ */}
       <footer className="footer">
@@ -1510,8 +1583,14 @@ export default function Home() {
                       )}
                     </div>
 
-                    <button type="submit" form="checkout-form" className="btn-primary full-width" style={{ marginTop: '20px', height: '55px', fontSize: '1.1rem' }}>
-                      Confirmar Pedido Q{(cartTotal + (paymentMethod === 'entrega' ? cartTotal * 0.04 : 0)).toFixed(2)} 🌸
+                    <button 
+                      type="submit" 
+                      form="checkout-form" 
+                      className={`btn-primary full-width ${isSubmittingOrder ? 'disabled' : ''}`} 
+                      disabled={isSubmittingOrder}
+                      style={{ marginTop: '20px', height: '55px', fontSize: '1.1rem', cursor: isSubmittingOrder ? 'not-allowed' : 'pointer', opacity: isSubmittingOrder ? 0.7 : 1 }}
+                    >
+                      {isSubmittingOrder ? '⏳ Procesando pedido...' : `Confirmar Pedido Q${(cartTotal + (paymentMethod === 'entrega' ? cartTotal * 0.04 : 0)).toFixed(2)} 🌸`}
                     </button>
                   </div>
                 </div>
