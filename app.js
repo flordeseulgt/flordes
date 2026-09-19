@@ -1480,15 +1480,60 @@ function closeTermsModal() {
   document.body.style.overflow = '';
 }
 
+// ============ FLOATING SOCIAL DOCK COLLAPSE ============
+function initSocialDock() {
+  const dock = document.getElementById('socialDock');
+  const toggleBtn = document.getElementById('socialDockToggle');
+  const poly = document.getElementById('socialDockTogglePoly');
+  const pills = document.getElementById('socialDockPills');
+  if (!dock || !toggleBtn) return;
+
+  const updateDockUI = (collapsed) => {
+    if (collapsed) {
+      dock.classList.add('collapsed');
+      toggleBtn.setAttribute('aria-label', 'Mostrar redes sociales');
+      toggleBtn.setAttribute('title', 'Mostrar redes sociales');
+      if (poly) poly.setAttribute('points', '9 18 15 12 9 6');
+      if (pills) pills.style.display = 'flex';
+    } else {
+      dock.classList.remove('collapsed');
+      toggleBtn.setAttribute('aria-label', 'Encoger redes sociales');
+      toggleBtn.setAttribute('title', 'Encoger redes sociales');
+      if (poly) poly.setAttribute('points', '15 18 9 12 15 6');
+      if (pills) pills.style.display = 'none';
+    }
+  };
+
+  // Start collapsed on mobile so it doesn't obstruct products
+  if (window.innerWidth <= 768) {
+    updateDockUI(true);
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isCollapsed = dock.classList.contains('collapsed');
+    updateDockUI(!isCollapsed);
+  });
+
+  // Auto-collapse when tapping outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 && !dock.classList.contains('collapsed') && !dock.contains(e.target)) {
+      updateDockUI(true);
+    }
+  });
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     try { initCardMotion(); } catch(e) {}
     try { initPinkMouseTrail(); } catch(e) {}
     try { initAudio(); } catch(e) {}
+    try { initSocialDock(); } catch(e) {}
   });
 } else {
   try { initCardMotion(); } catch(e) {}
   try { initPinkMouseTrail(); } catch(e) {}
   try { initAudio(); } catch(e) {}
+  try { initSocialDock(); } catch(e) {}
 }
 

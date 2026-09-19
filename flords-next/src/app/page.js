@@ -86,6 +86,28 @@ export default function Home() {
     return () => document.removeEventListener('mousedown', handleClickOutsideSort);
   }, []);
 
+  const [isSocialCollapsed, setIsSocialCollapsed] = useState(false);
+  const socialDockRef = useRef(null);
+
+  useEffect(() => {
+    // Start collapsed on mobile screens so it does not obstruct products
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      setIsSocialCollapsed(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleOutsideClickSocial = (e) => {
+      if (!isSocialCollapsed && window.innerWidth <= 768) {
+        if (socialDockRef.current && !socialDockRef.current.contains(e.target)) {
+          setIsSocialCollapsed(true);
+        }
+      }
+    };
+    document.addEventListener('click', handleOutsideClickSocial);
+    return () => document.removeEventListener('click', handleOutsideClickSocial);
+  }, [isSocialCollapsed]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -1784,7 +1806,34 @@ export default function Home() {
       </div>
 
       {/* Floating Social Dock (Left Side - TikTok, Instagram, Facebook) */}
-      <aside className="social-dock" aria-label="Redes Sociales">
+      <aside 
+        ref={socialDockRef} 
+        className={`social-dock ${isSocialCollapsed ? 'collapsed' : ''}`} 
+        aria-label="Redes Sociales"
+      >
+        <button
+          type="button"
+          className="social-dock-toggle"
+          onClick={() => setIsSocialCollapsed(prev => !prev)}
+          aria-label={isSocialCollapsed ? "Mostrar redes sociales" : "Encoger redes sociales"}
+          title={isSocialCollapsed ? "Mostrar redes sociales" : "Encoger redes sociales"}
+        >
+          <svg className="social-dock-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            {isSocialCollapsed ? (
+              <polyline points="9 18 15 12 9 6" />
+            ) : (
+              <polyline points="15 18 9 12 15 6" />
+            )}
+          </svg>
+          {isSocialCollapsed && (
+            <div className="social-dock-pills">
+              <span className="dock-pill-dot pill-dot-tiktok" />
+              <span className="dock-pill-dot pill-dot-ig" />
+              <span className="dock-pill-dot pill-dot-fb" />
+            </div>
+          )}
+        </button>
+
         <div className="social-dock-item">
           <a href="https://www.tiktok.com/@flor.de.seul.gt" target="_blank" rel="noopener" className="social-dock-btn btn-tiktok" aria-label="TikTok">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">

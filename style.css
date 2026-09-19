@@ -2155,7 +2155,7 @@ body.page-scrolled .nav-logo {
   position: fixed;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(0);
   z-index: 1050;
   display: flex;
   flex-direction: column;
@@ -2164,10 +2164,119 @@ body.page-scrolled .nav-logo {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 10px 8px;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 14px 14px 0;
   border: 1.5px solid var(--border-paper);
   border-left: none;
   box-shadow: var(--shadow-md);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.social-dock.collapsed {
+  transform: translateY(-50%) translateX(-100%);
+  box-shadow: none;
+}
+
+.social-dock-toggle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 100%;
+  width: 24px;
+  height: 52px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid var(--border-paper);
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  box-shadow: 4px 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-muted, #71717A);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.social-dock-toggle::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  left: -8px;
+  right: -12px;
+}
+
+.social-dock-toggle:hover {
+  color: var(--accent-pink, #E8597D);
+  background: var(--bg-paper, #FAF3F5);
+  box-shadow: 5px 3px 14px rgba(232, 89, 125, 0.2);
+}
+
+.social-dock-toggle-icon {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.social-dock-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+
+.dock-pill-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  display: block;
+}
+
+.pill-dot-tiktok { background: #008f89; }
+.pill-dot-ig { background: #E1306C; }
+.pill-dot-fb { background: #1877F2; }
+
+[data-theme="dark"] .pill-dot-tiktok { background: #25F4EE; }
+[data-theme="dark"] .pill-dot-ig { background: #F06292; }
+[data-theme="dark"] .pill-dot-fb { background: #60A5FA; }
+
+[data-theme="dark"] .social-dock-toggle {
+  background: var(--bg-card);
+  border-color: rgba(240, 112, 144, 0.25);
+  color: #F9A8D4;
+}
+
+[data-theme="dark"] .social-dock-toggle:hover {
+  background: #2D1522;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .social-dock {
+    padding: 8px 6px;
+    gap: 8px;
+    border-radius: 0 10px 10px 0;
+  }
+  .social-dock-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+  .social-dock-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .social-dock-tooltip {
+    display: none !important;
+  }
+  .social-dock-toggle {
+    width: 22px;
+    height: 48px;
+  }
 }
 
 .social-dock-btn {
