@@ -213,7 +213,7 @@ export const PRODUCTS = [
     brandName: 'Tirtir',
     name: 'Caja de Mascarillas Hidratantes',
     nameLong: 'Tirtir Glow Luminous Mask',
-    price: 285,
+    price: 250,
     size: '30 Unidades',
     img: '/assets/images/marcas/tirtir/masktirtir.png',
     desc: 'Mascarilla de tejido glow con ingredientes luminosos para una piel con aspecto de vidrio. Hidrata profundamente y aporta un brillo natural irresistible.',
