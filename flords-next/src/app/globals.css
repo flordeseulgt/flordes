@@ -1902,25 +1902,30 @@ body.page-scrolled .nav-logo {
 
 .product-img-wrap {
   position: relative;
-  height: 250px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 0;
   cursor: pointer;
   overflow: hidden;
 }
 
 [data-theme="dark"] .product-img-wrap {
-  background: #141210;
+  background: #181C24;
 }
 
 .product-img-wrap img {
-  max-height: 215px;
-  max-width: 90%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
   transition: transform 0.45s ease;
+  display: block;
 }
 
 .product-card:hover .product-img-wrap img {
@@ -2792,18 +2797,27 @@ body.page-scrolled .nav-logo {
 
 .product-img-wrap {
   position: relative;
+  width: 100%;
   aspect-ratio: 1 / 1;
+  height: auto;
   overflow: hidden;
-  background: var(--bg-secondary);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   cursor: pointer;
 }
 
 .product-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 16px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  padding: 0;
   transition: transform 0.5s ease;
+  display: block;
 }
 
 .product-card:hover .product-img-wrap img {
@@ -4424,7 +4438,30 @@ body.page-scrolled .nav-logo {
 
 @media (max-width: 480px) {
   .categories-grid { grid-template-columns: repeat(2, 1fr); }
-  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .product-card { border-radius: 16px; }
+  .product-img-wrap {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    background: #FFFFFF !important;
+    padding: 0 !important;
+  }
+  .product-img-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    padding: 0 !important;
+  }
+  .product-badge {
+    top: 8px;
+    left: 8px;
+    padding: 3px 8px;
+    font-size: 0.6rem;
+    border-radius: 6px;
+  }
   .product-info { padding: 10px; }
   .product-name { font-size: 0.8rem; }
   .product-price { font-size: 1rem; }
