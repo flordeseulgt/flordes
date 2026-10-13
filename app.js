@@ -785,6 +785,10 @@ function initScrollEffects() {
 const DISCOUNT_PERCENT = 10;
 const DISCOUNT_FACTOR = 0.90;
 
+function getDiscountedPrice(price) {
+  return Math.round(price * DISCOUNT_FACTOR);
+}
+
 // ============ PRODUCTS RENDER ============
 function getFilteredProducts() {
   const filtered = PRODUCTS.filter(p => {
@@ -823,7 +827,7 @@ function renderProducts() {
 
   grid.innerHTML = filtered.map(p => {
     const isOutOfStock = p.stock === 0;
-    const discountedPrice = (p.price * DISCOUNT_FACTOR).toFixed(2);
+    const discountedPrice = getDiscountedPrice(p.price).toFixed(2);
     const originalPrice = p.price.toFixed(2);
 
     return `
@@ -1032,11 +1036,14 @@ function getCartSubtotal() {
 }
 
 function getCartDiscount() {
-  return getCartSubtotal() * 0.10;
+  return getCartSubtotal() - getCartTotal();
 }
 
 function getCartTotal() {
-  return getCartSubtotal() * DISCOUNT_FACTOR;
+  return cart.reduce((sum, c) => {
+    const p = PRODUCTS.find(pr => pr.id === c.id);
+    return sum + (p ? getDiscountedPrice(p.price) * c.qty : 0);
+  }, 0);
 }
 
 function getCartCount() {
@@ -1079,7 +1086,7 @@ function updateCartUI() {
   const itemsHtml = cart.map(c => {
     const p = PRODUCTS.find(pr => pr.id === c.id);
     if (!p) return '';
-    const discountedUnit = p.price * DISCOUNT_FACTOR;
+    const discountedUnit = getDiscountedPrice(p.price);
     const discountedTotal = discountedUnit * c.qty;
     const originalTotal = p.price * c.qty;
 
@@ -1149,7 +1156,7 @@ function updateSummary() {
     summaryItems.innerHTML = cart.map(c => {
       const p = PRODUCTS.find(pr => pr.id === c.id);
       if (!p) return '';
-      const discountedTotal = p.price * DISCOUNT_FACTOR * c.qty;
+      const discountedTotal = getDiscountedPrice(p.price) * c.qty;
       return `
       <div class="summary-item">
         <img src="${p.img}" alt="${p.name}" />
@@ -1194,7 +1201,7 @@ function placeOrder(e) {
     `👤 *Cliente:* ${nombre}\n📱 *Teléfono:* ${tel}\n📍 *Dirección:* ${dir}\n💳 *Pago:* ${pago === 'deposito' ? 'Depósito Previo' : 'Contra Entrega'}\n\n` +
     `🛍 *Productos:*\n${cart.map(c => {
       const p = PRODUCTS.find(pr => pr.id === c.id);
-      return p ? `• ${p.name} x${c.qty} — Q${(p.price * DISCOUNT_FACTOR * c.qty).toFixed(2)} (Antes Q${(p.price * c.qty).toFixed(2)})` : '';
+      return p ? `• ${p.name} x${c.qty} — Q${(getDiscountedPrice(p.price) * c.qty).toFixed(2)} (Antes Q${(p.price * c.qty).toFixed(2)})` : '';
     }).join('\n')}\n\n` +
     `💵 *Subtotal:* Q${subtotal.toFixed(2)}\n` +
     `🌸 *Descuento Especial (10%):* -Q${discount.toFixed(2)}\n` +
@@ -1218,8 +1225,10 @@ function openProductModal(id) {
   const p = PRODUCTS.find(pr => pr.id === id);
   if (!p) return;
   const isOutOfStock = p.stock === 0;
-  const discountedPrice = (p.price * DISCOUNT_FACTOR).toFixed(2);
+  const discountedPriceNum = getDiscountedPrice(p.price);
+  const discountedPrice = discountedPriceNum.toFixed(2);
   const originalPrice = p.price.toFixed(2);
+  const savings = (p.price - discountedPriceNum).toFixed(2);
   const content = document.getElementById('productModalContent');
 
   content.innerHTML = `
@@ -1246,7 +1255,7 @@ function openProductModal(id) {
       <div class="product-modal-pricing">
         <span class="price-original modal-old-price">Q${originalPrice}</span>
         <span class="product-modal-price">Q${discountedPrice}</span>
-        <span class="patriotic-save-tag">Ahorro: Q${(p.price * 0.10).toFixed(2)} (10% OFF 🌸)</span>
+        <span class="patriotic-save-tag">Ahorro: Q${savings} (10% OFF 🌸)</span>
       </div>
       <div style="margin-top: 20px;">
         ${isOutOfStock ? `

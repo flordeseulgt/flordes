@@ -436,10 +436,11 @@ export default function Home() {
   };
 
   const DISCOUNT = 0.9;
+  const getDiscountedPrice = (price) => Math.round(price * DISCOUNT);
 
   const cartTotal = cart.reduce((sum, c) => {
     const p = productsData.find(pr => pr.id === c.id);
-    return sum + (p ? p.price * DISCOUNT * c.qty : 0);
+    return sum + (p ? getDiscountedPrice(p.price) * c.qty : 0);
   }, 0);
 
   const cartCount = cart.reduce((sum, c) => sum + c.qty, 0);
@@ -463,8 +464,8 @@ export default function Home() {
     if (!a.stock && b.stock) return 1;
     
     // 2. Prioridad por precio si el filtro está activo
-    if (sortByPrice === 'low-high') return (a.price * DISCOUNT) - (b.price * DISCOUNT);
-    if (sortByPrice === 'high-low') return (b.price * DISCOUNT) - (a.price * DISCOUNT);
+    if (sortByPrice === 'low-high') return getDiscountedPrice(a.price) - getDiscountedPrice(b.price);
+    if (sortByPrice === 'high-low') return getDiscountedPrice(b.price) - getDiscountedPrice(a.price);
     
     return 0;
   });
@@ -478,7 +479,7 @@ export default function Home() {
     const cartQty = cart.find(c => c.id === p.id)?.qty || 0;
     const isMaxReached = cartQty >= p.stock;
     const isDisabled = !p.stock || isMaxReached;
-    const discountedPrice = (p.price * DISCOUNT).toFixed(2);
+    const discountedPrice = getDiscountedPrice(p.price).toFixed(2);
     const originalPrice = p.price.toFixed(2);
 
     return (
@@ -832,7 +833,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Card Flotante 1: Crema para Ojeras Ginseng Beauty of Joseon (Q185.00 -> Q166.50) */}
+              {/* Card Flotante 1: Crema para Ojeras Ginseng Beauty of Joseon (Q185.00 -> Q167.00) */}
               <div className="showcase-card card-secondary card-top-right" onClick={() => { const p = productsData.find(x => x.id === 44); if (p) setSelectedProduct(p); }}>
                 <div className="card-mini-img">
                   <img src="/assets/images/marcas/beautyofjoseon/serumjin.png" alt="Crema para Ojeras Ginseng Beauty of Joseon" />
@@ -840,7 +841,7 @@ export default function Home() {
                 <div className="card-mini-info">
                   <span className="card-pill-tag">✨ Ginseng + Retinal</span>
                   <h5>Crema Ojeras BOJ</h5>
-                  <span className="card-mini-price"><s className="hero-old-price">Q185.00</s> <strong className="hero-new-price">Q166.50</strong></span>
+                  <span className="card-mini-price"><s className="hero-old-price">Q185.00</s> <strong className="hero-new-price">Q167.00</strong></span>
                 </div>
               </div>
 
@@ -1467,7 +1468,7 @@ export default function Home() {
                     {DISCOUNT < 1 ? (
                       <>
                         <span style={{ fontSize: '0.75rem', textDecoration: 'line-through', color: 'var(--text-muted)', opacity: 0.7, display: 'block' }}>Q{(p.price * c.qty).toFixed(2)}</span>
-                        <span style={{ display: 'block', color: '#3aaa35', fontWeight: 700 }}>Q{(p.price * DISCOUNT * c.qty).toFixed(2)}</span>
+                        <span style={{ display: 'block', color: '#3aaa35', fontWeight: 700 }}>Q{(getDiscountedPrice(p.price) * c.qty).toFixed(2)}</span>
                       </>
                     ) : (
                       <span>Q{(p.price * c.qty).toFixed(2)}</span>
