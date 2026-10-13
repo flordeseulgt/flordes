@@ -4436,10 +4436,10 @@ body.page-scrolled .nav-logo {
 }
 
 /* =========================================================
-   CINTA DECORATIVA MES PATRIO (ALTA GAMA, ELEGANTE & LIMPIA)
+   CINTA DECORATIVA PROMOCIONAL (ALTA GAMA, ELEGANTE & LIMPIA)
 ========================================================= */
 .top-patriotic-ribbon {
-  background: linear-gradient(90deg, rgba(74, 155, 235, 0.08) 0%, #FFFFFF 25%, #FFFFFF 75%, rgba(74, 155, 235, 0.08) 100%);
+  background: linear-gradient(90deg, rgba(255, 117, 160, 0.08) 0%, #FFFFFF 25%, #FFFFFF 75%, rgba(255, 117, 160, 0.08) 100%);
   padding: 7px 16px;
   display: flex;
   align-items: center;

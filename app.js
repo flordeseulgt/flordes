@@ -781,7 +781,7 @@ function initScrollEffects() {
   });
 }
 
-// ============ PATRIOTIC DISCOUNT CONFIG ============
+// ============ SPECIAL DISCOUNT CONFIG (10% OFF) ============
 const DISCOUNT_PERCENT = 10;
 const DISCOUNT_FACTOR = 0.90;
 
@@ -985,7 +985,7 @@ function addToCart(id) {
   saveCart();
   updateCartUI();
   openCart();
-  showToast(`🌸 ¡${product.name} agregado con 10% OFF Patrio!`);
+  showToast(`🌸 ¡${product.name} agregado con 10% OFF!`);
 
   // Animate button
   const btn = document.getElementById(`addBtn-${id}`);
@@ -1190,14 +1190,14 @@ function placeOrder(e) {
   const total = getCartTotal();
 
   const mensaje = `🌸 *Nuevo Pedido — Flor de Seúl GT*\n` +
-    `🇬🇹 *PROMOCIÓN MES PATRIO: 10% DE DESCUENTO APLICADO*\n\n` +
+    `✨ *PROMOCIÓN ESPECIAL: 10% DE DESCUENTO APLICADO*\n\n` +
     `👤 *Cliente:* ${nombre}\n📱 *Teléfono:* ${tel}\n📍 *Dirección:* ${dir}\n💳 *Pago:* ${pago === 'deposito' ? 'Depósito Previo' : 'Contra Entrega'}\n\n` +
     `🛍 *Productos:*\n${cart.map(c => {
       const p = PRODUCTS.find(pr => pr.id === c.id);
       return p ? `• ${p.name} x${c.qty} — Q${(p.price * DISCOUNT_FACTOR * c.qty).toFixed(2)} (Antes Q${(p.price * c.qty).toFixed(2)})` : '';
     }).join('\n')}\n\n` +
     `💵 *Subtotal:* Q${subtotal.toFixed(2)}\n` +
-    `🇬🇹 *Descuento Mes Patrio (10%):* -Q${discount.toFixed(2)}\n` +
+    `🌸 *Descuento Especial (10%):* -Q${discount.toFixed(2)}\n` +
     `💰 *Total a Pagar: Q${total.toFixed(2)}*`;
 
   const waUrl = `https://wa.me/50200000000?text=${encodeURIComponent(mensaje)}`;
@@ -1246,7 +1246,7 @@ function openProductModal(id) {
       <div class="product-modal-pricing">
         <span class="price-original modal-old-price">Q${originalPrice}</span>
         <span class="product-modal-price">Q${discountedPrice}</span>
-        <span class="patriotic-save-tag">Ahorro: Q${(p.price * 0.10).toFixed(2)} (10% Mes Patrio 🇬🇹)</span>
+        <span class="patriotic-save-tag">Ahorro: Q${(p.price * 0.10).toFixed(2)} (10% OFF 🌸)</span>
       </div>
       <div style="margin-top: 20px;">
         ${isOutOfStock ? `

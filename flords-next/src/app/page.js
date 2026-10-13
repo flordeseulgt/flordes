@@ -658,18 +658,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ============ CINTA PROMO MES PATRIO (ARRIBA DEL MENÚ) ============ */}
-      <aside className="top-patriotic-ribbon" id="topPatrioticRibbon" aria-label="Promoción Mes Patrio de Guatemala">
+      {/* ============ CINTA PROMO EXCLUSIVA (ARRIBA DEL MENÚ) ============ */}
+      <aside className="top-patriotic-ribbon" id="topPatrioticRibbon" aria-label="Promoción Especial Skincare Coreano Guatemala">
         <div className="top-patriotic-wrapper">
-          <div className="top-flag-badge">
-            <span className="flag-stripe blue"></span>
-            <span className="flag-stripe white"></span>
-            <span className="flag-stripe blue"></span>
-          </div>
-          <span className="top-flag-icon">🇬🇹</span>
-          <span className="top-patriotic-title">Mes Patrio de Guatemala</span>
+          <span className="top-flag-icon">🌸</span>
+          <span className="top-patriotic-title">PROMOCIÓN ESPECIAL K-BEAUTY</span>
           <span className="top-patriotic-pill">10% OFF EN TODO EL SKINCARE</span>
-          <span className="top-patriotic-sparkle">🌸</span>
+          <span className="top-patriotic-sparkle">✨</span>
         </div>
       </aside>
 
@@ -935,13 +930,13 @@ export default function Home() {
       {/* ============ ANNOUNCEMENT TICKER ============ */}
       <div className="announcement-bar">
         <div className="announcement-track">
-          <span>🇬🇹 ¡MES PATRIO! 10% DE DESCUENTO EN TODO EL CATÁLOGO 🇬🇹</span>
+          <span>🌸 ¡OFERTA ESPECIAL! 10% DE DESCUENTO EN TODO EL CATÁLOGO DE SKINCARE COREANO ✨</span>
           <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
           <span>🇰🇷 Importación Directa desde Seúl &nbsp;·&nbsp; 서울 직수입</span>
           <span>🇬🇹 Envíos a toda Guatemala &nbsp;·&nbsp; 무료배송</span>
           <span>💳 Pago Contra Entrega en Guatemala</span>
           <span>🌿 Fórmulas Limpias y Suaves &nbsp;·&nbsp; 저자극 스킨케어</span>
-          <span>🇬🇹 ¡MES PATRIO! 10% DE DESCUENTO EN TODO EL CATÁLOGO 🇬🇹</span>
+          <span>🌸 ¡OFERTA ESPECIAL! 10% DE DESCUENTO EN TODO EL CATÁLOGO DE SKINCARE COREANO ✨</span>
           <span>✨ Productos 100% Auténticos &nbsp;·&nbsp; 정품 보장</span>
           <span>🇰🇷 Importación Directa desde Seúl &nbsp;·&nbsp; 서울 직수입</span>
           <span>💳 Pago Contra Entrega en Guatemala</span>
@@ -1012,7 +1007,7 @@ export default function Home() {
             <span className="section-tag-editorial">공식 제품 아카이브 · CATÁLOGO COMPLETO</span>
             <h2 className="section-title-editorial">SKINCARE COREANO</h2>
             <div className="story-red-dash center-dash"></div>
-            <p className="section-desc-editorial">Skincare coreano auténtico importado directamente de Seúl a tu puerta en Guatemala · 🇬🇹 10% de Descuento por Mes Patrio en todo el catálogo</p>
+            <p className="section-desc-editorial">Skincare coreano auténtico importado directamente de Seúl a tu puerta en Guatemala · ✨ 10% de Descuento aplicado en todo el catálogo</p>
             
             <div className="brand-tabs" style={{ marginTop: '28px', marginBottom: '8px' }}>
               {['todos', 'anua', 'beautyofjoseon', 'mixsoon', 'roundlab', 'skin1004', 'sulwhasoo', 'tirtir', 'blab', 'mary'].map(brand => (
